@@ -49,7 +49,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?site $sites_no_site = null;
+    private ?Site $sites_no_site = null;
 
     public function __construct()
     {
