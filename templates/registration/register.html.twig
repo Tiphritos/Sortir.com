@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RegistrationController!{% endblock %}
+
+{% block body %}
+
+    
+ {{ form_start(registrationForm) }}
+    {{ form_row(registrationForm.pseudo) }}
+    {{ form_row(registrationForm.plainPassword, {
+        label: 'Password'
+    }) }}
+
+    <button type="submit" class="offset-5 btn bg-primary creation ">Connexion</button>
+
+    {{ form_end(registrationForm) }}
+{% endblock %}
