@@ -26,7 +26,7 @@ class Lieu
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 3, nullable: true)]
     private ?string $longitude = null;
 
-    #[ORM\ManyToOne(inversedBy: 'lieus')]
+    #[ORM\ManyToOne(inversedBy: 'lieux')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Ville $villes_no_ville = null;
 

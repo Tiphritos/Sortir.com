@@ -41,15 +41,15 @@ class Sortie
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?lieu $lieux_no_lieu = null;
+    private ?Lieu $lieux_no_lieu = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?participant $organisateur = null;
+    private ?Participant $organisateur = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?site $site_organisateur = null;
+    private ?Site $site_organisateur = null;
 
     public function getId(): ?int
     {
