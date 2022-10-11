@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use App\Repository\EtatRepository;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,14 +24,22 @@ class SortieController extends AbstractController
     }
 
     #[Route('/new', name: 'app_sortie_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, SortieRepository $sortieRepository): Response
+    public function new(Request $request,
+                        SortieRepository $sortieRepository,
+                        EtatRepository $etatRepository,
+                        ParticipantRepository $participantRepository): Response
     {
         $sortie = new Sortie();
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
+        $sortie->setEtatsNoEtat($etatRepository->findOneBy(["id"=>1]));
+        $organisateur = $participantRepository->findOneBy(["id"=>1]);
+        $sortie->setOrganisateur($organisateur);
+        $sortie->setSiteOrganisateur($organisateur->getSitesNoSite());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sortieRepository->save($sortie, true);
+
 
             return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);
         }
