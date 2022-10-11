@@ -6,4 +6,12 @@
 
 
     <div> <a href="{{ path('app_sortie_new') }}">Vers sortie/new</a></div>
+
+   <div class="participant"> Participant: {{ app.user.pseudo }}</div>
+
+    <div>
+        Date du jour  {{ "now" |date('j/ n/ Y') }}
+    </div>
+
+
 {% endblock %}

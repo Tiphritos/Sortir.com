@@ -17,18 +17,19 @@
 
 <nav class="offset-3 col-9  nav">
     <ul class="menu">
+        {% if (is_granted('ROLE_ADMIN')) %}
         <li class="menu-items"> <a href=# target="_blank" >Villes</a> </li>
         <li class="menu-items"><a  href=#>Sites</a>
+        {%endif %}
+        <li class="menu-items"> <a href={{path('app_accueil')}} target="_blank">Accueil</a></li>
+        <li class="menu-items"> <a href="{{ path('app_participant_show', {'id': app.user.id})}}" target="_blank">Mon profil</a>  </li>
 
-        <li class="menu-items"> <a href=# target="_blank">Accueil</a></li>
-        <li class="menu-items"> <a href=# target="_blank">Mon profil</a>  </li>
         <li class="menu-items"> <a href="{{ path('app_logout') }}" >Se déconnecter</a>  </li>
 
     </ul>
 </nav>
 
 </div>
-
 
 {% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
