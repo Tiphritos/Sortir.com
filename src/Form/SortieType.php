@@ -20,7 +20,9 @@ class SortieType extends AbstractType
             ->add('date_cloture')
             ->add('nb_inscriptions_max', null, [
                 'label' =>'Capacité maximum: ',
-                'id' => 'idCapacite'
+                'attr' =>[
+                    'id' => 'idCapacite'
+                ]
             ])
             ->add('description_infos',null,[
                 'label' =>'Description: ',
@@ -33,7 +35,9 @@ class SortieType extends AbstractType
                 'choice_label'=> 'Lieu',
                 'class'=> Lieu::class,
                 'expanded' => true,
-                'id' => 'idLieu'
+                'attr' =>[
+                    'id' => 'idLieu'
+                ]
             ])
 //            ->add('organisateur', EntityType::class,[
 //                'disabled' => true,
