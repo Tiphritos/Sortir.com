@@ -14,37 +14,52 @@ class SortieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
-            ->add('date_debut') //Date de debut de la Sortie
-            ->add('duree') //En heures
-            ->add('date_cloture') //Doit etre anterieure à la date de début
-            ->add('nb_inscriptions_max', null, [
-                'label' =>'Capacité maximum: ',
+            ->add('nom', null, [
+                'label' =>'Nom de la sortie: ',
                 'attr' =>[
-                    'id' => 'idCapacite'
+                    'id' =>'idTitre'
+                ]
+            ])
+            //Date de debut de la Sortie
+            ->add('date_debut', null, [
+                'label'=>'Date et heure de la sortie: ',
+                'attr' =>[
+                    'id' =>'idDebut'
+                ]
+            ])
+            ->add('duree', null, [
+                'label'=>'Durée en minutes: ',
+                'attr' =>[
+                    'id' =>'idDuree'
+                ]
+            ]) //En heures
+            //Doit etre anterieure à la date de début
+            ->add('date_cloture', null, [
+                'label'=>'Date limite d\'inscription: '
+            ])
+
+            ->add('nb_inscriptions_max', null, [
+                'label' =>'Nombre de places: ',
+                'attr' =>[
+                    'id' => 'idParticipantsMaximum'
                 ]
             ])
             ->add('description_infos',null,[
-                'label' =>'Description: ',
+                'label' =>'Description et infos: ',
                 'attr' =>[
                     'id' =>'idDescription'
                 ]])
             //->add('url_photo')
             //->add('etats_no_etat')
             ->add('lieux_no_lieu',EntityType::class,[
+                'label'=>'Lieu: ',
                 'choice_label'=> 'nom_lieu',
                 'class'=> Lieu::class,
-                'expanded' => true,
+                'placeholder'=>'Choisissez un lieu',
                 'attr' =>[
                     'id' => 'idLieu'
                 ]
-            ])
-//            ->add('organisateur', EntityType::class,[
-//                'disabled' => true,
-//                'id' => 'idOrganisateur'
-//            ]) // Utilisateur Connecté
-//            ->add('site_organisateur') //Site de l'utilisateur connecté
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
