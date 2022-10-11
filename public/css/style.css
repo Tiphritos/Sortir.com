@@ -1,3 +1,45 @@
 .test{
     color:red;
 }
+
+/*******************************/
+/*Menu*/
+
+
+#nav .menu-items{
+    position: relative;
+    display: inline-flex;
+    padding: 3px;
+    font-family: 'Dancing Script', cursive;
+    /* border: 1px solid rgb(0 0 0); */
+    margin: 7px 58px;
+    z-index: 1;
+    font-size: 2rem;
+
+}
+.menu-items::after{
+    content: "";
+    transform: scale(0);
+    height: 3px;
+    width: 90%;
+    background: rgb(0 0 0);
+    display: block;
+    position: absolute;
+    top: 82%;
+    transition: transform 0.4s ease-in-out;
+
+}
+.menu-items:hover::after{
+    transform: scale(1);
+}
+
+#nav .menu-items a{
+    text-decoration: none;
+
+    opacity: 0.9;
+    padding: 4px;
+    color: black;
+
+}
+
+

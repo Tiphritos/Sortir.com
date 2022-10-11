@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <title>{% block title %}Welcome!{% endblock %}</title>
-    {% block stylesheets %}{% endblock %}
+
 </head>
 <body>
+<nav id="nav">
+    <ul class="menu">
+        <li class="menu-items"> <a href=# target="_blank" >Villes</a> </li>
+        <li class="menu-items"><a  href=#>Sites</a>
+
+        <li class="menu-items"> <a href=# target="_blank">Accueil</a></li>
+        <li class="menu-items"> <a href=# target="_blank">Mon profil</a>  </li>
+        <li class="menu-items"> <a href=# target="_blank">Se déconnecter</a>  </li>
+
+    </ul>
+</nav>
+
+
+
 {% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
