@@ -15,13 +15,13 @@
 <table class="table">
     <thead>
     <tr>
-        <th>Id</th>
+
         <th>Nom</th>
         <th>Date_debut</th>
         <th>Duree</th>
         <th>Date_cloture</th>
         <th>Inscrits/places</th>
-        <th>Description_infos</th>
+        <th>Etat</th>
         <th>Url_photo</th>
         <th>actions</th>
     </tr>
@@ -29,13 +29,14 @@
     <tbody>
     {% for sortie in sorties %}
         <tr>
-            <td>{{ sortie.id }}</td>
+
             <td>{{ sortie.nom }}</td>
             <td>{{ sortie.dateDebut ? sortie.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
             <td>{{ sortie.duree }}</td>
             <td>{{ sortie.dateCloture ? sortie.dateCloture|date('Y-m-d ') : '' }}</td>
             <td>{{ sortie.nbInscriptionsMax }}</td>
-            <td>{{ sortie.descriptionInfos }}</td>
+            <td>{{ sortie.etatsNoEtat.libelle }}</td>
+
             <td>{{ sortie.urlPhoto }}</td>
             <td>
                 <a href="{{ path('app_sortie_show', {'id': sortie.id}) }}">Afficher</a>
@@ -47,5 +48,6 @@
     </tbody>
 
 </table>
-    <div> <a href="{{ path('app_sortie_new') }}">Vers sortie/new</a></div>
+    <div class="">
+        <a href="{{ path('app_sortie_new') }}" class="btn bg-primary creation">Créer une sortie</a></div>
 {% endblock %}
