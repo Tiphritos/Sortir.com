@@ -15,9 +15,9 @@ class SortieType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('date_debut')
-            ->add('duree')
-            ->add('date_cloture')
+            ->add('date_debut') //Date de debut de la Sortie
+            ->add('duree') //En heures
+            ->add('date_cloture') //Doit etre anterieure à la date de début
             ->add('nb_inscriptions_max', null, [
                 'label' =>'Capacité maximum: ',
                 'attr' =>[
@@ -32,7 +32,7 @@ class SortieType extends AbstractType
             //->add('url_photo')
             //->add('etats_no_etat')
             ->add('lieux_no_lieu',EntityType::class,[
-                'choice_label'=> 'Lieu',
+                'choice_label'=> 'nom_lieu',
                 'class'=> Lieu::class,
                 'expanded' => true,
                 'attr' =>[
