@@ -91,10 +91,10 @@ class InscriptionController extends AbstractController
         SortieRepository $sortieRepository,
         ParticipantRepository $participantRepository,
         InscriptionRepository $inscriptionRepository,
-        Inscription $inscription,
+        /*Inscription $inscription,*/
         EntityManagerInterface $entityManager): Response
     {
-
+        $inscription = $inscriptionRepository->findOneBy(['sortie_id'=>$sortie->getId(), 'participant_id'=>$participant->getId()]);
         $inscriptions = $inscriptionRepository->findBy(['sortie_id'=>$sortie->getId()] );
         $estinscrit = false;
         //Vérifier si inscrit
@@ -105,6 +105,7 @@ class InscriptionController extends AbstractController
             }
         }
         if ($estinscrit){
+
             $AnnulerDeSortie = $participant->removeInscription($inscription, true);
             $entityManager->persist($AnnulerDeSortie);
             $entityManager->flush();
