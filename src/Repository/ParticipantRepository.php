@@ -53,7 +53,10 @@ class ParticipantRepository extends ServiceEntityRepository
 //            ->getResult()
 //        ;
 //    }
-
+      public function ComptedesUtilisateurs($value){
+        $entityManager = $this ->getEntityManager();
+    //    $dql ="SELECT "
+      }
 //    public function findOneBySomeField($value): ?Participant
 //    {
 //        return $this->createQueryBuilder('p')
