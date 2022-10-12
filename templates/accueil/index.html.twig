@@ -5,7 +5,6 @@
 
 
 
-    <div> <a href="{{ path('app_sortie_new') }}">Vers sortie/new</a></div>
 
    <div class="participant"> Participant: {{ app.user.pseudo }}</div>
 
@@ -13,5 +12,42 @@
         Date du jour  {{ "now" |date('j/ n/ Y') }}
     </div>
 
+<table class="table">
+    <thead>
+    <tr>
 
+        <th>Nom</th>
+        <th>Date_debut</th>
+        <th>Duree</th>
+        <th>Date_cloture</th>
+        <th>Inscrits/places</th>
+        <th>Etat</th>
+        <th>Url_photo</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for sortie in sorties %}
+        <tr>
+
+            <td>{{ sortie.nom }}</td>
+            <td>{{ sortie.dateDebut ? sortie.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ sortie.duree }}</td>
+            <td>{{ sortie.dateCloture ? sortie.dateCloture|date('Y-m-d ') : '' }}</td>
+            <td>{{ sortie.nbInscriptionsMax }}</td>
+            <td>{{ sortie.etatsNoEtat.libelle }}</td>
+
+            <td>{{ sortie.urlPhoto }}</td>
+            <td>
+                <a href="{{ path('app_sortie_show', {'id': sortie.id}) }}">Afficher</a>
+          {#      <a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">edit</a>#}
+            </td>
+        </tr>
+
+    {% endfor %}
+    </tbody>
+
+</table>
+    <div class="">
+        <a href="{{ path('app_sortie_new') }}" class="btn bg-primary creation">Créer une sortie</a></div>
 {% endblock %}

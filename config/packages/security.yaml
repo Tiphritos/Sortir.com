@@ -14,6 +14,12 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            #Se souvenir de moi
+            remember_me:
+                secret: '%kernel.secret%' # Obligatoire
+                lifetime: 604800 # 1 semaine traduite en secondes
+                always_remember_me: true
+
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\AppAuthenticator

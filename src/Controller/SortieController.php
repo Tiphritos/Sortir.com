@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
+use App\Repository\LieuRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,10 +56,12 @@ class SortieController extends AbstractController
 
 
     #[Route('/{id}', name: 'app_sortie_show', methods: ['GET'])]
-    public function show(Sortie $sortie): Response
+    public function show(Sortie $sortie, LieuRepository $lieuRepository): Response
     {
+      $lieu =  $lieuRepository ->findOneBy(['id' => $sortie->getLieuxNoLieu()]);
         return $this->render('sortie/show.html.twig', [
             'sortie' => $sortie,
+            'lieu'=> $lieu
         ]);
     }
 

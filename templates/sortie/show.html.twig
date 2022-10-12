@@ -36,15 +36,24 @@
                 <td>{{ sortie.descriptionInfos }}</td>
             </tr>
             <tr>
+                <th>Lieu</th>
+                <td>{{lieu.nomLieu }}</td>
+            </tr>
+            <tr>
                 <th>Url_photo</th>
                 <td>{{ sortie.urlPhoto }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_sortie_index') }}">back to list</a>
+     {# <a href="{{ path('app_sortie_index') }}">back to list</a> #}
 
-    <a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">edit</a>
+    {#<a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">edit</a>#}
+
+    <a href="{{ path('app_inscription') }}">inscription</a>
 
     {{ include('sortie/_delete_form.html.twig') }}
+
+
 {% endblock %}
+
