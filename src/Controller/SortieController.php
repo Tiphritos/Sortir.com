@@ -8,6 +8,8 @@ use App\Repository\EtatRepository;
 use App\Repository\LieuRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -90,13 +92,17 @@ class SortieController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    //Annuler Sortie
     #[Route('/{id}', name: 'app_sortie_delete', methods: ['POST'])]
-    public function delete(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
+    public function annuler(Request $request, Sortie $sortie, SortieRepository $sortieRepository,
+    EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$sortie->getId(), $request->request->get('_token'))) {
-            $sortieRepository->remove($sortie, true);
-        }
+        $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id'=> 6]));
+        $entityManager->persist($sortie);
+        $entityManager->flush();
+//        if ($this->isCsrfTokenValid('delete'.$sortie->getId(), $request->request->get('_token'))) {
+//            $sortieRepository->remove($sortie, true);
+//        }
 
         return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);
     }
