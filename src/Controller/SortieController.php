@@ -36,7 +36,11 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($this->getUser());
             $sortie->setSiteOrganisateur($this->getUser()->getSitesNoSite());
-            $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id'=>1]));
+            if ($request->request->get('publier') != null) { //Si publié
+                $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id' => 2]));
+            }else{ //Si simplement enregistré
+                $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id' => 1]));
+            }
 
             $sortieRepository->save($sortie, true);
 
@@ -48,6 +52,7 @@ class SortieController extends AbstractController
             'form' => $form,
         ]);
     }
+
 
     #[Route('/{id}', name: 'app_sortie_show', methods: ['GET'])]
     public function show(Sortie $sortie): Response
