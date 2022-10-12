@@ -50,7 +50,8 @@
 
     {#<a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">edit</a>#}
 
-    <a href="{{ path('app_inscription') }}">inscription</a>
+    <a href="{{ path('app_inscription', {'id': app.user.id,'sortie':sortie.id}) }}">inscription</a>
+    <a href="{{ path('app_sortie_show', {'id': sortie.id}) }}">show</a>
 
     {{ include('sortie/_delete_form.html.twig') }}
 
