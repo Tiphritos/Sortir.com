@@ -66,12 +66,20 @@ class SortieController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_sortie_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
+    public function edit(Request $request,
+                         Sortie $sortie,
+                         SortieRepository $sortieRepository,
+                         EtatRepository $etatRepository): Response
     {
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($request->request->get('publier') != null) { //Si publié
+                $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id' => 2]));
+            }else{ //Si simplement enregistré
+                $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id' => 1]));
+            }
             $sortieRepository->save($sortie, true);
 
             return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);
