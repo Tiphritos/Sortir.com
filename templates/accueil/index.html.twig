@@ -1,63 +1,82 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="test"> coucou</div>
+    <div class="test"> coucou</div>
+    <div class="participant"> Participant: {{ app.user.pseudo }}</div>
+    <div>
+        Date du jour  {{ "now" |date('j/ n/ Y') }}
+    </div>
+
+    <div id="zone-filtres">
+        <form action="{{ path('app_accueil_filtres') }}" method="post">
+            <label for="sites">Site: </label>
+            <select name="sites" id="sites">
+                <option value="">Tous</option>
+                {% for site in sites %}
+                    {% set selected = '' %}
+                    {% if site.id == app.user.sitesNoSite.id %}
+                        {% set selected = 'selected' %}
+                    {% else %}
+                        {% set selected = '' %}
+                    {% endif %}
+                    <option value="{{ site.id }}" {{ selected }} > {{ site.nomSite }} </option>
+                {% endfor %}
+            </select>
+            <label for="mot-clef">Le nom de la sortie contient: </label>
+            <input type="text" name="mot-clef" id="mot-clef" placeholder="Mot-clef">
+            {# Dates #}
+            <label for="date1">Entre </label>
+            <input type="date" name="date1" id="date1">
+            <label for="date2"> et </label>
+            <input type="date" name="date2" id="date2">
+            {# Checkboxes #}
+            <div>
+                <input type="checkbox" name="estOrganisateur" id="estOrganisateur" value="estOrganisateur">
+                <label for="estOrganisateur">Je suis l'organisateur</label>
+                <input type="checkbox" name="estInscrit" id="estInscrit" value="estInscrit">
+                <label for="estInscrit">Je suis inscrit</label>
+                <input type="checkbox" name="pasInscrit" id="pasInscrit" value="pasInscrit">
+                <label for="pasInscrit">Je ne suis pas inscrit</label>
+                <input type="checkbox" name="sortiesPassees" id="sortiesPassees" value="sortiesPassees">
+                <label for="sortiesPassees">Sorties passées</label>
+            </div>
+            <button type="submit">Rechercher</button>
+        </form>
+    </div>
 
 
-
-
-<div class="participant"> Participant: {{ app.user.pseudo }}</div>
-
-<div>
-    Date du jour  {{ "now" |date('j/ n/ Y') }}
-</div>
-
-<table class="table">
-    <thead>
-    <tr>
-
-        <th>Nom</th>
-        <th>Date_debut</th>
-        <th>Duree</th>
-        <th>Date_cloture</th>
-        <th>Inscrits/places</th>
-        <th>Etat</th>
-        <th>Inscrit</th>
-        <th>Organisateur</th>
-        <th>actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    {%for tableau in tab %}
-        <tr>
-            <td>{{ tableau.sortie.nom }}</td>
-            <td>{{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
-            <td>{{  tableau.sortie.duree }}</td><td>{{  tableau.sortie.dateCloture ?  tableau.sortie.dateCloture|date('Y-m-d ') : '' }}</td>
-            <td>{{ tableau.nbreInscrits }}/{{  tableau.sortie.nbInscriptionsMax }}</td>
-            <td>{{  tableau.sortie.etatsNoEtat.libelle }}</td>
-            <td>{{ tableau.estInscrit ? 'x': '' }}</td>
-            <td>{{  tableau.sortie.organisateur.nom }}</td>
-            <td>    <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }}">Afficher</a>
-                    <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}">Mettre à jour</a></td>
-        </tr>
-
-
-    {% endfor %}
-
-    </tbody>
-
-</table>
-
-<div>
-
-
-</div>
-<div>
-
-
-
-
-
+    <div id="zone-liste">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Date_debut</th>
+                <th>Duree</th>
+                <th>Date_cloture</th>
+                <th>Inscrits/places</th>
+                <th>Etat</th>
+                <th>Inscrit</th>
+                <th>Organisateur</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {%for tableau in tab %}
+                <tr>
+                    <td>{{ tableau.sortie.nom }}</td>
+                    <td>{{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{  tableau.sortie.duree }}</td><td>{{  tableau.sortie.dateCloture ?  tableau.sortie.dateCloture|date('Y-m-d ') : '' }}</td>
+                    <td>{{ tableau.nbreInscrits }}/{{  tableau.sortie.nbInscriptionsMax }}</td>
+                    <td>{{  tableau.sortie.etatsNoEtat.libelle }}</td>
+                    <td>{{ tableau.estInscrit ? 'x': '' }}</td>
+                    <td>{{  tableau.sortie.organisateur.nom }}</td>
+                    <td>    <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }}">Afficher</a>
+                        <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}">Mettre à jour</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <div class="">
         <a href="{{ path('app_sortie_new') }}" class="btn bg-primary creation">Créer une sortie</a></div>
-    {% endblock %}
+{% endblock %}
