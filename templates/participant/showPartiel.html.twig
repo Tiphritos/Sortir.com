@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Participant à la sortie {% endblock %}
+
+{% block body %}
+    <h1>{{ participant.pseudo }}</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Prenom</th>
+            <td>{{ participant.prenom }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ participant.nom }}</td>
+        </tr>
+
+        <tr>
+            <th>Mail</th>
+            <td>{{ participant.mail }}</td>
+        </tr>
+
+        </tbody>
+    </table>
+
+
+{% endblock %}
