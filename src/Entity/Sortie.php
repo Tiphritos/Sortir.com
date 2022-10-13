@@ -30,6 +30,7 @@ class Sortie
 
     #[Assert\NotBlank]
     #[Assert\GreaterThan('today')]
+    #[Assert\Expression("this.getDateDebut() > this.getDateCloture()")]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_cloture = null;
 
