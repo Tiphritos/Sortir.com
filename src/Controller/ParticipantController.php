@@ -49,6 +49,15 @@ class ParticipantController extends AbstractController
         ]);
     }
 
+
+    #[Route('/partiel/{id}', name: 'app_Partiel_show', methods: ['GET'])]
+    public function Participant(Participant $participant): Response
+    {
+        return $this->render('participant/showPartiel.html.twig', [
+            'participant' => $participant,
+        ]);
+    }
+
     #[Route('/{id}/edit', name: 'app_participant_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Participant $participant, ParticipantRepository $participantRepository,UserPasswordHasherInterface $passwordHasher): Response
     {
