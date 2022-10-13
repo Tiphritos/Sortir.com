@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Inscription;
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -38,6 +39,46 @@ class SortieRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findFiltres($siteId, $motClef, $date1, $date2, $estOrganisateur, $estInscrit, $pasInscrit, $sortiesPassees, $userId):array{
+
+        $queryBuilder= $this->createQueryBuilder('s');
+        $queryBuilder->join('App\Entity\Inscription', 'i');
+        if($siteId != 0){
+            $queryBuilder->andWhere('s.site_organisateur = :siteId')
+            ->setParameter(':siteId', $siteId );
+        }
+        if(strlen($motClef)>0){
+            $queryBuilder->andWhere('s.nom LIKE :motClef')
+                ->setParameter(':motClef', $motClef );
+        }
+        if($date1 != null){
+            $queryBuilder->andWhere('s.date_debut > :date1')
+                ->setParameter(':date1', $date1 );
+        }
+        if($date2 != null){
+            $queryBuilder->andWhere('s.date_debut < :date2')
+                ->setParameter(':date2', $date2 );
+        }
+        if($estOrganisateur){
+            $queryBuilder->andWhere('s.organisateur = :userId')
+                ->setParameter(':userId', $userId );
+        }
+//        if(($estInscrit) && !($pasInscrit)){
+//            $queryBuilder->andWhere('s.id = i.sortie_id');
+//        }
+//        if(!($estInscrit) && ($pasInscrit)){
+//            $queryBuilder->andWhere('s.id = i.sortie_id');
+//        }
+        if($sortiesPassees){
+            $queryBuilder->andWhere('s.etats_no_etat IN (4, 5, 7)');
+        }
+
+          //  dd($queryBuilder, $siteId);
+        $query = $queryBuilder->getQuery();
+        return $query->getArrayResult();
+
     }
 
 //    /**

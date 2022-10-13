@@ -1,7 +1,5 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-{% if sortie.etatsNoEtat.Id <=3 %}
     <button class="btn">{{ button_label|default('Enregistrer') }}</button>
     <button class="btn" name="publier" value="publier">{{ button_label|default('Publier') }}</button>
-{% endif %}
 {{ form_end(form) }}
