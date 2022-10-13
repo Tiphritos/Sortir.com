@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
+use App\Repository\InscriptionRepository;
 use App\Repository\LieuRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
@@ -38,7 +39,7 @@ class SortieController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-          $sortie->setOrganisateur($this->getUser());
+            $sortie->setOrganisateur($this->getUser());
             $sortie->setSiteOrganisateur($this->getUser()->getSitesNoSite());
             if ($request->request->get('publier') != null) { //Si publié
                 $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id' => 2]));
@@ -101,16 +102,22 @@ class SortieController extends AbstractController
     }
     //Annuler Sortie
     #[Route('/{id}', name: 'app_sortie_delete', methods: ['POST'])]
-    public function annuler(Request $request, Sortie $sortie, SortieRepository $sortieRepository,
+    public function annuler(Request $request, Sortie $sortie, InscriptionRepository $inscriptionRepository,
                             EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
     {
-        $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id'=> 6]));
-        $entityManager->persist($sortie);
-        $entityManager->flush();
-//        if ($this->isCsrfTokenValid('delete'.$sortie->getId(), $request->request->get('_token'))) {
-//            $sortieRepository->remove($sortie, true);
-//        }
-
+        //Checker l'état de la sortie, doit être strictement antérieur à 4 (aka ne pas avoir commencé)
+        if($sortie->getEtatsNoEtat()->getId()<=3) {
+            //Recupérer les inscriptions à la sortie puis les supprimer
+            $inscriptions = $inscriptionRepository->findBy(['sortie_id' => $sortie->getId()]);
+            foreach ($inscriptions as $inscription) {
+                $inscriptionRepository->remove($inscription, true);
+                //$entityManager->persist($inscription);
+            }
+            //Annuler la sortie
+            $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id' => 6]));
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+        }
         return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);
     }
 }
