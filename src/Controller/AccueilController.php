@@ -48,7 +48,7 @@ class AccueilController extends AbstractController
     {
 
         //Recuperer les differents filtres selectionnés
-        $siteFilter = $request->request->get('sites');
+        $siteFilter = $siteRepository->findOneBy(['id'=> $request->request->get('sites')]);
         $motClef = $request->request->get('mot-clef');
         $date1 = $request->request->get('date1');
         $date2 = $request->request->get('date2');
@@ -57,13 +57,15 @@ class AccueilController extends AbstractController
         $pasInscrit = $request->request->get('pasInscrit') != null;
         $sortiesPassees = $request->request->get('sortiesPassees') != null;
 
-//        dd($siteFilter, $motClef, $date1, $estOrganisateur);
 
-        $sorties = $sortieRepository->findFiltres($siteFilter, $motClef, $date1, $date2, $estOrganisateur, $estInscrit, $pasInscrit, $sortiesPassees, $this->getUser()->getId());
+
+        $sorties = $sortieRepository->findFiltres($siteFilter,'%'.$motClef.'%', $date1, $date2, $estOrganisateur, $estInscrit, $pasInscrit, $sortiesPassees, $this->getUser());
+        //dd($siteFilter, $motClef, $date1, $estOrganisateur, $sorties);
         $inscriptions =$inscriptionRepository ->findAll();
         $sites = $siteRepository->findAll();
-        $tab1 = [];
+
         foreach ($sorties as $sort){
+            //dd($sorties, $sort);
             $nbreInscrits = count($inscriptionRepository -> findBy(['sortie_id'=> $sort->getId()]));
             $estInscrit = (count($inscriptionRepository->findBy(['sortie_id' => $sort->getId(), 'participant_id' => $this->getUser()->getId()])) == 1);
 

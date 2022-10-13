@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Inscription;
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -41,29 +43,29 @@ class SortieRepository extends ServiceEntityRepository
         }
     }
 
-    public function findFiltres($siteId, $motClef, $date1, $date2, $estOrganisateur, $estInscrit, $pasInscrit, $sortiesPassees, $userId):array{
+    public function findFiltres($site, $motClef, $date1, $date2, $estOrganisateur, $estInscrit, $pasInscrit, $sortiesPassees, $user):array{
 
         $queryBuilder= $this->createQueryBuilder('s');
-        $queryBuilder->join('App\Entity\Inscription', 'i');
-        if($siteId != 0){
-            $queryBuilder->andWhere('s.site_organisateur = :siteId')
-            ->setParameter(':siteId', $siteId );
+        //$queryBuilder->join('App\Entity\Inscription', 'i');
+        if($site != null){
+            $queryBuilder->andWhere('s.site_organisateur = :site')
+            ->setParameter(':site', $site);
         }
         if(strlen($motClef)>0){
             $queryBuilder->andWhere('s.nom LIKE :motClef')
                 ->setParameter(':motClef', $motClef );
         }
         if($date1 != null){
-            $queryBuilder->andWhere('s.date_debut > :date1')
+            $queryBuilder->andWhere('s.date_debut >= :date1')
                 ->setParameter(':date1', $date1 );
         }
         if($date2 != null){
-            $queryBuilder->andWhere('s.date_debut < :date2')
+            $queryBuilder->andWhere('s.date_debut <= :date2')
                 ->setParameter(':date2', $date2 );
         }
         if($estOrganisateur){
-            $queryBuilder->andWhere('s.organisateur = :userId')
-                ->setParameter(':userId', $userId );
+            $queryBuilder->andWhere('s.organisateur = :user')
+                ->setParameter(':user', $user );
         }
 //        if(($estInscrit) && !($pasInscrit)){
 //            $queryBuilder->andWhere('s.id = i.sortie_id');
@@ -77,7 +79,8 @@ class SortieRepository extends ServiceEntityRepository
 
           //  dd($queryBuilder, $siteId);
         $query = $queryBuilder->getQuery();
-        return $query->getArrayResult();
+        //dd($query);
+        return $query->getResult();
 
     }
 
