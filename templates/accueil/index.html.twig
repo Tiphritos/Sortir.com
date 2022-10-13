@@ -1,12 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="test"> coucou</div>
-    <div class="participant"> Participant: {{ app.user.pseudo }}</div>
-    <div>
-        Date du jour  {{ "now" |date('j/ n/ Y') }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="offset-10 col-2 participant">
+                Participant: {{ app.user.pseudo }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-10 col-2">
+                Date du jour  {{ "now" |date('j/ n/ Y') }}
+            </div>
+        </div>
     </div>
-
     <div id="zone-filtres">
         <form action="{{ path('app_accueil_filtres') }}" method="post">
             <label for="sites">Site: </label>
