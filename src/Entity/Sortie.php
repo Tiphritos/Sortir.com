@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SortieRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SortieRepository::class)]
 class Sortie
@@ -14,18 +15,25 @@ class Sortie
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    #[Assert\NotBlank]
+    #[Assert\GreaterThan('today')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_debut = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(nullable: true)]
     private ?int $duree = null;
 
+    #[Assert\NotBlank]
+    #[Assert\GreaterThan('today')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_cloture = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column]
     private ?int $nb_inscriptions_max = null;
 
