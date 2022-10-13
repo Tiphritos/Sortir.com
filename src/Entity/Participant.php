@@ -6,6 +6,7 @@ use App\Repository\ParticipantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -17,18 +18,36 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        max: 100,
+        maxMessage: 'Votre nom est trop long. Sa longueur maximale est de 100 caractères.',
+    )]
+    #[ORM\Column(length: 100)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min:3 ,
+        max: 25,
+        minMessage: 'Votre pseudo est trop court. Sa longueur minimale est de 2 caractères.',
+        maxMessage: 'Votre pseudo est trop long. Sa longueur maximale est de 25 caractères.',
+    )]
+    #[ORM\Column(length: 25, unique: true)]
     private ?string $pseudo = null;
 
-    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        max: 100,
+        maxMessage: 'Votre prenom est trop long. Sa longueur maximale est de 100 caractères.',
+    )]
+    #[ORM\Column(length: 100)]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 15, nullable: true)]
     private ?string $telephone = null;
 
+    #[Assert\Email]
     #[ORM\Column(length: 255)]
     private ?string $mail = null;
 
@@ -43,6 +62,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private array $roles = [];
+
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
