@@ -40,6 +40,15 @@
                 <td>{{lieu.nomLieu }}</td>
             </tr>
             <tr>
+                <th>Participants</th>
+                <td>{% for inscrip in inscriptions %}
+
+                        <a href="{{ path('app_Partiel_show', {'id':inscrip.participantId.id}) }}">  {{ inscrip.participantId.nom }}</a>
+                    {% endfor %}
+                </td>
+
+            </tr>
+            <tr>
                 <th>Url_photo</th>
                 <td>{{ sortie.urlPhoto }}</td>
             </tr>
