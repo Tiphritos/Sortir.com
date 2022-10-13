@@ -77,7 +77,9 @@
                     <td>{{ tableau.estInscrit ? 'x': '' }}</td>
                     <td>{{  tableau.sortie.organisateur.nom }}</td>
                     <td>    <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }}">Afficher</a>
+                        {% if (is_granted('ROLE_ADMIN')) %}
                         <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}">Mettre à jour</a></td>
+                        {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

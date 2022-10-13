@@ -22,10 +22,10 @@
 
     <nav class=" col-8  nav">
         <ul class="menu">
-            {#    {% if (is_granted('ROLE_ADMIN')) %}#}
+               {% if (is_granted('ROLE_ADMIN')) %}
             <li class="menu-items"> <a href=#   class="liens-items">Villes</a> </li>
             <li class="menu-items"><a  href=# class="liens-items">Sites</a>
-                {# {%endif %}#}
+                {%endif %}
             <li class="menu-items"> <a href={{path('app_accueil')}}  class="liens-items">Accueil</a></li>
             <li class="menu-items"> <a href="{{ path('app_participant_show', {'id': app.user.id})}}"  class="liens-items">Mon profil</a>  </li>
 
