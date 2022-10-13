@@ -6,11 +6,11 @@
 
 
 
-   <div class="participant"> Participant: {{ app.user.pseudo }}</div>
+<div class="participant"> Participant: {{ app.user.pseudo }}</div>
 
-    <div>
-        Date du jour  {{ "now" |date('j/ n/ Y') }}
-    </div>
+<div>
+    Date du jour  {{ "now" |date('j/ n/ Y') }}
+</div>
 
 <table class="table">
     <thead>
@@ -22,32 +22,42 @@
         <th>Date_cloture</th>
         <th>Inscrits/places</th>
         <th>Etat</th>
-        <th>Url_photo</th>
+        <th>Inscrit</th>
+        <th>Organisateur</th>
         <th>actions</th>
     </tr>
     </thead>
     <tbody>
-    {% for sortie in sorties %}
+    {%for tableau in tab %}
         <tr>
-
-            <td>{{ sortie.nom }}</td>
-            <td>{{ sortie.dateDebut ? sortie.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
-            <td>{{ sortie.duree }}</td>
-            <td>{{ sortie.dateCloture ? sortie.dateCloture|date('Y-m-d ') : '' }}</td>
-            <td>{{ sortie.nbInscriptionsMax }}</td>
-            <td>{{ sortie.etatsNoEtat.libelle }}</td>
-
-            <td>{{ sortie.urlPhoto }}</td>
-            <td>
-                <a href="{{ path('app_sortie_show', {'id': sortie.id}) }}">Afficher</a>
-                <a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">Mettre à jour</a>
-            </td>
+            <td>{{ tableau.sortie.nom }}</td>
+            <td>{{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{  tableau.sortie.duree }}</td><td>{{  tableau.sortie.dateCloture ?  tableau.sortie.dateCloture|date('Y-m-d ') : '' }}</td>
+            <td>{{ tableau.nbreInscrits }}/{{  tableau.sortie.nbInscriptionsMax }}</td>
+            <td>{{  tableau.sortie.etatsNoEtat.libelle }}</td>
+            <td>{{ tableau.estInscrit ? 'x': '' }}</td>
+            <td>{{  tableau.sortie.organisateur.nom }}</td>
+            <td>    <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }}">Afficher</a>
+                    <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}">Mettre à jour</a></td>
         </tr>
 
+
     {% endfor %}
+
     </tbody>
 
 </table>
+
+<div>
+
+
+</div>
+<div>
+
+
+
+
+
     <div class="">
         <a href="{{ path('app_sortie_new') }}" class="btn bg-primary creation">Créer une sortie</a></div>
-{% endblock %}
+    {% endblock %}

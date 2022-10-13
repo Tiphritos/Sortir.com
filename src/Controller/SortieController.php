@@ -37,7 +37,7 @@ class SortieController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $sortie->setOrganisateur($this->getUser());
+          $sortie->setOrganisateur($this->getUser());
             $sortie->setSiteOrganisateur($this->getUser()->getSitesNoSite());
             if ($request->request->get('publier') != null) { //Si publié
                 $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id' => 2]));
@@ -53,6 +53,7 @@ class SortieController extends AbstractController
         return $this->renderForm('sortie/new.html.twig', [
             'sortie' => $sortie,
             'form' => $form,
+
         ]);
     }
 
