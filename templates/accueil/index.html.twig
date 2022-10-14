@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="row">
+<div class="container-fluid">
+    {#<div class="row">
             <div class="offset-10 col-2 participant">
                 Participant: {{ app.user.pseudo }}
             </div>
@@ -11,8 +11,8 @@
             <div class="offset-10 col-2">
                 Date du jour  {{ "now" |date('j/ n/ Y') }}
             </div>
-        </div>
-    </div>
+        </div>#}
+
     <div id="zone-filtres">
         <form action="{{ path('app_accueil_filtres') }}" method="post">
             <label for="sites">Site: </label>
@@ -52,7 +52,7 @@
 
 
     <div id="zone-liste">
-        <table class="table">
+        <table class="table couleurEcriture">
             <thead>
             <tr>
                 <th>Nom</th>
@@ -77,9 +77,9 @@
                     <td>{{ tableau.estInscrit ? 'x': '' }}</td>
                     <td>{{  tableau.sortie.organisateur.nom }}</td>
                     <td>    <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }}">Afficher</a>
-                        {% if (is_granted('ROLE_ADMIN')) %}
+                        {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id) %}
                         <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}">Mettre à jour</a></td>
-                        {% endif %}
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>
@@ -87,4 +87,32 @@
     </div>
     <div class="">
         <a href="{{ path('app_sortie_new') }}" class="btn bg-primary creation">Créer une sortie</a></div>
-{% endblock %}
+    <div class="social-panel-container ">
+        <div class="social-panel">
+            <p> <i class="fa fa-heart"></i>
+                <a href="{{ path('app_participant_show', {'id': app.user.id})}}"  class="liens-items">{{ app.user.pseudo }}</a> </p>
+            <button class="close-btn"><i class="fas fa-times"></i></button>
+
+
+            <ul>
+                <li>
+                    Nom :{{ app.user.nom }}
+
+                </li>
+                <li>
+
+                    Prénom :{{app.user.prenom}}
+
+                </li>
+                <li>
+
+                    Adresse mail :{{ app.user.mail }}
+
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+    {% endblock %}

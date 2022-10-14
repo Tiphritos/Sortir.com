@@ -8,6 +8,7 @@ html,body{
     background: var(--main-color) ;
     background: var(--backgroundlinear);
     background-attachment: fixed;
+    height: 100vh;
 }
 
 .liens-items{
