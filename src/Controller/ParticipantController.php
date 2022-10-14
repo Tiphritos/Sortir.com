@@ -65,12 +65,7 @@ class ParticipantController extends AbstractController
         $form->handleRequest($request);
         $motdepasse = $participant ->getMotDePasse();
 
-
-
-
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             $motdepasseHache = $passwordHasher->hashPassword($participant,$motdepasse);
             $participant ->setMotDePasse($motdepasseHache);
             $participantRepository->save($participant, true);
@@ -93,5 +88,25 @@ class ParticipantController extends AbstractController
         }
 
         return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    //https://zetcode.com/php/csv/
+    #[Route('/new/csv', name: 'app_participant_new_csv', methods: ['GET', 'POST'])]
+    public function newCsv(Request $request, ParticipantRepository $participantRepository): Response
+    {
+        $participant = new Participant();
+        $form = $this->createForm(ParticipantType::class, $participant);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $participantRepository->save($participant, true);
+
+            return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('participant/newcsv.html.twig', [
+            'participant' => $participant,
+            'form' => $form,
+        ]);
     }
 }
