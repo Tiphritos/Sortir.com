@@ -1,3 +1,9 @@
+body{
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
 /*******************************/
 /*Menu*/
 
@@ -55,8 +61,13 @@
 }
 a{
     text-decoration: none;
-    color: black;
+    color: white;
 }
 .liens-items:hover{
     color: #edc139;
+}
+/***********Couleur**************/
+
+.couleurEcriture{
+    color: white;
 }
