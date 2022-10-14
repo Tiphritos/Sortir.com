@@ -72,17 +72,15 @@ class SortieRepository extends ServiceEntityRepository
         if(($estInscrit) && !($pasInscrit)){
             $queryBuilder->andWhere('s.id = i.sortie_id');
         }
-//        if(!($estInscrit) && ($pasInscrit)){
-//            $queryBuilder->andWhere('s.id = i.sortie_id');
-//        }
+        if(!($estInscrit) && ($pasInscrit)){
+            $queryBuilder->andWhere('s.id != i.sortie_id');
+        }
         if($sortiesPassees){
             $queryBuilder->andWhere('s.date_debut <= :date3')
                 ->setParameter(':date3', date_create_immutable('now'));
         }
 
-          //  dd($queryBuilder, $siteId);
         $query = $queryBuilder->getQuery();
-        //dd($query);
         return $query->getResult();
 
     }

@@ -6,6 +6,7 @@ use App\Entity\Lieu;
 use App\Entity\Sortie;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -34,7 +35,7 @@ class SortieType extends AbstractType
                 ]
             ]) //En heures
             //Doit etre anterieure à la date de début
-            ->add('date_cloture', null, [
+            ->add('date_cloture', DateTimeType::class, [
                 'label'=>'Date limite d\'inscription: '
             ])
 
