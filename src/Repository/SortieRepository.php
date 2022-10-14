@@ -46,7 +46,9 @@ class SortieRepository extends ServiceEntityRepository
     public function findFiltres($site, $motClef, $date1, $date2, $estOrganisateur, $estInscrit, $pasInscrit, $sortiesPassees, $user):array{
 
         $queryBuilder= $this->createQueryBuilder('s');
-        //$queryBuilder->join('App\Entity\Inscription', 'i');
+        if(($estInscrit) || ($pasInscrit)) {
+            $queryBuilder->join('App\Entity\Inscription', 'i');
+        }
         if($site != null){
             $queryBuilder->andWhere('s.site_organisateur = :site')
             ->setParameter(':site', $site);
@@ -67,14 +69,15 @@ class SortieRepository extends ServiceEntityRepository
             $queryBuilder->andWhere('s.organisateur = :user')
                 ->setParameter(':user', $user );
         }
-//        if(($estInscrit) && !($pasInscrit)){
-//            $queryBuilder->andWhere('s.id = i.sortie_id');
-//        }
+        if(($estInscrit) && !($pasInscrit)){
+            $queryBuilder->andWhere('s.id = i.sortie_id');
+        }
 //        if(!($estInscrit) && ($pasInscrit)){
 //            $queryBuilder->andWhere('s.id = i.sortie_id');
 //        }
         if($sortiesPassees){
-            $queryBuilder->andWhere('s.etats_no_etat IN (4, 5, 7)');
+            $queryBuilder->andWhere('s.date_debut <= :date3')
+                ->setParameter(':date3', date_create_immutable('now'));
         }
 
           //  dd($queryBuilder, $siteId);

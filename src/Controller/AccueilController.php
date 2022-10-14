@@ -63,7 +63,7 @@ class AccueilController extends AbstractController
         //dd($siteFilter, $motClef, $date1, $estOrganisateur, $sorties);
         $inscriptions =$inscriptionRepository ->findAll();
         $sites = $siteRepository->findAll();
-
+        $tab1 = [];
         foreach ($sorties as $sort){
             //dd($sorties, $sort);
             $nbreInscrits = count($inscriptionRepository -> findBy(['sortie_id'=> $sort->getId()]));
