@@ -27,7 +27,12 @@
 
         </tbody>
     </table>
+    {% for message in app.flashes('message') %}
+        <div class="flash-info">
+            {{ message }}
+        </div>
 
+    {% endfor %}
     <a href="{{ path('app_participant_index') }}">back to list</a>
 
     <a href="{{ path('app_participant_edit', {'id': participant.id}) }}">Modifier mon profil</a>

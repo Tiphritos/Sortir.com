@@ -8,6 +8,7 @@ use App\Repository\EtatRepository;
 use App\Repository\InscriptionRepository;
 use App\Repository\LieuRepository;
 use App\Repository\SortieRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,11 +33,20 @@ class SortieController extends AbstractController
                         EtatRepository $etatRepository
     ): Response
     {
+       ;
+        $date = new \DateTimeImmutable();
         $sortie = new Sortie();
+        $sortie->setDateDebut($date);
         $form = $this->createForm(SortieType::class, $sortie);
+
         $form->handleRequest($request);
+        $dateDebut = $request->request->get('dateDebut');
+
+
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
             $sortie->setOrganisateur($this->getUser());
             $sortie->setSiteOrganisateur($this->getUser()->getSitesNoSite());
             if ($request->request->get('publier') != null) { //Si publié

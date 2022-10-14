@@ -71,3 +71,8 @@ a{
 .couleurEcriture{
     color: white;
 }
+
+/********Tableau d'affichage******/
+.table{
+    text-align: center;
+}

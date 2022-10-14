@@ -52,7 +52,7 @@
 
 
     <div id="zone-liste">
-        <table class="table couleurEcriture">
+         <table class="table couleurEcriture">
             <thead>
             <tr>
                 <th>Nom</th>
@@ -67,52 +67,111 @@
             </tr>
             </thead>
             <tbody>
-            {%for tableau in tab %}
+        {%for tableau in tab %}
+                {% if (tableau.sortie.etatsNoEtat.id != 7)%}
                 <tr>
-                    <td>{{ tableau.sortie.nom }}</td>
-                    <td>{{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{  tableau.sortie.duree }}</td><td>{{  tableau.sortie.dateCloture ?  tableau.sortie.dateCloture|date('Y-m-d ') : '' }}</td>
+                    <td class="text-start">{{ tableau.sortie.nom }}</td>
+                    <td> Le {{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('d-m-Y H:i') : '' }}</td>
+                    <td>{{  tableau.sortie.duree }} min</td>
+                    <td>{{  tableau.sortie.dateCloture ?  tableau.sortie.dateCloture|date('d-m-Y ') : '' }}</td>
                     <td>{{ tableau.nbreInscrits }}/{{  tableau.sortie.nbInscriptionsMax }}</td>
                     <td>{{  tableau.sortie.etatsNoEtat.libelle }}</td>
                     <td>{{ tableau.estInscrit ? 'x': '' }}</td>
                     <td>{{  tableau.sortie.organisateur.nom }}</td>
-                    <td>    <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }}">Afficher</a>
-                        {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id) %}
-                        <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}">Mettre à jour</a></td>
+                    <td>
+                        <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }}">Afficher</a>
+                        {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id ) %}
+                        <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}"> | Mettre à jour</a></td>
                     {% endif %}
+
+
                 </tr>
+                {% endif %}
             {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    <div class="">
-        <a href="{{ path('app_sortie_new') }}" class="btn bg-primary creation">Créer une sortie</a></div>
-    <div class="social-panel-container ">
-        <div class="social-panel">
-            <p> <i class="fa fa-heart"></i>
-                <a href="{{ path('app_participant_show', {'id': app.user.id})}}"  class="liens-items">{{ app.user.pseudo }}</a> </p>
-            <button class="close-btn"><i class="fas fa-times"></i></button>
+        </tbody>
+    </table>
+ {#       <div class="card-deck">
+            {%for tableau in tab %}
+            {% if (tableau.sortie.etatsNoEtat.id != 7)%}
+            <div class="card">
+                <div class="card-header">{{ tableau.sortie.nom }}</div>
+                <div class="card-body">
+                    <h3 class="card-title">Titre de la première carte</h5>
+                        <p class="card-text bg-primary">{{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('d-m-Y H:i') : '' }}
+                        <p class="card-text" > {{  tableau.sortie.duree }} min</p>
+                          <p class="card-text"  >  {{  tableau.sortie.dateCloture ?  tableau.sortie.dateCloture|date('d-m-Y ') : '' }}</p>
+                        <p class="card-text"  >  {{ tableau.nbreInscrits }}/{{  tableau.sortie.nbInscriptionsMax }}</p>
+                           <p class="card-text">   {{  tableau.sortie.etatsNoEtat.libelle }}</p>
+                        <p class="card-text" >  {{ tableau.estInscrit ? 'x': '' }}</p>
+                           <p class="card-text " > {{  tableau.sortie.organisateur.nom }}</p>
+
+                            <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }}">Afficher</a>
+                            {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id ) %}
+                                <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}"> | Mettre à jour</a>
+                            {% endif %}
+                        </p>
+                        <p class="card-text"><small class="text-muted">Ligne de texte supplémentaire</small></p>
+                </div>
+                {% endif %}
+                {% endfor %}
+
+                {% for recette in recettes %}
+                    <div class ="col-6 col-sm-4 col-md-3 p-2">
+                        <div class="card " style="width: 18rem;">
+                            {% if (recette.estFavori) %}
+                                <div class="etoile"> &#9733</div>
+                            {% else %}
+                                <div class="etoile">&#10025</div>
+                            {% endif %}
+
+                            <img src="{{ asset('images/'~ recette.image) }}" class="card-img-top img figure-img img-fluid rounded" alt="recette">
+
+                            <div class="card-body ">
+                                <h5 class="card-title text-center">{{ recette.nom }}</h5>
+
+                                <a href="{{ path('app_recette_show', {'id': recette.id}) }}"class="btn btn-primary">Recette</a>
+                                {% if (recette.estFavori) %}
+                                    <a href="{{ path('favoris',{'id':recette.id}) }}"class="btn btn-primary">Enlever des favoris</a>
+                                {% else %}
+                                    <a href="{{ path('favoris',{'id':recette.id}) }}"class="btn btn-primary">Ajouter aux favoris</a>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
 
 
-            <ul>
-                <li>
-                    Nom :{{ app.user.nom }}
 
-                </li>
-                <li>
+                {% endfor %}
+            </div>#}
+            <div class="">
+                <a href="{{ path('app_sortie_new') }}" class="btn bg-primary creation">Créer une sortie</a></div>
+            <div class="social-panel-container ">
+                <div class="social-panel">
+                    <p> <i class="fa fa-heart"></i>
+                        <a href="{{ path('app_participant_show', {'id': app.user.id})}}"  class="liens-items">{{ app.user.pseudo }}</a> </p>
+                    <button class="close-btn"><i class="fas fa-times"></i></button>
 
-                    Prénom :{{app.user.prenom}}
 
-                </li>
-                <li>
+                    <ul>
+                        <li>
+                            Nom :{{ app.user.nom }}
 
-                    Adresse mail :{{ app.user.mail }}
+                        </li>
+                        <li>
 
-                </li>
+                            Prénom :{{app.user.prenom}}
 
-            </ul>
+                        </li>
+                        <li>
+
+                            Adresse mail :{{ app.user.mail }}
+
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-    {% endblock %}
+        {% endblock %}
