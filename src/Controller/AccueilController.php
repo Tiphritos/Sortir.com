@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Repository\InscriptionRepository;
 use App\Repository\SiteRepository;
 use App\Repository\SortieRepository;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,15 +23,16 @@ class AccueilController extends AbstractController
         $sorties =$sortieRepository->findAll();
         $inscriptions =$inscriptionRepository ->findAll();
         $sites = $siteRepository->findAll();
+        $tab1=[];
         foreach ($sorties as $sort){
             $nbreInscrits = count($inscriptionRepository -> findBy(['sortie_id'=> $sort->getId()]));
            $estInscrit = (count($inscriptionRepository->findBy(['sortie_id' => $sort->getId(), 'participant_id' => $this->getUser()->getId()])) == 1);
-
             $tab1[] =array(
-            'sortie' => $sort,
-             'nbreInscrits'=>$nbreInscrits,
-             'estInscrit' =>$estInscrit
+                'sortie' => $sort,
+                'nbreInscrits'=>$nbreInscrits,
+                'estInscrit' =>$estInscrit
             );
+
              }
 
         return $this->render('accueil/index.html.twig', [

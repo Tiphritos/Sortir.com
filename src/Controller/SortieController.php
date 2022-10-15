@@ -47,7 +47,7 @@ class SortieController extends AbstractController
                 $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id' => 1]));
             }
             $sortieRepository->save($sortie, true);
-            return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('sortie/new.html.twig', [
