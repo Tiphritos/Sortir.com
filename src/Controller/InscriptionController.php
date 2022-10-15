@@ -78,18 +78,15 @@ class InscriptionController extends AbstractController
 
         // dd($idParticipant,$idSortie);
 
-        return $this->render('inscription/index.html.twig', [
-            'controller_name' => 'InscriptionController',
-
-        ]);
+        return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+        ;
     }
     #[Route('/{id}/{sortie}/desistement', name: 'app_desistement')]
     public function desistement(
         Request $request,
         Participant $participant,
         Sortie $sortie ,
-        SortieRepository $sortieRepository,
-        ParticipantRepository $participantRepository,
+
         InscriptionRepository $inscriptionRepository,
         /*Inscription $inscription,*/
         EntityManagerInterface $entityManager): Response
@@ -121,9 +118,7 @@ class InscriptionController extends AbstractController
 
         // dd($idParticipant,$idSortie);
 
-        return $this->render('inscription/index.html.twig', [
-            'controller_name' => 'InscriptionController',
+        return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
 
-        ]);
     }
 }

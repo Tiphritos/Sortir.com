@@ -12,7 +12,12 @@
                 Date du jour  {{ "now" |date('j/ n/ Y') }}
             </div>
         </div>#}
+    {% for message in app.flashes('message') %}
+        <div class="flash-info">
+            {{ message }}
+        </div>
 
+    {% endfor %}
     <div id="zone-filtres">
         <form action="{{ path('app_accueil_filtres') }}" method="post">
             <label for="sites">Site: </label>

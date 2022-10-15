@@ -17,3 +17,13 @@ floating_btn.addEventListener('click', () => {
     social_panel_container.classList.remove('visible')
 });*/
 
+window.onload = () =>{
+
+
+    let consignes = document.querySelector (".sous_menu_admin")
+
+    consignes.style.display = "none"
+
+
+
+}

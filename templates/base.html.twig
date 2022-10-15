@@ -25,8 +25,14 @@
         <nav class=" col-8  nav">
             <ul class="menu">
                 {% if (is_granted('ROLE_ADMIN')) %}
-                <li class="menu-items"> <a href=#   class="liens-items">Villes</a> </li>
-                <li class="menu-items"><a  href=# class="liens-items">Sites</a>
+                <li class="liens-items signe_droite">Admin
+                    <ul class="sous_menu_admin ">
+                        <li><a href=#   class="">Villes</a></li>
+                        <li><a  href=# class="">Sites</a></li>
+                        <li><a href="# " class="">Inscrits</a> </li>
+                    </ul>
+                </li>
+                <li class="menu-items">
                     {%endif %}
                 <li class="menu-items"> <a href={{path('app_accueil')}}  class="liens-items">Accueil</a></li>
                 <li class="menu-items"> <a href="{{ path('app_participant_show', {'id': app.user.id})}}"  class="liens-items">Mon profil</a>  </li>
