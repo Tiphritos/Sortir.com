@@ -2,6 +2,7 @@ const chk = document.getElementById('chk');
 
 chk.addEventListener('change', () => {
     document.body.classList.toggle('hub');
+    document.getElementById("com").classList.toggle('titre')
 });
 
 // SOCIAL PANEL JS
@@ -11,19 +12,9 @@ const social_panel_container = document.querySelector('.social-panel-container')
 
 floating_btn.addEventListener('click', () => {
     social_panel_container.classList.toggle('visible')
-});
+},true);
 
-/*close_btn.addEventListener('click', () => {
+close_btn.addEventListener('click', () => {
     social_panel_container.classList.remove('visible')
-});*/
+},true);
 
-window.onload = () =>{
-
-
-    let consignes = document.querySelector (".sous_menu_admin")
-
-    consignes.style.display = "none"
-
-
-
-}

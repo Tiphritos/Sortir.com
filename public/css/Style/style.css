@@ -3,20 +3,25 @@ body{
     padding: 0;
     color: white;
 }
+/*******************************/
+/*Titre*/
 
+.titrePrincipal{
+    display: flex;
+}
 /*******************************/
 /*Menu*/
 
 
 .nav .menu-items{
-    position: relative;
-    display: inline-flex;
-    padding: 3px;
-    font-family: Inconsolata ;
-    /* border: 1px solid rgb(0 0 0); */
-    margin: 7px 20px;
-    z-index: 1;
-    font-size: 1rem;
+     position: relative;
+     display: inline-flex;
+     padding: 3px;
+
+
+    margin: -12px 0px;
+    /* z-index: 1; */
+    /* font-size: 1rem;*/
 
 }
 .menu-items::after{

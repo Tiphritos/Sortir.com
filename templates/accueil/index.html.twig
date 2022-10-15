@@ -55,7 +55,7 @@
         </form>
     </div>
 
-
+<!--
     <div id="zone-liste">
          <table class="table couleurEcriture">
             <thead>
@@ -95,6 +95,40 @@
             {% endfor %}
         </tbody>
     </table>
+    </div>
+-->
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {%for tableau in tab %}
+            {% if (tableau.sortie.etatsNoEtat.id != 7)%}
+            <div class="col-6">
+
+                <div class="card bg-dark container-fluid">
+                <!--    <img src="..." class="card-img-top" alt="..."> -->
+                    <div class="card-body">
+                        <h5 class="card-title text-center liens-items ">{{ tableau.sortie.nom }}</h5>
+                        <p class="card-text ">
+                      <div>  Le {{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('d-m-Y H:i') : '' }}</div>
+                        <div>  La sortie dure {{  tableau.sortie.duree }} min</div>
+                        <div>  La fin des inscriptions est le  {{  tableau.sortie.dateCloture ?  tableau.sortie.dateCloture|date('d-m-Y ') : '' }}</div>
+                        <div>  Le nombre de participants {{ tableau.nbreInscrits }} sur {{  tableau.sortie.nbInscriptionsMax }} inscrit</div>
+                        <div> La sortie est  {{  tableau.sortie.etatsNoEtat.libelle }}</div>
+                        <div> Inscrit ? {{ tableau.estInscrit ? 'oui': 'non' }}</div>
+                        <div> L'organisateur {{  tableau.sortie.organisateur.nom }}</div>
+
+                <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }}">Afficher</a>
+                            {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id ) %}
+                            <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}"> | Mettre à jour</a>
+                                {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+
+        </div>
+
+
  {#       <div class="card-deck">
             {%for tableau in tab %}
             {% if (tableau.sortie.etatsNoEtat.id != 7)%}

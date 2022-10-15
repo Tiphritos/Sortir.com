@@ -5,43 +5,62 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-    <link type="text/css" href="{{ asset('js/jquery-ui/css/smoothness/jquery-ui-1.10.3.custom.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <script src="{{ asset('js/script.js') }}" defer></script>
 
-    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    <title>{% block title %}Accueil{% endblock %}</title>
 
 </head>
 <body class="container-fluid">
 
-    <div class="row">
-        <div class=" col-1 logo ">
-            Logo
-        </div>
-        <div class="offset-1 col-2 ">
-            <h1 class="TitrePrincipal">Sortie.com</h1>
-        </div>
+<div class="row">
+    <div class=" col-1 logo ">
+        Logo
+    </div>
+    <div class="offset-1 col-2 ">
+        <h1 class="titrePrincipal">Sortie <span id="com" class="">.com</span></h1>
+    </div>
 
-        <nav class=" col-8  nav">
-            <ul class="menu">
-                {% if (is_granted('ROLE_ADMIN')) %}
-                <li class="liens-items signe_droite">Admin
-                    <ul class="sous_menu_admin ">
-                        <li><a href=#   class="">Villes</a></li>
-                        <li><a  href=# class="">Sites</a></li>
-                        <li><a href="# " class="">Inscrits</a> </li>
-                    </ul>
-                </li>
-                <li class="menu-items">
+
+    <div class="col-8 ">
+        <nav class="navbar navbar-expand-lg position-absolute end-0 nav mt-1 ">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if (is_granted('ROLE_ADMIN')) %}
+                        <li class="nav-item dropdown menu-items ">
+                            <a class="nav-link dropdown-toggle liens-items" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Admin
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarScrollingDropdown">
+                                <li><a class="dropdown-item " href="#">Villes</a></li>
+                                <li><a class="dropdown-item" href="#">Lieu</a></li>
+
+                                <li><a class="dropdown-item" href="#">Participant</a></li>
+                            </ul>
+                        </li>
                     {%endif %}
-                <li class="menu-items"> <a href={{path('app_accueil')}}  class="liens-items">Accueil</a></li>
-                <li class="menu-items"> <a href="{{ path('app_participant_show', {'id': app.user.id})}}"  class="liens-items">Mon profil</a>  </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link  liens-items " aria-current="page" href="{{path('app_accueil')}}">Accueil</a>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link liens-items" href="{{ path('app_participant_show', {'id': app.user.id})}}">Mon profil</a>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link liens-items" href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </li>
 
-                <li class="menu-items"> <a href="{{ path('app_logout') }}" class="liens-items" >Se déconnecter</a>  </li>
+                </ul>
 
-            </ul>
+            </div>
+
         </nav>
     </div>
+</div>
     <div class="row">
         <div class="offset-11 col-1">
             <input type="checkbox" class="checkbox" id="chk" />
@@ -60,6 +79,6 @@
     {% block javascripts %}{% endblock %}
 
 
-
+    <script src="{{ asset('js/script.js') }}" ></script>
 </body>
 </html>

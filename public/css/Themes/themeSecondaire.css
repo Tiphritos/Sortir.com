@@ -1,10 +1,12 @@
 
 
 body.hub {
-    background: #ffa31a fixed no-repeat;
+    background: black fixed no-repeat;
 
 }
-
+.titre{
+    background: orange;
+}
 .checkbox {
     opacity: 0;
     position: absolute;
