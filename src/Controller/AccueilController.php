@@ -26,20 +26,20 @@ class AccueilController extends AbstractController
         $tab1=[];
         foreach ($sorties as $sort){
             $nbreInscrits = count($inscriptionRepository -> findBy(['sortie_id'=> $sort->getId()]));
-           $estInscrit = (count($inscriptionRepository->findBy(['sortie_id' => $sort->getId(), 'participant_id' => $this->getUser()->getId()])) == 1);
+            $estInscrit = (count($inscriptionRepository->findBy(['sortie_id' => $sort->getId(), 'participant_id' => $this->getUser()->getId()])) == 1);
             $tab1[] =array(
                 'sortie' => $sort,
                 'nbreInscrits'=>$nbreInscrits,
                 'estInscrit' =>$estInscrit
             );
 
-             }
+        }
 
         return $this->render('accueil/index.html.twig', [
-                'sorties' =>$sorties,
-                'inscriptions' => $inscriptions,
-                'tab' => $tab1,
-                'sites'=>$sites
+            'sorties' =>$sorties,
+            'inscriptions' => $inscriptions,
+            'tab' => $tab1,
+            'sites'=>$sites
         ]);
     }
     #[Route('/accueil/filtres', name: 'app_accueil_filtres', methods: ['POST'])]

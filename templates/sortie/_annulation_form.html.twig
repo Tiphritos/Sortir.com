@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_sortie_annulation', {'id': sortie.id}) }}" >
+{{ form_row(form.description_infos) }}
+    <button class="btn">Annuler la sortie</button>
+</form>

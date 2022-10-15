@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Inscription;
 use App\Entity\Sortie;
+use App\Form\SortieAnnulationType;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\InscriptionRepository;
 use App\Repository\LieuRepository;
 use App\Repository\SortieRepository;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,10 +23,11 @@ class SortieController extends AbstractController
     #[Route('/new', name: 'app_sortie_new', methods: ['GET', 'POST'])]
     public function new(Request $request,
                         SortieRepository $sortieRepository,
+                        InscriptionRepository $inscriptionRepository,
                         EtatRepository $etatRepository
     ): Response
     {
-       ;
+        ;
         $date = new \DateTimeImmutable();
         $sortie = new Sortie();
         $sortie->setDateDebut($date);
@@ -41,12 +43,22 @@ class SortieController extends AbstractController
 
             $sortie->setOrganisateur($this->getUser());
             $sortie->setSiteOrganisateur($this->getUser()->getSitesNoSite());
+
             if ($request->request->get('publier') != null) { //Si publié
                 $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id' => 2]));
             }else{ //Si simplement enregistré
                 $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id' => 1]));
             }
             $sortieRepository->save($sortie, true);
+
+            //Inscrire automatiquement l'organisateur à sa sortie
+            $inscription = new Inscription();
+            $inscription->setParticipantId($this->getUser());
+            $inscription->setDateInscription(new \DateTimeImmutable('now'));
+            $inscription->setSortieId($sortie);
+
+            $inscriptionRepository->save($inscription, true);
+
             return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -90,29 +102,44 @@ class SortieController extends AbstractController
                 }
                 $sortieRepository->save($sortie, true);
 
-                return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
             }
         }
-
+        //dd($sortie);
         return $this->renderForm('sortie/edit.html.twig', [
             'sortie' => $sortie,
             'form' => $form,
         ]);
     }
-    //Annuler Sortie
-    #[Route('/{id}', name: 'app_sortie_delete', methods: ['POST'])]
+    #[Route('/{id}/annulation', name: 'app_sortie_delete', methods: ['POST'])]
+    public function redirectToAnnulation(Request $request, Sortie $sortie, InscriptionRepository $inscriptionRepository,
+                                         EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(SortieAnnulationType::class, $sortie);
+        $form->handleRequest($request);
+        return $this->renderForm('sortie/confirmannulation.html.twig',[
+            'sortie'=>$sortie,
+            'form'=>$form
+        ]);
+    }
+
+    //Annuler Sortie après confirmation
+    #[Route('/{id}', name: 'app_sortie_annulation', methods: ['POST'])]
     public function annuler(Request $request, Sortie $sortie, InscriptionRepository $inscriptionRepository,
                             EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
     {
+
+        $motif = 'Raison de l\'annulation: '.($sortie->getDescriptionInfos());
+
         //Checker l'état de la sortie, doit être strictement antérieur à 4 (aka ne pas avoir commencé)
         if($sortie->getEtatsNoEtat()->getId()<=3) {
             //Recupérer les inscriptions à la sortie puis les supprimer
             $inscriptions = $inscriptionRepository->findBy(['sortie_id' => $sortie->getId()]);
             foreach ($inscriptions as $inscription) {
                 $inscriptionRepository->remove($inscription, true);
-                //$entityManager->persist($inscription);
             }
             //Annuler la sortie
+            $sortie->setDescriptionInfos($motif);
             $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id' => 6]));
             $entityManager->persist($sortie);
             $entityManager->flush();
