@@ -3,39 +3,129 @@
 {% block title %}Participant{% endblock %}
 
 {% block body %}
-    <h1>{{ participant.pseudo }}</h1>
 
-    <table class="table couleurEcriture">
-        <tbody>
-            <tr>
-                 <th>Prenom</th>
-                <td>{{ participant.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ participant.nom }}</td>
-            </tr>
-
-            <tr>
-                <th>Telephone</th>
-                <td>{{ participant.telephone }}</td>
-            </tr>
-            <tr>
-                <th>Mail</th>
-                <td>{{ participant.mail }}</td>
-            </tr>
-
-        </tbody>
-    </table>
     {% for message in app.flashes('message') %}
         <div class="flash-info">
             {{ message }}
         </div>
 
     {% endfor %}
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-md-9 col-lg-7 col-xl-5">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-4">
+                            <div class="d-flex text-black">
+                                <div class="flex-shrink-0">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                                         alt="Generic placeholder image" class="img-fluid"
+                                         style="width: 180px; border-radius: 10px;">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1">{{ participant.pseudo }}</h5>
+                                    <p class="mb-2 pb-1" style="color: #2b2a2a;">{{ participant.prenom }} {{ participant.nom }}</p>
+                                    <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
+                                         style="background-color: #efefef;">
+                                        <div>
+                                            <p class="small text-muted mb-1">Téléphone</p>
+                                            <p class="mb-0">{{ participant.telephone }}</p>
+                                        </div>
+
+                                        <div>
+                                            <p class="small text-muted mb-1 text-center">Mail</p>
+                                            <p class="mb-0">{{ participant.mail }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex pt-1">
+
+                                        <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="btn btn-primary flex-grow-1">Modifier mon profil</a>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section >
+        <div class="container py-5">
+            <div class="row">
+                <div class="col">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                                 class="rounded-circle img-fluid" style="width: 150px;">
+                            <h5 class="my-3 text-muted">{{ participant.pseudo }}</h5>
+
+
+                            <div class="d-flex justify-content-center mb-2">
+                                <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="btn btn-outline-primary ms-1">Modifier mon profil</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class=" text-muted mb-0">Nom </p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ participant.nom }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0 text-muted ">Prenom</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ participant.prenom }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0 text-muted">Adresse mail</p>
+                                </div>
+                                <div class="  col-sm-9">
+                                    <p class="text-muted mb-0">{{ participant.mail }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0 text-muted">Téléphone</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ participant.telephone }}</p>
+                                </div>
+                            </div>
+                            <hr>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
     <a href="{{ path('app_accueil') }}">Retour à l'accueil |</a>
 
-    <a href="{{ path('app_participant_edit', {'id': participant.id}) }}">Modifier mon profil</a>
+
 
     {{ include('participant/_delete_form.html.twig') }}
 {% endblock %}

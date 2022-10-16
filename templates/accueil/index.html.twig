@@ -18,7 +18,7 @@
         </div>
 
     {% endfor %}
-    <div id="zone-filtres">
+    <div id="zone-filtres" class="text-center mb-2">
         <form action="{{ path('app_accueil_filtres') }}" method="post">
             <label for="sites">Site: </label>
             <select name="sites" id="sites">
@@ -185,10 +185,12 @@
             </div>#}
             <div class="">
                 <a href="{{ path('app_sortie_new') }}" class="btn bg-primary creation">Créer une sortie</a></div>
+
             <div class="social-panel-container ">
                 <div class="social-panel">
                     <p> <i class="fa fa-heart"></i>
                         <a href="{{ path('app_participant_show', {'id': app.user.id})}}"  class="liens-items">{{ app.user.pseudo }}</a> </p>
+
                     <button class="close-btn"><i class="fas fa-times"></i></button>
 
 
@@ -212,6 +214,8 @@
                 </div>
             </div>
         </div>
-
+    <button class="floating-btn">
+        Mon profil
+    </button>
 
 {% endblock %}
