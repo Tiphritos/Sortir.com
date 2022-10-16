@@ -90,23 +90,21 @@ class ParticipantController extends AbstractController
         return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    //https://zetcode.com/php/csv/
-    #[Route('/new/csv', name: 'app_participant_new_csv', methods: ['GET', 'POST'])]
-    public function newCsv(Request $request, ParticipantRepository $participantRepository): Response
-    {
-        $participant = new Participant();
-        $form = $this->createForm(ParticipantType::class, $participant);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $participantRepository->save($participant, true);
-
-            return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('participant/newcsv.html.twig', [
-            'participant' => $participant,
-            'form' => $form,
-        ]);
-    }
+//    //https://zetcode.com/php/csv/
+//    #[Route('/new/csv', name: 'app_participant_new_csv', methods: ['GET', 'POST'])]
+//    public function newCsv(Request $request, ParticipantRepository $participantRepository): Response
+//    {
+//        $csv_name = $request->request->get('csvParticipant');
+////        $csv = fgetcsv($csv_name, '1000');
+////        if (is_uploaded_file($csv)){
+//            $file = fopen($csv_name, 'r');
+//            dd($file);
+////            while (($getData = fgetcsv($file, 10000, ",")) !== FALSE) {
+////                $participant = new Participant();
+////                $participant->set
+////            }
+//        //}
+//
+//        return $this->redirectToRoute('app_accueil');
+//    }
 }

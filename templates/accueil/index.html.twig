@@ -119,7 +119,7 @@
                             {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id ) %}
                             <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}"> | Mettre à jour</a>
                                 {% endif %}
-                        </p>
+                        
                     </div>
                 </div>
             </div>
@@ -213,4 +213,5 @@
             </div>
         </div>
 
-        {% endblock %}
+
+{% endblock %}

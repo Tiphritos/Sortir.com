@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{%  block body %}
+
+    <form action="{{ path('app_participant_new_csv') }}" method="post">
+        <input type="file" name="csvParticipant" id="csvParticipant">
+        <button type="submit">Ajouter CSV</button>
+    </form>
+
+{% endblock%}
