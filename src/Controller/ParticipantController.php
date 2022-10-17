@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Participant;
+use App\Form\CsvType;
 use App\Form\ParticipantType;
 use App\Repository\ParticipantRepository;
+use App\Services\CsvService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,11 +16,29 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/participant')]
 class ParticipantController extends AbstractController
 {
-    #[Route('/', name: 'app_participant_index', methods: ['GET'])]
-    public function index(ParticipantRepository $participantRepository): Response
+    #[Route('/', name: 'app_participant_index', methods: ['GET', 'POST'])]
+    public function index(ParticipantRepository $participantRepository, CsvService $csvService, Request $request): Response
     {
-        return $this->render('participant/index.html.twig', [
+        $form = $this->createForm(CsvType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()){
+            dd($request->get('csv'));
+            $csv = fopen('participants.csv', 'r');
+//            dd($csv);
+            if (fgetcsv($csv) != null) {
+                $arr= fgetcsv($csv, 1000, ';');
+                dd($arr);
+            }
+
+
+
+            return $this->redirectToRoute('app_accueil');
+        }
+
+        return $this->renderForm('participant/index.html.twig', [
             'participants' => $participantRepository->findAll(),
+            'form' => $form
         ]);
     }
 

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Administration des participants</h1>
+
+        {{ include('participant/formCsv.html.twig') }}
+
+    {% for part in participants  %}
+
+        <div>
+            <h2> <a href="{{ path('app_participant_show', {'id': part.id}) }}">{{ part.nom }} {{ part.prenom }}</a></h2>
+
+        </div>
+
+    {% endfor %}
+
+{%  endblock %}
