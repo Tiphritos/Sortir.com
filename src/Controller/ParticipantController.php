@@ -57,7 +57,7 @@ class ParticipantController extends AbstractController
                 $participant->setMotDePasse($arr[$i][6]);
                 $participant->setAdministrateur($arr[$i][7]);
                 $participant->setActif($arr[$i][8]);
-                //$participant->setRoles($arr[$i][9]);
+                $participant->setRoles(["ROLE_USER"]);
                 $participantRepository->save($participant, true);
             }
 
