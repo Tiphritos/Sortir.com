@@ -12,7 +12,7 @@
     {% endfor %}
 
     <section >
-        <div class="container py-5 ">
+        <div class="container py-5 mt-5">
             <div class="row">
                 <div class="col">
 
@@ -29,8 +29,8 @@
 
 
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="btn btn-outline-primary ms-1">Modifier mon profil</a>
-
+                                <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="btn btn-outline-primary ms-1">Modifier </a>
+                                {{ include('participant/_delete_form.html.twig') }}
                             </div>
                         </div>
                     </div>
@@ -87,5 +87,5 @@
     <a href="{{ path('app_accueil') }}" class="btnAffichagePage">Retour à l'accueil </a>
 
 
-    {{ include('participant/_delete_form.html.twig') }}
+
 {% endblock %}

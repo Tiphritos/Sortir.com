@@ -7,7 +7,7 @@
 
     {{ include('sortie/_form.html.twig') }}
 
-    <a href="{{ path('app_accueil') }}">Retour à l'accueil</a>
+    <a href="{{ path('app_accueil') }}" class="btnAffichagePage">Retour à l'accueil</a>
     {% if sortie.etatsNoEtat.Id <=3 %}
 {#    {{ include('sortie/_delete_form.html.twig') }}#}
         <form method="post" action="{{ path('app_sortie_delete', {'id': sortie.id}) }}" >
@@ -15,7 +15,7 @@
             {#    return confirm('Etes vous sur de vouloir annuler cette sortie?');"#}
 {#<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sortie.id) }}">#}
 
-            <button class="btn">Annuler la sortie</button>
+            <button class="btn btn-outline-primary ms-1">Annuler la sortie</button>
 
         </form>
     {% endif %}
