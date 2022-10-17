@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Csv;
 use App\Entity\Participant;
+use App\Form\CsvType;
 use App\Form\ParticipantType;
 use App\Repository\ParticipantRepository;
+use App\Repository\SiteRepository;
+use App\Services\CsvService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,11 +18,48 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/participant')]
 class ParticipantController extends AbstractController
 {
-    #[Route('/', name: 'app_participant_index', methods: ['GET'])]
-    public function index(ParticipantRepository $participantRepository): Response
+    #[Route('/', name: 'app_participant_index', methods: ['GET', 'POST'])]
+    public function index(ParticipantRepository $participantRepository,
+                          SiteRepository $siteRepository,
+                          Request $request): Response
     {
-        return $this->render('participant/index.html.twig', [
+        $csv= new Csv();
+        $form = $this->createForm(CsvType::class, $csv);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()){
+            if (($handle = fopen($csv->getName(), "r")) !== FALSE)
+            {
+                $i = 0;
+                while (($data = fgetcsv($handle, null, ";")) !== FALSE)
+                {
+                    $i++;
+                    $arr[] = $data;
+                }
+                fclose($handle);
+            }
+            for($i = 1; $i < count($arr); $i++){
+                $participant = new Participant();
+                $participant->setSitesNoSite($siteRepository->findOneBy(['id'=>$arr[$i][0]]));
+                $participant->setNom($arr[$i][1]);
+                $participant->setPseudo($arr[$i][2]);
+                $participant->setPrenom($arr[$i][3]);
+                $participant->setTelephone($arr[$i][4]);
+                $participant->setMail($arr[$i][5]);
+                $participant->setMotDePasse($arr[$i][6]);
+                $participant->setAdministrateur($arr[$i][7]);
+                $participant->setActif($arr[$i][8]);
+                //$participant->setRoles($arr[$i][9]);
+                $participantRepository->save($participant, true);
+            }
+
+            //dd($arr);
+            return $this->redirectToRoute('app_accueil');
+        }
+
+        return $this->renderForm('participant/index.html.twig', [
             'participants' => $participantRepository->findAll(),
+            'form' => $form
         ]);
     }
 
