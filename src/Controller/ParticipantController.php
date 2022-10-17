@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Csv;
 use App\Entity\Participant;
 use App\Form\CsvType;
 use App\Form\ParticipantType;
@@ -19,11 +20,12 @@ class ParticipantController extends AbstractController
     #[Route('/', name: 'app_participant_index', methods: ['GET', 'POST'])]
     public function index(ParticipantRepository $participantRepository, CsvService $csvService, Request $request): Response
     {
-        $form = $this->createForm(CsvType::class);
+        $csv= new Csv();
+        $form = $this->createForm(CsvType::class, $csv);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()){
-            dd($request->get('csv'));
+            dd($csv);
             $csv = fopen('participants.csv', 'r');
 //            dd($csv);
             if (fgetcsv($csv) != null) {
