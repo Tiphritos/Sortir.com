@@ -5,12 +5,17 @@ namespace App\Entity;
 use App\Repository\ParticipantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ParticipantRepository::class)]
+#[Vich\Uploadable]
 class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -70,6 +75,15 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'participant_id', targetEntity: Inscription::class, orphanRemoval: true)]
     private Collection $inscriptions;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $url_photo = null;
+
+    #[Vich\UploadableField(mapping:"profile_pics", fileNameProperty:'url_photo')]
+    private ?File $imageFile;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
 
     public function __construct()
     {
@@ -264,5 +278,81 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function getUrlPhoto(): ?string
+    {
+        return $this->url_photo;
+    }
+
+    public function setUrlPhoto(?string $url_photo): self
+    {
+        $this->url_photo = $url_photo;
+
+        return $this;
+    }
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function __serialize(): array    {
+        return [
+            'id' => $this->id,
+            'nom' => $this->nom,
+            'pseudo' => $this->pseudo,
+            'prenom' => $this->prenom,
+            'telephone' => $this->telephone,
+            'mail' => $this->mail,
+            'motDePasse' => $this->mot_de_passe,
+            'administrateur' => $this->administrateur,
+            'actif' => $this->actif,
+            'roles' => $this->roles,
+            'sites_no_site' => $this->sites_no_site,
+            'inscriptions' => $this->inscriptions,
+            'url_photo' => $this->url_photo,
+//            'imageFile' => $this->imageFile,
+            'updatedAt' => $this->updatedAt
+        ];
+    }
+
+    public function __unserialize(array $serialized): void{
+        $this->id = $serialized['id'];
+        $this->mail = $serialized['mail'];
+        $this->nom = $serialized['nom'];
+        $this->pseudo = $serialized['pseudo'];
+        $this->prenom = $serialized['prenom'];
+        $this->telephone = $serialized['telephone'];
+        $this->mot_de_passe = $serialized['motDePasse'];
+        $this->administrateur = $serialized['administrateur'];
+        $this->actif = $serialized['actif'];
+        $this->roles = $serialized['roles'];
+        $this->sites_no_site = $serialized['sites_no_site'];
+        $this->inscriptions = $serialized['inscriptions'];
+        $this->url_photo = $serialized['url_photo'];
+        //$this->imageFile = $serialized['imageFile'];
+        $this->updatedAt = $serialized['updatedAt'];
+
     }
 }

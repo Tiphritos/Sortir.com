@@ -1,4 +1,14 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+{#    {{ form_widget(form) }}#}
+    {{ form_row(form.pseudo) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.prenom) }}
+    {{ form_row(form.telephone) }}
+    {{ form_row(form.mail) }}
+    {{ form_row(form.motDePasse) }}
+    {{ form_row(form.sites_no_site) }}
+    {{ form_row(form.imageFile) }}
+
+
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
