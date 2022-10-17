@@ -1,16 +1,55 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<div>
- Nom de la sortie :   {{ sortie.nom }}
-</div>
-<div>
- Date de la sortie : {{ sortie.dateDebut | date('Y-m-d ') }}
-</div>
-    {{ form_start(form) }}
+    <h1>Sortie: {{ sortie.nom }}</h1>
 
-    {{ form_end(form) }}
-    {{ include('sortie/_annulation_form.html.twig') }}
+    <form action="{{ path('app_sortie_annulation', {'id':sortie.id}) }}" method="post">
+        <label for="motifAnnulation">Motif de l'annulation: </label><input type="text" name="motifAnnulation" id="motifAnnulation">
+        <button type="submit">Annuler la sortie</button>
+    </form>
 
+    <div class="container" >
 
+        <table class="table couleurEcriture">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sortie.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ sortie.nom }}</td>
+            </tr>
+            <tr>
+                <th>Date_debut</th>
+                <td>{{ sortie.dateDebut ? sortie.dateDebut|date('Y-m-d H:i') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Duree</th>
+                <td>{{ sortie.duree }}</td>
+            </tr>
+            <tr>
+                <th>Date_cloture</th>
+                <td>{{ sortie.dateCloture ? sortie.dateCloture|date('Y-m-d H:i') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Nb_inscriptions_max</th>
+                <td>{{ sortie.nbInscriptionsMax }}</td>
+            </tr>
+            <tr>
+                <th>Description_infos</th>
+                <td>{{ sortie.descriptionInfos }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{lieu.nomLieu }}</td>
+            </tr>
+
+            <tr>
+                <th>Url_photo</th>
+                <td>{{ sortie.urlPhoto }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}

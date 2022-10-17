@@ -112,14 +112,16 @@ class SortieController extends AbstractController
         ]);
     }
     #[Route('/{id}/annulation', name: 'app_sortie_delete', methods: ['POST'])]
-    public function redirectToAnnulation(Request $request, Sortie $sortie, InscriptionRepository $inscriptionRepository,
-                                         EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
+    public function redirectToAnnulation(Request $request,
+                                         Sortie $sortie,
+                                         InscriptionRepository $inscriptionRepository,
+                                         LieuRepository $lieuRepository,
+                                         EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(SortieAnnulationType::class, $sortie);
-        $form->handleRequest($request);
-        return $this->renderForm('sortie/confirmannulation.html.twig',[
-            'sortie'=>$sortie,
-            'form'=>$form
+        $lieu =  $lieuRepository ->findOneBy(['id' => $sortie->getLieuxNoLieu()]);
+        return $this->render('sortie/confirmannulation.html.twig',[
+            'sortie' => $sortie,
+            'lieu' => $lieu
         ]);
     }
 
@@ -129,7 +131,7 @@ class SortieController extends AbstractController
                             EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
     {
 
-        $motif = 'Raison de l\'annulation: '.($sortie->getDescriptionInfos());
+        $motif = 'Raison de l\'annulation: '.($request->request->get('motifAnnulation'));
 
         //Checker l'état de la sortie, doit être strictement antérieur à 4 (aka ne pas avoir commencé)
         if($sortie->getEtatsNoEtat()->getId()<=3) {
