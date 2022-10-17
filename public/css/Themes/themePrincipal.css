@@ -5,6 +5,7 @@
 
 
 html,body{
+    background-image:url("/public/img/fond_ecran.jpg");
     background: var(--main-color) ;
     background: var(--backgroundlinear);
     background-attachment: fixed;

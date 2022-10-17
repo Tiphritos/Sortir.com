@@ -54,7 +54,9 @@ body{
     /*background: linear-gradient(0deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(255,173,57,1) 95%);*/
 
 }
-
+.creationCard{
+    width: 128px;
+}
 .creation:active{
     -webkit-box-shadow: 0px 2px 0px ;
     -moz-box-shadow: 0px 2px 0px ;
@@ -101,6 +103,16 @@ a{
 }
 
 /********Tableau d'affichage******/
+/*
 .table{
     text-align: center;
 }
+*/
+/********Cards page accueil******/
+.card{
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+
+

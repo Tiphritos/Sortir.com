@@ -5,6 +5,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <title>Document</title>
 </head>
@@ -14,8 +17,7 @@
 </html>
 
 
-
-{% block body %}
+{#
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">Le mot de passe ou l'identifiant sont invalides</div>
@@ -26,7 +28,7 @@
             You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-
+    <div class="container-fluid text-center justify-content-center"></div>
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputPseudo">Pseudo</label>
     <input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" autocomplete="username" required autofocus>
@@ -37,16 +39,6 @@
            value="{{ csrf_token('authenticate') }}"
     >
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
 
     <button class="btn btn-lg btn-primary" type="submit">
         Sign in
@@ -57,5 +49,65 @@
         <input type="checkbox" name="_remember_me" checked/>
         Se souvenir de moi
     </label>
+</form>#}
+
+</div>
+<form method="post">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-2"></div>
+        <div class="col-lg-6 col-md-8 login-box">
+            <div class="col-lg-12 login-key">
+                <i class="fa fa-key" aria-hidden="true"></i>
+            </div>
+            <div class="col-lg-12 login-title">
+              Se connecter
+            </div>
+            {% if error %}
+                <div class=" col-lg-12 alert alert-danger">Le mot de passe ou l'identifiant sont invalides</div>
+            {% endif %}
+            <div class="col-lg-12 login-form">
+                <div class="col-lg-12 login-form">
+                    <form>
+                        <div class="form-group">
+
+                            <label for="inputPseudo form-control-label">Pseudo</label>
+                            <input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" autocomplete="username" required autofocus>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword">Password</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password"  required>
+
+                        </div>
+
+                        <div class="col-lg-12 loginbttm">
+                            <div class="col-lg-6 login-btm login-text">
+
+                            </div>
+                            <div class="col-lg-6 login-btm login-button">
+
+                                <input type="hidden" name="_csrf_token"
+                                       value="{{ csrf_token('authenticate') }}">
+
+                            </div>
+                            <div>
+                                <label>
+                                    <input type="checkbox" name="_remember_me" checked/>
+                                    Se souvenir de moi
+                                </label>
+
+                                <button class="btn btnSeconnecter float-right" type="submit">
+                                    Se connecter
+                                </button>
+
+                            </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-2"></div>
+        </div>
+    </div>
 </form>
-{% endblock %}

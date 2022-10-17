@@ -97,15 +97,18 @@
     </table>
     </div>
 -->
-        <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="container">
+        <div class="card-deck">
+            <div class="row">
             {%for tableau in tab %}
             {% if (tableau.sortie.etatsNoEtat.id != 7)%}
-            <div class="col-6">
+            <div class="col-3 ">
 
-                <div class="card bg-dark container-fluid">
-                <!--    <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card bg-dark ">
+
                     <div class="card-body">
                         <h5 class="card-title text-center liens-items ">{{ tableau.sortie.nom }}</h5>
+                        <img src="..." class="card-img-top" alt="...">
                         <p class="card-text ">
                       <div>  Le {{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('d-m-Y H:i') : '' }}</div>
                         <div>  La sortie dure {{  tableau.sortie.duree }} min</div>
@@ -115,9 +118,9 @@
                         <div> Inscrit ? {{ tableau.estInscrit ? 'oui': 'non' }}</div>
                         <div> L'organisateur {{  tableau.sortie.organisateur.nom }}</div>
 
-                <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }}">Afficher</a>
+                <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }} " class="btn bg-primary creationCard">Afficher</a>
                             {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id ) %}
-                            <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}"> | Mettre à jour</a>
+                            <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}"class="btn bg-primary creationCard">  Mettre à jour</a>
                                 {% endif %}
                         
                     </div>
@@ -125,9 +128,10 @@
             </div>
             {% endif %}
             {% endfor %}
+            </div>
 
         </div>
-
+    </div>
 
  {#       <div class="card-deck">
             {%for tableau in tab %}

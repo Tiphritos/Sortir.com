@@ -16,7 +16,6 @@ class SortieAnnulationType extends AbstractType
     {
         $builder
 
-
             ->add('description_infos',null,[
                 'label' =>'Motif de l\'annulation: ',
                 'attr' =>[

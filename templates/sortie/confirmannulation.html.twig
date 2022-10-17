@@ -1,6 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+<div>
+ Nom de la sortie :   {{ sortie.nom }}
+</div>
+<div>
+ Date de la sortie : {{ sortie.dateDebut | date('Y-m-d ') }}
+</div>
+    {{ form_start(form) }}
 
+    {{ form_end(form) }}
     {{ include('sortie/_annulation_form.html.twig') }}
 
 
