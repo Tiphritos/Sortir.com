@@ -9,6 +9,7 @@ use App\Form\ParticipantType;
 use App\Repository\ParticipantRepository;
 use App\Repository\SiteRepository;
 use App\Services\CsvService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,10 +20,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ParticipantController extends AbstractController
 {
     #[Route('/', name: 'app_participant_index', methods: ['GET', 'POST'])]
+
     public function index(ParticipantRepository $participantRepository,
                           SiteRepository $siteRepository,
                           Request $request): Response
     {
+        if (!$this->isGranted("ROLE_ADMIN")) {
+            $this->addFlash('message',"Accès limité à l'administrateur");
+
+            return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+        }
+
         $csv= new Csv();
         $form = $this->createForm(CsvType::class, $csv);
         $form->handleRequest($request);
@@ -64,8 +72,14 @@ class ParticipantController extends AbstractController
     }
 
     #[Route('/new', name: 'app_participant_new', methods: ['GET', 'POST'])]
+
     public function new(Request $request, ParticipantRepository $participantRepository): Response
     {
+        if (!$this->isGranted("ROLE_ADMIN")) {
+            $this->addFlash('message',"Accès limité à l'administrateur");
+            return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+        }
+
         $participant = new Participant();
         $form = $this->createForm(ParticipantType::class, $participant);
         $form->handleRequest($request);

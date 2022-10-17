@@ -1,43 +1,107 @@
-<div class="container-fluid form">
-    {{ form_start(form) }}
-<div class=" row mt-5">
-    <div class="col-4">
-        {{ form_row(form.nom) }}
+
+<section>
+    <div class="container py-5 ">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col">
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card couleurFond">
+                    <div class="card-body text-center">
+
+                        <div class="row ">
+
+                            <div class="col-sm-12">
+                                <p class=" mb-0 ">{{ form_row(form.nom) }}</p>
+                            </div>
+                        </div>
+                        <hr class="soulignage">
+
+
+                        <div class="row">
+
+                            <div class="col-sm-12">
+                                <p class=" mb-0">   {{ form_row(form.nb_inscriptions_max) }}</p>
+                            </div>
+                        </div>
+                        <hr class="soulignage">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+                                <p class=" mb-0">{{ form_row(form.duree) }}</p>
+                            </div>
+                        </div>
+                        <hr class="soulignage">
+
+                        <div class="d-flex justify-content-center mb-2">
+                            <button class="btn btn-outline-primary ms-1">{{ button_label|default('Enregistrer') }}</button>
+                            <button class="btn btn-outline-primary ms-1" name="publier" value="publier">{{ button_label|default('Publier') }}</button>
+
+                        </div>
+                            {#<a href="{{ path('app_inscription', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Inscription</a>
+                            <a href="{{ path('app_desistement', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Desistement</a>
+                          #}{#  #}{#
+                            <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="btn btn-outline-primary ms-1">Modifier mon profil</a>
+                            #}{#
+
+                        </div>#}
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-6">
+                <div class="card mb-4 couleurFond">
+                    <div class="card-body">
+
+
+                       {# <div class="row">
+
+                            <div class="col-sm-12">
+                                <p class=" mb-0">   {{ form_row(form.nb_inscriptions_max) }}</p>
+                            </div>
+                        </div>
+                        <hr class="soulignage">#}
+                        <div class="row ">
+
+                            <div class="col-sm-12">
+                                <p class=" mb-0 ">  {{ form_row(form.date_debut) }}</p>
+                            </div>
+                        </div>
+                        <hr class="soulignage">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+                                <p class=" mb-0">   {{ form_row(form.date_cloture) }}</p>
+                            </div>
+                        </div>
+
+
+
+                        <hr class="soulignage">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+                                <p class=" mb-0">    {{ form_row(form.description_infos) }}</p>
+                            </div>
+                        </div>
+                        <hr class="soulignage">
+                        <div class="row">
+
+                            <div class="col-sm-9">
+                                <p class=" mb-0">    {{ form_row(form.lieux_no_lieu) }}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {{ form_end(form) }}
     </div>
-    <div class="col-8">
-        {{ form_row(form.date_debut) }}
-    </div>
-
-</div>
-    <div class=" row mt-2">
-        <div class="col-4">
-            {{ form_row(form.duree) }}
-        </div>
-        <div class=" col-8">
-            {{ form_row(form.date_cloture) }}
-        </div>
-
-    </div>
-    <div class=" row mt-2">
-        <div class="col-4">
-            {{ form_row(form.nb_inscriptions_max) }}
-        </div>
-        <div class="col-8">
-            {{ form_row(form.description_infos) }}
-        </div>
-
-    </div>
-    <div class=" row mt-2">
-        <div class="col-4">
-            {{ form_row(form.lieux_no_lieu) }}
-        </div>
-        <div class=" offset-3 col-5">
-
-            <button class="btn couleurEcriture">{{ button_label|default('Enregistrer') }}</button>
-            <button class="btn couleurEcriture" name="publier" value="publier">{{ button_label|default('Publier') }}</button>
-
-        </div>
-    </div>
-</div>
-
-   {{ form_end(form) }}
+    <button class="btn">Annuler la sortie</button>
+</section>

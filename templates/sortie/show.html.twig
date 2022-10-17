@@ -4,55 +4,129 @@
 
 {% block body %}
     <h1>Sortie</h1>
-<div class="container" >
-    <table class="table couleurEcriture">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ sortie.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ sortie.nom }}</td>
-            </tr>
-            <tr>
-                <th>Date_debut</th>
-                <td>{{ sortie.dateDebut ? sortie.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Duree</th>
-                <td>{{ sortie.duree }}</td>
-            </tr>
-            <tr>
-                <th>Date_cloture</th>
-                <td>{{ sortie.dateCloture ? sortie.dateCloture|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Nb_inscriptions_max</th>
-                <td>{{ sortie.nbInscriptionsMax }}</td>
-            </tr>
-            <tr>
-                <th>Description_infos</th>
-                <td>{{ sortie.descriptionInfos }}</td>
-            </tr>
-            <tr>
-                <th>Lieu</th>
-                <td>{{lieu.nomLieu }}</td>
-            </tr>
 
-            <tr>
-                <th>Url_photo</th>
-                <td>{{ sortie.urlPhoto }}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+
+
+    <section>
+    <div class="container py-5 ">
+        <div class="row">
+            <div class="col">
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4 couleurFond">
+                    <div class="card-body text-center">
+                        <img src="{{ asset("img/ProfilDefault.png") }}" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3 ">{{ sortie.nom }}</h5>
+
+
+                        <div class="d-flex justify-content-center mb-2">
+                            <a href="{{ path('app_inscription', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Inscription</a>
+                            <a href="{{ path('app_desistement', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Desistement</a>
+{#
+                            <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="btn btn-outline-primary ms-1">Modifier mon profil</a>
+#}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4 couleurFond">
+                    <div class="card-body">
+                        <div class="row ">
+                            <div class="col-sm-3">
+                                <p class="  mb-0 fw-bold">Date et heure de la sortie </p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class=" mb-0 ">{{ sortie.dateDebut ? sortie.dateDebut|date('Y-m-d H:i:s') : '' }}</p>
+                            </div>
+                        </div>
+                        <hr class="soulignage">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0 fw-bold ">Date limite d'inscription</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class=" mb-0">{{  sortie.dateCloture ? sortie.dateCloture|date('Y-m-d H:i:s') : ''  }}</p>
+                            </div>
+                        </div>
+                        <hr class="soulignage">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0 fw-bold ">Nombre de places</p>
+                            </div>
+                            <div class="  col-sm-9">
+                                <p class=" mb-0">{{ sortie.nbInscriptionsMax }}</p>
+                            </div>
+                        </div>
+                        <hr class="soulignage">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0 fw-bold ">Description et info</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class=" mb-0">{{ sortie.descriptionInfos }}</p>
+                            </div>
+                        </div>
+                        <hr class="soulignage">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0 fw-bold">Lieu </p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class=" mb-0">{{ lieu.nomLieu }}</p>
+                            </div>
+                        </div>
+                        <hr class="soulignage">
+
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0 fw-bold">Rue</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class=" mb-0">{{ lieu.rue }}</p>
+                            </div>
+                        </div>
+                        <hr class="soulignage">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0 fw-bold">Ville</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class=" mb-0">{{ lieu.villesNoVille.nomVille }}</p>
+                            </div>
+                        </div>
+                        <hr class="soulignage">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0 fw-bold">Code postal</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class=" mb-0">{{ lieu.villesNoVille.codePostal }}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </section>
      {# <a href="{{ path('app_sortie_index') }}">back to list</a> #}
 
     {#<a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">edit</a>#}
 
     <a href="{{ path('app_inscription', {'id': app.user.id,'sortie':sortie.id}) }}">inscription</a>
     <a href="{{ path('app_desistement', {'id': app.user.id,'sortie':sortie.id}) }}">Desistement</a>
+    <a href="{{ path('app_accueil') }}" class="btnAffichagePage">Retour à l'accueil</a>
 
 
     {{ include('sortie/_delete_form.html.twig') }}

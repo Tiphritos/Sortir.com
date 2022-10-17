@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container-fluid">
-    {#<div class="row">
+    <div class="container-fluid">
+        {#<div class="row">
             <div class="offset-10 col-2 participant">
                 Participant: {{ app.user.pseudo }}
             </div>
@@ -12,50 +12,94 @@
                 Date du jour  {{ "now" |date('j/ n/ Y') }}
             </div>
         </div>#}
-    {% for message in app.flashes('message') %}
-        <div class="flash-info">
-            {{ message }}
+        {% for message in app.flashes('message') %}
+            <div class="flash-info">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+        <div id="zone-filtres container-fluid " class=" mb-2">
+            <div class="row justify-content-center">
+                <div class="col-7">
+                    <form action="{{ path('app_accueil_filtres') }}" method="post">
+                        <div class="row">
+                            <div class="col-2">
+                                <label for="sites">Site: </label>
+                            </div>
+                            <div class="col-6">
+                                <select name="sites" id="sites">
+                                    <option value="">Tous</option>
+                                    {% for site in sites %}
+                                        {% set selected = '' %}
+                                        {% if site.id == app.user.sitesNoSite.id %}
+                                            {% set selected = 'selected' %}
+                                        {% else %}
+                                            {% set selected = '' %}
+                                        {% endif %}
+                                        <option value="{{ site.id }}" {{ selected }} > {{ site.nomSite }} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-12 mt-2">
+                                    <label for="mot-clef">Le nom de la sortie contient: </label>
+                                    <input type="text" name="mot-clef" id="mot-clef" placeholder="Mot-clef">
+                                    </div>
+                                    {# Dates #}
+                                    <div class="col-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="date1">Entre </label>
+                                                <input type="date" name="date1" id="date1">
+                                            </div>
+                                            <div class="col-1">
+                                                <p>et</p>
+                                            </div>
+                                            <div class="col-5">
+
+                                                <input type="date" name="date2" id="date2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {# Checkboxes #}
+
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-12">
+                                    <input type="checkbox" name="estOrganisateur" id="estOrganisateur" value="estOrganisateur">
+                                    <label for="estOrganisateur">Je suis l'organisateur</label>
+                                    </div>
+                                    <div class="col-12">
+                                    <input type="checkbox" name="estInscrit" id="estInscrit" value="estInscrit">
+                                    <label for="estInscrit">Je suis inscrit</label>
+                                    </div>
+                                    <div class="col-12">
+                                    <input type="checkbox" name="pasInscrit" id="pasInscrit" value="pasInscrit">
+                                    <label for="pasInscrit">Je ne suis pas inscrit</label>
+                                    </div>
+                                    <div class="col-12">
+                                    <input type="checkbox" name="sortiesPassees" id="sortiesPassees" value="sortiesPassees">
+                                    <label for="sortiesPassees">Sorties passées</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-1 parent">
+                    <button type="submit" class="creation">Rechercher</button>
+                </div>
+
+                </form>
+            </div>
         </div>
 
-    {% endfor %}
-    <div id="zone-filtres" class="text-center mb-2">
-        <form action="{{ path('app_accueil_filtres') }}" method="post">
-            <label for="sites">Site: </label>
-            <select name="sites" id="sites">
-                <option value="">Tous</option>
-                {% for site in sites %}
-                    {% set selected = '' %}
-                    {% if site.id == app.user.sitesNoSite.id %}
-                        {% set selected = 'selected' %}
-                    {% else %}
-                        {% set selected = '' %}
-                    {% endif %}
-                    <option value="{{ site.id }}" {{ selected }} > {{ site.nomSite }} </option>
-                {% endfor %}
-            </select>
-            <label for="mot-clef">Le nom de la sortie contient: </label>
-            <input type="text" name="mot-clef" id="mot-clef" placeholder="Mot-clef">
-            {# Dates #}
-            <label for="date1">Entre </label>
-            <input type="date" name="date1" id="date1">
-            <label for="date2"> et </label>
-            <input type="date" name="date2" id="date2">
-            {# Checkboxes #}
-            <div>
-                <input type="checkbox" name="estOrganisateur" id="estOrganisateur" value="estOrganisateur">
-                <label for="estOrganisateur">Je suis l'organisateur</label>
-                <input type="checkbox" name="estInscrit" id="estInscrit" value="estInscrit">
-                <label for="estInscrit">Je suis inscrit</label>
-                <input type="checkbox" name="pasInscrit" id="pasInscrit" value="pasInscrit">
-                <label for="pasInscrit">Je ne suis pas inscrit</label>
-                <input type="checkbox" name="sortiesPassees" id="sortiesPassees" value="sortiesPassees">
-                <label for="sortiesPassees">Sorties passées</label>
-            </div>
-            <button type="submit">Rechercher</button>
-        </form>
-    </div>
-
-<!--
+        <!--
     <div id="zone-liste">
          <table class="table couleurEcriture">
             <thead>
@@ -97,43 +141,43 @@
     </table>
     </div>
 -->
-    <div class="container">
-        <div class="card-deck">
-            <div class="row">
-            {%for tableau in tab %}
-            {% if (tableau.sortie.etatsNoEtat.id != 7)%}
-            <div class="col-3 ">
+        <div class="container">
+            <div class="card-deck">
+                <div class="row">
+                    {%for tableau in tab %}
+                        {% if (tableau.sortie.etatsNoEtat.id != 7)%}
+                            <div class="col-3 ">
 
-                <div class="card bg-dark ">
+                                <div class="card bg-dark ">
 
-                    <div class="card-body">
-                        <h5 class="card-title text-center liens-items ">{{ tableau.sortie.nom }}</h5>
-                        <img src="..." class="card-img-top" alt="...">
-                        <p class="card-text ">
-                      <div>  Le {{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('d-m-Y H:i') : '' }}</div>
-                        <div>  La sortie dure {{  tableau.sortie.duree }} min</div>
-                        <div>  La fin des inscriptions est le  {{  tableau.sortie.dateCloture ?  tableau.sortie.dateCloture|date('d-m-Y ') : '' }}</div>
-                        <div>  Le nombre de participants {{ tableau.nbreInscrits }} sur {{  tableau.sortie.nbInscriptionsMax }} inscrit</div>
-                        <div> La sortie est  {{  tableau.sortie.etatsNoEtat.libelle }}</div>
-                        <div> Inscrit ? {{ tableau.estInscrit ? 'oui': 'non' }}</div>
-                        <div> L'organisateur {{  tableau.sortie.organisateur.nom }}</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center liens-items ">{{ tableau.sortie.nom }}</h5>
+                                        <img src="..." class="card-img-top" alt="...">
+                                        <p class="card-text ">
+                                        <div>  Le {{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('d-m-Y H:i') : '' }}</div>
+                                        <div>  La sortie dure {{  tableau.sortie.duree }} min</div>
+                                        <div>  La fin des inscriptions est le  {{  tableau.sortie.dateCloture ?  tableau.sortie.dateCloture|date('d-m-Y ') : '' }}</div>
+                                        <div>  Le nombre de participants {{ tableau.nbreInscrits }} sur {{  tableau.sortie.nbInscriptionsMax }} inscrit</div>
+                                        <div> La sortie est  {{  tableau.sortie.etatsNoEtat.libelle }}</div>
+                                        <div> Inscrit ? {{ tableau.estInscrit ? 'oui': 'non' }}</div>
+                                        <div> L'organisateur {{  tableau.sortie.organisateur.nom }}</div>
 
-                <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }} " class="btn bg-primary creationCard">Afficher</a>
-                            {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id ) %}
-                            <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}"class="btn bg-primary creationCard">  Mettre à jour</a>
-                                {% endif %}
-                        
-                    </div>
+                                        <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }} " class="btn bg-primary creationCard">Afficher</a>
+                                        {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id ) %}
+                                            <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}"class="btn bg-primary creationCard">  Mettre à jour</a>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
-            </div>
-            {% endif %}
-            {% endfor %}
-            </div>
 
+            </div>
         </div>
-    </div>
 
- {#       <div class="card-deck">
+        {#       <div class="card-deck">
             {%for tableau in tab %}
             {% if (tableau.sortie.etatsNoEtat.id != 7)%}
             <div class="card">
@@ -187,37 +231,37 @@
 
                 {% endfor %}
             </div>#}
-            <div class="">
-                <a href="{{ path('app_sortie_new') }}" class="btn bg-primary creation">Créer une sortie</a></div>
+        <div class="">
+            <a href="{{ path('app_sortie_new') }}" class="btnAffichagePage ">Créer une sortie</a></div>
 
-            <div class="social-panel-container ">
-                <div class="social-panel">
-                    <p> <i class="fa fa-heart"></i>
-                        <a href="{{ path('app_participant_show', {'id': app.user.id})}}"  class="liens-items">{{ app.user.pseudo }}</a> </p>
+        <div class="social-panel-container ">
+            <div class="social-panel">
+                <p> <i class="fa fa-heart"></i>
+                    <a href="{{ path('app_participant_show', {'id': app.user.id})}}"  class="liens-items">{{ app.user.pseudo }}</a> </p>
 
-                    <button class="close-btn"><i class="fas fa-times"></i></button>
+                <button class="close-btn"><i class="fas fa-times"></i></button>
 
 
-                    <ul>
-                        <li>
-                            Nom :{{ app.user.nom }}
+                <ul>
+                    <li>
+                        Nom :{{ app.user.nom }}
 
-                        </li>
-                        <li>
+                    </li>
+                    <li>
 
-                            Prénom :{{app.user.prenom}}
+                        Prénom :{{app.user.prenom}}
 
-                        </li>
-                        <li>
+                    </li>
+                    <li>
 
-                            Adresse mail :{{ app.user.mail }}
+                        Adresse mail :{{ app.user.mail }}
 
-                        </li>
+                    </li>
 
-                    </ul>
-                </div>
+                </ul>
             </div>
         </div>
+    </div>
     <button class="floating-btn">
         Mon profil
     </button>

@@ -12,7 +12,7 @@
     {% endfor %}
 
     <section >
-        <div class="container py-5">
+        <div class="container py-5 ">
             <div class="row">
                 <div class="col">
 
@@ -21,11 +21,11 @@
 
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="card mb-4">
+                    <div class="card mb-4 couleurFond">
                         <div class="card-body text-center">
                             <img src="{{ asset("img/ProfilDefault.png") }}" alt="avatar"
                                  class="rounded-circle img-fluid" style="width: 150px;">
-                            <h5 class="my-3 text-muted">{{ participant.pseudo }}</h5>
+                            <h5 class="my-3 ">{{ participant.pseudo }}</h5>
 
 
                             <div class="d-flex justify-content-center mb-2">
@@ -37,44 +37,44 @@
 
                 </div>
                 <div class="col-lg-8">
-                    <div class="card mb-4">
+                    <div class="card mb-4 couleurFond">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row ">
                                 <div class="col-sm-3">
-                                    <p class=" text-muted mb-0">Nom </p>
+                                    <p class="  mb-0">Nom </p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ participant.nom }}</p>
+                                    <p class=" mb-0 ">{{ participant.nom }}</p>
                                 </div>
                             </div>
-                            <hr>
+                            <hr class="soulignage">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="mb-0 text-muted ">Prenom</p>
+                                    <p class="mb-0  ">Prenom</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ participant.prenom }}</p>
+                                    <p class=" mb-0">{{ participant.prenom }}</p>
                                 </div>
                             </div>
-                            <hr>
+                            <hr class="soulignage">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="mb-0 text-muted">Adresse mail</p>
+                                    <p class="mb-0 ">Adresse mail</p>
                                 </div>
                                 <div class="  col-sm-9">
-                                    <p class="text-muted mb-0">{{ participant.mail }}</p>
+                                    <p class=" mb-0">{{ participant.mail }}</p>
                                 </div>
                             </div>
-                            <hr>
+                            <hr class="soulignage">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="mb-0 text-muted">Téléphone</p>
+                                    <p class="mb-0 ">Téléphone</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ participant.telephone }}</p>
+                                    <p class=" mb-0">{{ participant.telephone }}</p>
                                 </div>
                             </div>
-                            <hr>
+                            <hr class="soulignage">
 
                         </div>
                     </div>
@@ -84,7 +84,7 @@
         </div>
     </section>
 
-    <a href="{{ path('app_accueil') }}">Retour à l'accueil |</a>
+    <a href="{{ path('app_accueil') }}" class="btnAffichagePage">Retour à l'accueil </a>
 
 
     {{ include('participant/_delete_form.html.twig') }}

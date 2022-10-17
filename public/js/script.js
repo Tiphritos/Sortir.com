@@ -1,3 +1,5 @@
+//Toggle
+
 const chk = document.getElementById('chk');
 
 chk.addEventListener('change', () => {
@@ -18,3 +20,4 @@ close_btn.addEventListener('click', () => {
     social_panel_container.classList.remove('visible')
 },true);
 
+//Barre de navigation

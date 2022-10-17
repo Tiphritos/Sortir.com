@@ -11,7 +11,7 @@
             <h2> <a href="{{ path('app_participant_show', {'id': part.id}) }}">{{ part.nom }} {{ part.prenom }}</a></h2>
 
         </div>
-
+        <a href="{{ path('app_accueil') }}" class="btnAffichagePage">Retour à l'accueil</a>
     {% endfor %}
 
 {%  endblock %}
