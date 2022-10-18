@@ -6,6 +6,7 @@ body.hub {
 }
 .titre{
     background: orange;
+    border-radius: 2px;
 }
 .checkbox {
     opacity: 0;

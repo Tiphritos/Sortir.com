@@ -8,17 +8,15 @@
                 {{ message }}
             </div>
         {% endfor %}
-        <button class="text-right filter-btn">Filtres</button>
+        <button class="text-right filter-btn btn btn-outline-primary">Filtres</button>
         <br>
-        <div id="zone-filtres container-fluid " class=" mb-5 d-none d-md-block filters-panel-container">
+        <div id="zone-filtres row " class=" mb-5 d-none d-md-block filters-panel-container">
             <div class="row justify-content-center filters-panel">
                 <div class="col-sm-0 col-md-2"></div>
-                <div class="col-12 m-3">
-
+                <div class="col-12 mt-3 mb-3">
                     <form action="{{ path('app_accueil_filtres') }}" method="post">
-
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="row">
                                     <div class="col-4 text-end">
                                         <label for="sites">Site: </label>
@@ -63,8 +61,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="col-4">
                                 <div class="row">
                                     <div class="col-12">
@@ -84,70 +80,13 @@
                                         <label for="sortiesPassees">Sorties passées</label>
                                     </div>
                                 </div>
-
                             </div>
-
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-outline-primary ms-1">Rechercher</button>
-
+                            <div class="col-2 d-flex align-items-end">
+                                <button type="submit" class="btn  btnSeconnecter ms-1">Filtrer</button>
                             </div>
                         </div>
                     </form>
                 </div>
-
-                <div class="row">
-
-                    {#                            <div class="col-6">#}
-                    {#                                <div class="row">#}
-                    {#                                    <div class="col-12 mt-2">#}
-                    {#                                        <label for="mot-clef">Le nom de la sortie contient: </label>#}
-                    {#                                        <input type="text" name="mot-clef" id="mot-clef" placeholder="Mot-clef">#}
-                    {#                                    </div>#}
-                    {# Dates #}
-                    {#                                    <div class="col-12 mt-3">#}
-                    {#                                        <div class="row">#}
-                    {#                                            <div class="col-6">#}
-                    {#                                                <label for="date1">Entre </label>#}
-                    {#                                                <input type="date" name="date1" id="date1">#}
-                    {#                                            </div>#}
-
-                    {#                                            <div class="col-5">#}
-                    {#                                                <input type="date" name="date2" id="date2">#}
-                    {#                                            </div>#}
-                    {#                                        </div>#}
-                    {#                                    </div>#}
-                    {#                </div>#}
-                    {#            </div>#}
-
-                    {#                                <div class="col-4">#}
-                    {#                                    <div class="row">#}
-                    {#                                        <div class="col-12">#}
-                    {#                                            <input type="checkbox" name="estOrganisateur" id="estOrganisateur" value="estOrganisateur">#}
-                    {#                                            <label for="estOrganisateur">Je suis l'organisateur</label>#}
-                    {#                                        </div>#}
-                    {#                                        <div class="col-12">#}
-                    {#                                            <input type="checkbox" name="estInscrit" id="estInscrit" value="estInscrit">#}
-                    {#                                            <label for="estInscrit">Je suis inscrit</label>#}
-                    {#                                        </div>#}
-                    {#                                        <div class="col-12">#}
-                    {#                                            <input type="checkbox" name="pasInscrit" id="pasInscrit" value="pasInscrit">#}
-                    {#                                            <label for="pasInscrit">Je ne suis pas inscrit</label>#}
-                    {#                                        </div>#}
-                    {#                                        <div class="col-12">#}
-                    {#                                            <input type="checkbox" name="sortiesPassees" id="sortiesPassees" value="sortiesPassees">#}
-                    {#                                            <label for="sortiesPassees">Sorties passées</label>#}
-                    {#                                        </div>#}
-                    {#                                    </div>#}
-                    {#                                </div>#}
-
-                    {#            <div class="col-2">#}
-                    {#                <button type="submit" class="btn btn-outline-primary ms-1">Rechercher</button>#}
-                    {#            </div>#}
-                    {#        </div>#}
-
-                    {#        </form>#}
-                </div>
-
             </div>
         </div>
         <div class="container scroller">
