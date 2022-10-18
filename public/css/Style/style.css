@@ -336,3 +336,8 @@ section p{
 #sortie_duree{
     margin-top: 12px;
 }
+
+/*******Cards page Sortie Affichage Participant********/
+.imgcard{
+    height: 100px;
+}

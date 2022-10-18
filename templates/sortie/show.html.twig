@@ -8,7 +8,7 @@
 
 
     <section>
-        <div class="container py-5 ">
+        <div class="container pt-5 ">
             <div class="row">
                 <div class="col">
 
@@ -25,8 +25,12 @@
 
 
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="{{ path('app_inscription', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Inscription</a>
-                                <a href="{{ path('app_desistement', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Desistement</a>
+                                {% if sortie.etatsNoEtat.id is same as (6) %}
+
+                                {% else %}
+                                    <a href="{{ path('app_inscription', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Inscription</a>
+                                    <a href="{{ path('app_desistement', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Desistement</a>
+                                {%endif %}
                                 {#
                                 <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="btn btn-outline-primary ms-1">Modifier mon profil</a>
                                 #}
@@ -69,9 +73,9 @@
                             <div class="row">
                                 <div class="col-sm-3">
                                     {% if sortie.etatsNoEtat.id is same as (6) %}
-                                    <p class="mb-0 fw-bold ">Raison de l'annulation</p>
+                                        <p class="mb-0 fw-bold ">Raison de l'annulation</p>
                                     {%else %}
-                                    <p class="mb-0 fw-bold ">Description et info</p>
+                                        <p class="mb-0 fw-bold ">Description et info</p>
                                     {%endif %}
                                 </div>
                                 <div class="col-sm-9">
@@ -134,32 +138,49 @@
 
     {#    {{ include('sortie/_delete_form.html.twig') }}#}
 
-    <section class="vh-100">
-        <div class="container py-5 h-100">
-            {% for inscrip in inscriptions %}
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col col-md-9 col-lg-7 col-xl-5">
-                    <div class="card" style="border-radius: 15px;">
-                        <div class="card-body p-4">
-                            <div class="d-flex text-black">
-                                <div class="flex-shrink-0">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                                         alt="Generic placeholder image" class="img-fluid"
-                                         style="width: 180px; border-radius: 10px;">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h5 class="mb-1">{{inscrip.participantId.nom}}</h5>
-                                    <p class="mb-2 pb-1" style="color: #2b2a2a;">{{inscrip.participantId.prenom}} {{inscrip.participantId.nom}}</p>
 
 
-                                </div>
-                            </div>
+    <div class="container ">
+
+        <div class="row ">
+            <div class="col-4">
+                <div class="card mb-4 couleurFond">
+                        <div class="card-body text-center">
+
+                            <h5 class="my-3 ">Liste des participants</h5>
+
+
+
                         </div>
                     </div>
+            </div>
+            <div class="col-8">
+                <div class="row">
+                {% for inscrip in inscriptions %}
+
+                    <div class=" col-2">
+                        <div class="card mb-4 couleurFond">
+                            <div class="card-body text-center">
+                                {%if inscrip.participantId.urlPhoto %}
+                                    <img src="{{ asset('uploads/images/'~ inscrip.participantId.urlPhoto) }}" alt="avatar"
+                                         class="rounded-circle img-fluid imgcard">
+                                {% else %}
+                                    <img src="{{ asset('uploads/images/ProfilDefault.png')}}" alt="avatar"
+                                         class="rounded-circle img-fluid imgcard">
+                                {% endif %}
+                                <h5 class="my-3 ">{{inscrip.participantId.pseudo}} </h5>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                {% endfor %}
                 </div>
             </div>
         </div>
-        {% endfor %}
-    </section>
+    </div>
+
 {% endblock %}
 
