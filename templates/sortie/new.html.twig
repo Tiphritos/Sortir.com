@@ -6,6 +6,62 @@
     <h1 class="text-center">A vous de créer votre sortie</h1>
 
     {{ include('sortie/_form.html.twig') }}
+    </div>
+
+    <input type="button" onclick="example()" value="+ "  class ="btn btn-outline-primary ms-1 " />
+
+    <div id="example">
+
+            <div class="container py-5 ">
+                {{ form_start(form) }}
+                <div class="row">
+                    <div class="col">
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card couleurFond h-100">
+                            <div class="card-body text-center">
+                                {{ form_start(formL) }}
+                                <div class="row ">
+
+                                    <div class="col-sm-12">
+                                        <p class=" mb-0 ">  {{ form_row(formL.nom_lieu) }}</p>
+                                    </div>
+                                </div>
+                                <hr class="soulignage">
+
+
+                                <div class="row">
+
+                                    <div class="col-sm-12">
+                                        <p class=" mb-0">   {{ form_row(formL.rue) }}</p>
+                                    </div>
+                                </div>
+                                <hr class="soulignage">
+                                <div class="row">
+
+                                    <div class="col-sm-12">
+                                        <p class=" mb-0">    {{ form_row(formL.villes_no_ville) }}</p>
+                                    </div>
+                                </div>
+                                <hr class="soulignage">
+                                <div class="row">
+
+                                    <div class="col-sm-12">
+                                       <button class="btn btn-outline-primary ms-1 ">{{ button_label|default('Save') }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(formL) }}
+
+    </div>
 
     <a href="{{ path('app_accueil') }}"class="btnAffichageRetourAccueil">Retour à l'accueil</a>
 {% endblock %}

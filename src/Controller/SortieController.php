@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Inscription;
+use App\Entity\Lieu;
 use App\Entity\Sortie;
+use App\Form\LieuType;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\InscriptionRepository;
@@ -29,9 +31,11 @@ class SortieController extends AbstractController
         ;
         $date = new \DateTimeImmutable();
         $sortie = new Sortie();
+        $lieu = new Lieu();
+        $formL = $this->createForm(LieuType::class,$lieu);
         $sortie->setDateDebut($date);
         $form = $this->createForm(SortieType::class, $sortie);
-
+        $formL->handleRequest($request);
         $form->handleRequest($request);
         $dateDebut = $request->request->get('dateDebut');
 
@@ -64,6 +68,7 @@ class SortieController extends AbstractController
         return $this->renderForm('sortie/new.html.twig', [
             'sortie' => $sortie,
             'form' => $form,
+            'formL'=> $formL
         ]);
     }
 

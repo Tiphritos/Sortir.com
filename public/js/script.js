@@ -20,4 +20,8 @@ close_btn.addEventListener('click', () => {
     social_panel_container.classList.remove('visible')
 },true);
 
-//Barre de navigation
+//Afficahge lieu
+function example() {
+   let  lieu = document.getElementById("example");
+    lieu.style.visibility = lieu.style.visibility === "visible" ? "hidden" : "visible";
+}
