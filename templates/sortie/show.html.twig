@@ -146,10 +146,11 @@
             <div class="col-4">
                 <div class="card mb-4 couleurFond">
                         <div class="card-body text-center">
-
-                            <h5 class="my-3 ">Liste des participants</h5>
-
-
+                               {% if nbreDeParticipant is same as (0)  %}
+                            <h5 class="my-3 ">  Aucun participant pour le moment</h5>
+                                {% else %}
+                            < <h5 class="my-3 ">  Liste des participants</h5>
+                                {% endif %}
 
                         </div>
                     </div>

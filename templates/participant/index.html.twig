@@ -3,15 +3,48 @@
 {% block body %}
     <h1>Administration des participants</h1>
 
-        {{ include('participant/formCsv.html.twig') }}
+    <div class="container ">
 
-    {% for part in participants  %}
+        <div class="row ">
+            <div class="col-5">
+                <div class="card mb-4 couleurFond">
+                    <div class="card-body text-center">
+                        <h5 class="my-3 ">  Ajouter une liste de participants (fichier csv)</h5>
+                        {{ form_start(form) }}
+                        {{ form_row(form.name) }}
+                        <button class="btn btn-outline-primary ms-1">{{ button_label|default('Enregistrer') }}</button>
+                        {{ form_end(form) }}
+                        <hr class="soulignage">
+                        <h5 class="my-3 ">  Créer manuellement des participants </h5>
+                        <a href="{{ path('app_participant_new')}}" class="btn btn-outline-primary ms-1"> Créer </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-7">
+                <div class="row">
+                    {% for part in participants  %}
 
-        <div>
-            <h2> <a href="{{ path('app_participant_show', {'id': part.id}) }}">{{ part.nom }} {{ part.prenom }}</a></h2>
+                        <div class=" col-3">
+                            <div class="card mb-4 couleurFond">
+                                <div class="card-body text-center">
+                                    {%if part.urlPhoto %}
+                                        <img src="{{ asset('uploads/images/'~ part.urlPhoto) }}" alt="avatar"
+                                             class="rounded-circle img-fluid imgcard">
+                                    {% else %}
+                                        <img src="{{ asset('uploads/images/ProfilDefault.png')}}" alt="avatar"
+                                             class="rounded-circle img-fluid imgcard">
+                                    {% endif %}
+                                    <h5 class="my-3 "><a href="{{ path('app_participant_show', {'id': part.id}) }}">{{part.pseudo}} </a> </h5>
 
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-        <a href="{{ path('app_accueil') }}" class="btnAffichageRetourAccueil">Retour à l'accueil</a>
-    {% endfor %}
-
+    </div>
 {%  endblock %}

@@ -73,10 +73,13 @@ class SortieController extends AbstractController
     {
         $lieu =  $lieuRepository ->findOneBy(['id' => $sortie->getLieuxNoLieu()]);
         $inscriptions = $inscriptionRepository ->findBy(['sortie_id'=>$sortie->getId()]);
+        $nbredeParticipant = count($inscriptions);
+
         return $this->render('sortie/show.html.twig', [
             'sortie' => $sortie,
             'lieu'=> $lieu,
-            'inscriptions'=>$inscriptions
+            'inscriptions'=>$inscriptions,
+            'nbreDeParticipant'=>  $nbredeParticipant
         ]);
     }
 
