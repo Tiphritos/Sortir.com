@@ -44,8 +44,8 @@ class Sortie
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $description_infos = null;
 
-    #[ORM\Column(length: 255, nullable: true, options:['default'=>'SortieDefault.gif'])]
-    private ?string $url_photo = null;
+    #[ORM\Column(length: 255, nullable: true, options:['default'=>'SortieDefault.jpg'])]
+    private ?string $url_photo = 'SortieDefault.jpg';
 
     #[Vich\UploadableField(mapping:"profile_pics", fileNameProperty:'url_photo')]
     private ?File $imageFile = null;

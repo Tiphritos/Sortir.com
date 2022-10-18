@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container-fluid">
-        {#<div class="row">
+<div class="container-fluid">
+    {#<div class="row">
             <div class="offset-10 col-2 participant">
                 Participant: {{ app.user.pseudo }}
             </div>
@@ -12,88 +12,88 @@
                 Date du jour  {{ "now" |date('j/ n/ Y') }}
             </div>
         </div>#}
-        {% for message in app.flashes('message') %}
-            <div class="flash-info">
-                {{ message }}
-            </div>
+    {% for message in app.flashes('message') %}
+        <div class="flash-info">
+            {{ message }}
+        </div>
 
-        {% endfor %}
-        <div id="zone-filtres container-fluid " class=" mb-5">
-            <div class="row justify-content-center">
-                <div class="col-7">
-                    <form action="{{ path('app_accueil_filtres') }}" method="post">
-                        <div class="row">
-                            <div class="col-2">
-                                <label for="sites">Site: </label>
-                            </div>
-                            <div class="col-6">
-                                <select name="sites" id="sites">
-                                    <option value="">Tous</option>
-                                    {% for site in sites %}
-                                        {% set selected = '' %}
-                                        {% if site.id == app.user.sitesNoSite.id %}
-                                            {% set selected = 'selected' %}
-                                        {% else %}
-                                            {% set selected = '' %}
-                                        {% endif %}
-                                        <option value="{{ site.id }}" {{ selected }} > {{ site.nomSite }} </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
+    {% endfor %}
+    <div id="zone-filtres container-fluid " class=" mb-5">
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <form action="{{ path('app_accueil_filtres') }}" method="post">
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="sites">Site: </label>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="row">
-                                    <div class="col-12 mt-2">
+                        <div class="col-6">
+                            <select name="sites" id="sites">
+                                <option value="">Tous</option>
+                                {% for site in sites %}
+                                    {% set selected = '' %}
+                                    {% if site.id == app.user.sitesNoSite.id %}
+                                        {% set selected = 'selected' %}
+                                    {% else %}
+                                        {% set selected = '' %}
+                                    {% endif %}
+                                    <option value="{{ site.id }}" {{ selected }} > {{ site.nomSite }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-12 mt-2">
                                     <label for="mot-clef">Le nom de la sortie contient: </label>
                                     <input type="text" name="mot-clef" id="mot-clef" placeholder="Mot-clef">
-                                    </div>
-                                    {# Dates #}
-                                    <div class="col-12 mt-3">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label for="date1">Entre </label>
-                                                <input type="date" name="date1" id="date1">
-                                            </div>
-                                            <div class="col-1">
-                                                <p>et</p>
-                                            </div>
-                                            <div class="col-5">
+                                </div>
+                                {# Dates #}
+                                <div class="col-12 mt-3">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="date1">Entre </label>
+                                            <input type="date" name="date1" id="date1">
+                                        </div>
+                                        <div class="col-1">
+                                            <p>et</p>
+                                        </div>
+                                        <div class="col-5">
 
-                                                <input type="date" name="date2" id="date2">
-                                            </div>
+                                            <input type="date" name="date2" id="date2">
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-                            {# Checkboxes #}
 
-                            <div class="col-6">
-                                <div class="row">
-                                    <div class="col-12">
+                        </div>
+                        {# Checkboxes #}
+
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-12">
                                     <input type="checkbox" name="estOrganisateur" id="estOrganisateur" value="estOrganisateur">
                                     <label for="estOrganisateur">Je suis l'organisateur</label>
-                                    </div>
-                                    <div class="col-12">
+                                </div>
+                                <div class="col-12">
                                     <input type="checkbox" name="estInscrit" id="estInscrit" value="estInscrit">
                                     <label for="estInscrit">Je suis inscrit</label>
-                                    </div>
-                                    <div class="col-12">
+                                </div>
+                                <div class="col-12">
                                     <input type="checkbox" name="pasInscrit" id="pasInscrit" value="pasInscrit">
                                     <label for="pasInscrit">Je ne suis pas inscrit</label>
-                                    </div>
-                                    <div class="col-12">
+                                </div>
+                                <div class="col-12">
                                     <input type="checkbox" name="sortiesPassees" id="sortiesPassees" value="sortiesPassees">
                                     <label for="sortiesPassees">Sorties passées</label>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                </div>
-                <div class="col-1 parent">
-                    <button type="submit" class="creation">Rechercher</button>
-                </div>
+                    </div>
+
+                    <div class="col-1 parent">
+                        <button type="submit" class="creation">Rechercher</button>
+                    </div>
 
                 </form>
             </div>
@@ -152,7 +152,7 @@
 
                                     <div class="card-body">
                                         <h5 class="card-title text-center liens-items ">{{ tableau.sortie.nom }}</h5>
-                                        <img src="..." class="card-img-top" alt="...">
+                                        <img src="{{ asset('uploads/images/'~tableau.sortie.urlPhoto)  }}" class="card-img-top" alt="...">
                                         <p class="card-text ">
                                         <div>  Le {{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('d-m-Y H:i') : '' }}</div>
                                         <div>  La sortie dure {{  tableau.sortie.duree }} min</div>
@@ -266,4 +266,4 @@
         Mon profil
     </button>
 
-{% endblock %}
+    {% endblock %}

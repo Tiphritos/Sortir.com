@@ -7,6 +7,7 @@ use App\Entity\Sortie;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -58,8 +59,7 @@ class SortieType extends AbstractType
                 'attr' =>[
                     'id' =>'idDescription'
                 ]])
-            //->add('url_photo')
-            //->add('etats_no_etat')
+
             ->add('lieux_no_lieu',EntityType::class,[
                 'label'=>'Lieu: ',
                 'choice_label'=> 'nom_lieu',
@@ -68,7 +68,8 @@ class SortieType extends AbstractType
                 'attr' =>[
                     'id' => 'idLieu'
                 ]
-            ]);
+            ])
+            ->add('imageFile', FileType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

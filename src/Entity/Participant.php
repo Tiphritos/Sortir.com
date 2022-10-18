@@ -77,7 +77,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $inscriptions;
 
     #[ORM\Column(length: 255, nullable: true, options: ['default'=>'ProfilDefault.png'])]
-    private ?string $url_photo = null;
+    private ?string $url_photo = 'ProfilDefault.png';
 
     #[Vich\UploadableField(mapping:"profile_pics", fileNameProperty:'url_photo')]
     private ?File $imageFile = null;
