@@ -1,16 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container-fluid">
+    <div class="container-fluid base-app">
         {% for message in app.flashes('message') %}
             <div class="flash-info">
                 {{ message }}
             </div>
-
         {% endfor %}
-        <div id="zone-filtres container-fluid " class=" mb-5 d-none d-md-block">
+        <details id="zone-filtres container-fluid " class=" mb-5 d-none d-md-block">
+            <summary class="text-right">Filtres</summary>
             <div class="row justify-content-center">
-                <div class="offset-3  col-7">
+                <div class="col-sm-0 col-md-2"></div>
+                <div class="col-8">
                     <form action="{{ path('app_accueil_filtres') }}" method="post">
                         <div class="row">
                             <div class="col-2">
@@ -85,33 +86,43 @@
                 </div>
                 </form>
             </div>
-        </div>
+        </details>
         <div class="container scroller">
             <div class="card-deck">
                 <div class="row">
                     {%for tableau in tab %}
                         {% if (tableau.sortie.etatsNoEtat.id != 7)%}
-
                             <div class="col-lg-4 col-md-6 col-sm-12 ">
                                 <div class="card bg-dark">
-                                    <div class="card-body">
+                                    <div class="card-header">
                                         <h5 class="card-title text-center liens-items text-nowrap ">{{ tableau.sortie.nom }}</h5>
-                                        <img src="{{ asset('uploads/images/'~tableau.sortie.urlPhoto)  }}" class="card-img-top" alt="image">
-                                        <p class="card-text ">
-                                        <div>  Le {{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('d-m-Y H:i') : '' }}</div>
-                                        <div>  La sortie dure {{  tableau.sortie.duree }} min</div>
-                                        <div>  La fin des inscriptions est le  {{  tableau.sortie.dateCloture ?  tableau.sortie.dateCloture|date('d-m-Y ') : '' }}</div>
-                                        <div>  Le nombre de participants {{ tableau.nbreInscrits }} sur {{  tableau.sortie.nbInscriptionsMax }} inscrit</div>
-                                        <div> La sortie est  {{  tableau.sortie.etatsNoEtat.libelle }}</div>
-                                        <div> Inscrit ? {{ tableau.estInscrit ? 'oui': 'non' }}</div>
-                                        <div> L'organisateur {{  tableau.sortie.organisateur.nom }}</div>
-
-                                        <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }} " class="btn bg-primary creationCard">Afficher</a>
-                                        {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id ) %}
-                                            <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}" class="btn bg-primary creationCard">  Mettre à jour</a>
-                                        {% endif %}
-
                                     </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <img src="{{ asset('uploads/images/'~tableau.sortie.urlPhoto)  }}" class="card-img-top start-50" alt="Nique les aveugles" >
+                                            </div>
+                                            <div class="card-text col-6">
+                                                <div>  Le {{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('d-m-Y') : '' }} à {{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('H:i') : '' }}</div>
+                                                <div>  Durée: {{  tableau.sortie.duree }} min</div>
+                                                <div>  {{ tableau.nbreInscrits }} / {{  tableau.sortie.nbInscriptionsMax }}</div>
+                                                <div> La sortie est  {{  tableau.sortie.etatsNoEtat.libelle }}</div>
+                                                <div> {{ tableau.estInscrit ? 'Inscrit': 'Pas inscrit' }}</div>
+                                            </div>
+                                        </div>
+{#                                        <div>  Fin des inscriptions le {{  tableau.sortie.dateCloture ?  tableau.sortie.dateCloture|date('d-m-Y ') : '' }}</div>#}
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-md-6 col-sm-12 text-center">
+                                            {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id ) %}
+                                                <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}" class="btn btn-outline-primary ms-1">Modifier</a>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 text-center">
+                                            <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }} " class="btn btn-outline-primary ms-1">Afficher</a>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 
