@@ -94,6 +94,9 @@ class SortieController extends AbstractController
             $validator = Validation::createValidator();
             $listeOfErrors = $validator->validate($sortie);
             if (count($listeOfErrors) == 0){
+//                if($request->request->get('annuler') != null){
+//                    return $this->redirectToRoute('app_sortie_delete');
+//                }
                 if ($request->request->get('publier') != null) { //Si publié
                     $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id' => 2]));
                 } else { //Si simplement enregistré
@@ -110,7 +113,7 @@ class SortieController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/{id}/annulation', name: 'app_sortie_delete', methods: ['POST'])]
+    #[Route('/{id}/annulation', name: 'app_sortie_delete', methods: ['POST', 'GET'])]
     public function redirectToAnnulation(Request $request,
                                          Sortie $sortie,
                                          InscriptionRepository $inscriptionRepository,

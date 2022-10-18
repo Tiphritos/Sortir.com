@@ -19,7 +19,7 @@ class Sortie
     private ?int $id = null;
 
     #[Assert\NotBlank]
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 25)]
     private ?string $nom = null;
 
     #[Assert\NotBlank]

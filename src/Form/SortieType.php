@@ -69,7 +69,9 @@ class SortieType extends AbstractType
                     'id' => 'idLieu'
                 ]
             ])
-            ->add('imageFile', FileType::class);
+            ->add('imageFile', FileType::class,[
+                    'required'=>false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
