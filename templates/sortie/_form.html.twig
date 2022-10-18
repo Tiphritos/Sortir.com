@@ -44,11 +44,11 @@
                         <hr class="soulignage">
 
                         <div class="d-flex justify-content-center mb-5">
-
-                                <button class="btn btn-outline-primary ms-1">{{ button_label|default('Enregistrer') }}</button>
-                                <button class="btn btn-outline-primary ms-1" name="publier" value="publier">{{ button_label|default('Publier') }}</button>
-
-
+                            <button class="btn btn-outline-primary ms-1">{{ button_label|default('Enregistrer') }}</button>
+                            <button class="btn btn-outline-primary ms-1" name="publier" value="publier">{{ button_label|default('Publier') }}</button>
+                            {% if sortie.etatsNoEtat and sortie.etatsNoEtat.Id <=3 %}
+                                <a href="/sortie/{{ sortie.id }}/annulation" class=" btn btn-outline-primary ms-1">Annuler la sortie</a>
+                            {% endif %}
                         </div>
                             {#<a href="{{ path('app_inscription', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Inscription</a>
                             <a href="{{ path('app_desistement', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Desistement</a>
@@ -113,5 +113,6 @@
         </div>
         {{ form_end(form) }}
     </div>
-    <button class=" btn btn-outline-primary ms-1">Annuler la sortie</button>
+
+{#    <a href="/sortie/{{ sortie.id }}/annulation" class=" btn btn-outline-primary ms-1">Annuler la sortie</a>#}
 </section>

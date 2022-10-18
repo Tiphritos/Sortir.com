@@ -2,23 +2,13 @@
 
 {% block body %}
     <div class="container-fluid">
-        {#<div class="row">
-            <div class="offset-10 col-2 participant">
-                Participant: {{ app.user.pseudo }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="offset-10 col-2">
-                Date du jour  {{ "now" |date('j/ n/ Y') }}
-            </div>
-        </div>#}
         {% for message in app.flashes('message') %}
             <div class="flash-info">
                 {{ message }}
             </div>
 
         {% endfor %}
-        <div id="zone-filtres container-fluid " class=" mb-5">
+        <div id="zone-filtres container-fluid " class=" mb-5 d-none d-md-block">
             <div class="row justify-content-center">
                 <div class="offset-3  col-7">
                     <form action="{{ path('app_accueil_filtres') }}" method="post">
@@ -68,7 +58,6 @@
 
                             </div>
                             {# Checkboxes #}
-
                             <div class="col-6">
                                 <div class="row">
                                     <div class="col-12">
@@ -95,63 +84,19 @@
                     <button type="submit" class="creation">Rechercher</button>
                 </div>
                 </form>
-
             </div>
         </div>
-        <!--
-    <div id="zone-liste">
-         <table class="table couleurEcriture">
-            <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Date_debut</th>
-                <th>Duree</th>
-                <th>Date_cloture</th>
-                <th>Inscrits/places</th>
-                <th>Etat</th>
-                <th>Inscrit</th>
-                <th>Organisateur</th>
-                <th>actions</th>
-            </tr>
-            </thead>
-            <tbody>
-        {%for tableau in tab %}
-                {% if (tableau.sortie.etatsNoEtat.id != 7)%}
-                <tr>
-                    <td class="text-start">{{ tableau.sortie.nom }}</td>
-                    <td> Le {{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('d-m-Y H:i') : '' }}</td>
-                    <td>{{  tableau.sortie.duree }} min</td>
-                    <td>{{  tableau.sortie.dateCloture ?  tableau.sortie.dateCloture|date('d-m-Y ') : '' }}</td>
-                    <td>{{ tableau.nbreInscrits }}/{{  tableau.sortie.nbInscriptionsMax }}</td>
-                    <td>{{  tableau.sortie.etatsNoEtat.libelle }}</td>
-                    <td>{{ tableau.estInscrit ? 'x': '' }}</td>
-                    <td>{{  tableau.sortie.organisateur.nom }}</td>
-                    <td>
-                        <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }}">Afficher</a>
-                        {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id ) %}
-                        <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}"> | Mettre à jour</a></td>
-                    {% endif %}
-
-
-                </tr>
-                {% endif %}
-            {% endfor %}
-        </tbody>
-    </table>
-    </div>
--->
         <div class="container">
             <div class="card-deck">
                 <div class="row">
                     {%for tableau in tab %}
                         {% if (tableau.sortie.etatsNoEtat.id != 7)%}
-                            <div class="col-3 ">
 
-                                <div class="card bg-dark ">
-
+                            <div class="col-lg-4 col-md-6 col-sm-12 ">
+                                <div class="card bg-dark">
                                     <div class="card-body">
-                                        <h5 class="card-title text-center liens-items ">{{ tableau.sortie.nom }}</h5>
-                                        <img src="{{ asset('uploads/images/'~tableau.sortie.urlPhoto)  }}" class="card-img-top" alt="...">
+                                        <h5 class="card-title text-center liens-items text-nowrap ">{{ tableau.sortie.nom }}</h5>
+                                        <img src="{{ asset('uploads/images/'~tableau.sortie.urlPhoto)  }}" class="card-img-top" alt="image">
                                         <p class="card-text ">
                                         <div>  Le {{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('d-m-Y H:i') : '' }}</div>
                                         <div>  La sortie dure {{  tableau.sortie.duree }} min</div>
@@ -163,100 +108,35 @@
 
                                         <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }} " class="btn bg-primary creationCard">Afficher</a>
                                         {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id ) %}
-                                            <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}"class="btn bg-primary creationCard">  Mettre à jour</a>
+                                            <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}" class="btn bg-primary creationCard">  Mettre à jour</a>
                                         {% endif %}
 
                                     </div>
                                 </div>
                             </div>
+
                         {% endif %}
                     {% endfor %}
                 </div>
-
             </div>
         </div>
-
-        {#       <div class="card-deck">
-            {%for tableau in tab %}
-            {% if (tableau.sortie.etatsNoEtat.id != 7)%}
-            <div class="card">
-                <div class="card-header">{{ tableau.sortie.nom }}</div>
-                <div class="card-body">
-                    <h3 class="card-title">Titre de la première carte</h5>
-                        <p class="card-text bg-primary">{{ tableau.sortie.dateDebut ? tableau.sortie.dateDebut|date('d-m-Y H:i') : '' }}
-                        <p class="card-text" > {{  tableau.sortie.duree }} min</p>
-                          <p class="card-text"  >  {{  tableau.sortie.dateCloture ?  tableau.sortie.dateCloture|date('d-m-Y ') : '' }}</p>
-                        <p class="card-text"  >  {{ tableau.nbreInscrits }}/{{  tableau.sortie.nbInscriptionsMax }}</p>
-                           <p class="card-text">   {{  tableau.sortie.etatsNoEtat.libelle }}</p>
-                        <p class="card-text" >  {{ tableau.estInscrit ? 'x': '' }}</p>
-                           <p class="card-text " > {{  tableau.sortie.organisateur.nom }}</p>
-
-                            <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }}">Afficher</a>
-                            {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id ) %}
-                                <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}"> | Mettre à jour</a>
-                            {% endif %}
-                        </p>
-                        <p class="card-text"><small class="text-muted">Ligne de texte supplémentaire</small></p>
-                </div>
-                {% endif %}
-                {% endfor %}
-
-                {% for recette in recettes %}
-                    <div class ="col-6 col-sm-4 col-md-3 p-2">
-                        <div class="card " style="width: 18rem;">
-                            {% if (recette.estFavori) %}
-                                <div class="etoile"> &#9733</div>
-                            {% else %}
-                                <div class="etoile">&#10025</div>
-                            {% endif %}
-
-                            <img src="{{ asset('images/'~ recette.image) }}" class="card-img-top img figure-img img-fluid rounded" alt="recette">
-
-                            <div class="card-body ">
-                                <h5 class="card-title text-center">{{ recette.nom }}</h5>
-
-                                <a href="{{ path('app_recette_show', {'id': recette.id}) }}"class="btn btn-primary">Recette</a>
-                                {% if (recette.estFavori) %}
-                                    <a href="{{ path('favoris',{'id':recette.id}) }}"class="btn btn-primary">Enlever des favoris</a>
-                                {% else %}
-                                    <a href="{{ path('favoris',{'id':recette.id}) }}"class="btn btn-primary">Ajouter aux favoris</a>
-                                {% endif %}
-
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                {% endfor %}
-            </div>#}
         <div class="">
             <a href="{{ path('app_sortie_new') }}" class="btnAffichagePage ">Créer une sortie</a></div>
-
         <div class="social-panel-container ">
             <div class="social-panel">
                 <p> <i class="fa fa-heart"></i>
                     <a href="{{ path('app_participant_show', {'id': app.user.id})}}"  class="liens-items">{{ app.user.pseudo }}</a> </p>
-
                 <button class="close-btn"><i class="fas fa-times"></i></button>
-
-
                 <ul>
                     <li>
                         Nom :{{ app.user.nom }}
-
                     </li>
                     <li>
-
                         Prénom :{{app.user.prenom}}
-
                     </li>
                     <li>
-
                         Adresse mail :{{ app.user.mail }}
-
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -264,5 +144,4 @@
     <button class="floating-btn">
         Mon profil
     </button>
-
 {% endblock %}
