@@ -79,7 +79,7 @@ class InscriptionController extends AbstractController
         // dd($idParticipant,$idSortie);
 
         return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
-        
+
     }
     #[Route('/{id}/{sortie}/desistement', name: 'app_desistement')]
     public function desistement(
