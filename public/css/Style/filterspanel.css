@@ -1,0 +1,156 @@
+.filters-panel-container {
+    position: fixed;
+    z-index: 999;
+    transform: translateX(-110%);
+    transition: transform 0.4s ease-in-out;
+    opacity: 80%;
+}
+
+.filters-panel-container.visible {
+    transform: translateX(10px);
+    opacity: 95%;
+}
+
+.filters-panel {
+    background-color: #1A2226;
+    border-radius: 10px;
+    box-shadow: 5px -9px 15px 6px rgba(0,0,0,0.7);
+    border: 1px solid #0DB8DE;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+
+    /*position: relative;*/
+    /*height: 169px;*/
+    /*width: 370px;*/
+    max-width: calc(100% - 10px);
+}
+
+.filters-panel button.close-btn {
+    border: 0;
+    color: #97A5CE;
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.filters-panel button.close-btn:focus {
+    outline: none;
+}
+
+/*.filter-title {*/
+
+/*    border-radius: 0 0 10px 10px;*/
+/*    border: 1px solid #0DB8DE;*/
+/*    color: #fff;*/
+/*    font-size: 20px;*/
+/*    line-height: 18px;*/
+/*    padding: 2px 17px 6px;*/
+/*    !*position: absolute;*!*/
+/*    top: 0;*/
+/*    left: 50%;*/
+/*    margin: 0;*/
+/*    transform: translateX(-50%);*/
+/*    text-align: center;*/
+/*    width: 235px;*/
+/*}*/
+
+.filters-panel p i {
+    margin: 0 5px;
+}
+
+.filters-panel h4 {
+    margin: 20px 0;
+    color: #97A5CE;
+
+    font-size: 14px;
+    line-height: 18px;
+    text-transform: uppercase;
+}
+
+.filters-panel ul {
+
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.filters-panel ul li {
+    margin: 0 10px;
+}
+
+.filters-panel ul li a {
+
+
+    color: #001F61;
+    font-size: 20px;
+    display: flex;
+
+    align-items: flex-start;
+    height: 31px;
+    width: 104px;
+    text-decoration: none;
+    flex-direction: column-reverse;
+    flex-wrap: nowrap;
+    align-content: center;
+
+}
+
+
+.filter-btn {
+    border-radius: 26.5px;
+    background-color: #001F61;
+    border: 1px solid #001F61;
+    box-shadow: 0 16px 22px -17px #03153B;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 12px 20px;
+    /*position: fixed;*/
+    /*bottom: 20px;*/
+    /*right: 20px;*/
+    z-index: 999;
+}
+
+.filter-btn:hover {
+    background-color: #ffffff;
+    color: #001F61;
+}
+
+.filter-btn:focus {
+    outline: none;
+}
+
+/*.floating-text {
+    background-color: #001F61;
+    border-radius: 10px 10px 0 0;
+    color: #fff;
+    font-family: 'Muli';
+    padding: 7px 15px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 998;
+}
+
+.floating-text a {
+    color: #FF7500;
+    text-decoration: none;
+}*/
+
+@media screen and (max-width: 480px) {
+
+    .filters-panel-container.visible {
+        transform: translateX(0px);
+    }
+
+    .filter-btn {
+        right: 10px;
+    }
+}
