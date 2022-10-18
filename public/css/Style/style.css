@@ -113,7 +113,25 @@ a{
     background-color: #ffffff;
     color: #001F61;
 }
-
+.btnAffichageRetourAccueil{
+    border-radius: 26.5px;
+    background-color: #001F61;
+    border: 1px solid #001F61;
+    box-shadow: 0 16px 22px -17px #03153b;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 12px 9px;
+    position: fixed;
+    bottom: 20px;
+    right: 0px;
+    z-index: 999;
+}
+.btnAffichageRetourAccueil:hover {
+    background-color: #ffffff;
+    color: #001F61;
+}
 .btnCreationSortie:focus {
     outline: none;
 }
@@ -341,4 +359,13 @@ section p{
 /*******Cards page Sortie Affichage Participant********/
 .imgcard{
     height: 100px;
+}
+
+/******Scroll ***********/
+.scroller {
+
+    height: 478px;
+    overflow-y: scroll;
+    scrollbar-color: rebeccapurple green;
+    scrollbar-width: thin;
 }

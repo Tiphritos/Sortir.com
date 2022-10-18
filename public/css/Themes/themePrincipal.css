@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'font-Franchise';
+    src: url("/../../fonts/retrolight/Retrolight.ttf") format("truetype");
+
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
     --main-color: rgb(72,78,91);
     --backgroundlinear: linear-gradient(180deg, rgba(72,78,91,1) 15%, rgba(46,53,68,1) 81%, rgba(28,32,41,1) 93%);
@@ -10,8 +18,13 @@ html,body{
     background: var(--backgroundlinear);
     background-attachment: fixed;
     height: 100vh;
-}
 
+}
+.titrePrincipal{
+    font-family: 'font-Franchise';
+    color: #0DB8DE;
+    font-size: 3rem;
+}
 .liens-items{
     color: #edc139;
 }
