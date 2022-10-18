@@ -80,7 +80,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $url_photo = null;
 
     #[Vich\UploadableField(mapping:"profile_pics", fileNameProperty:'url_photo')]
-    private ?File $imageFile;
+    private ?File $imageFile = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;

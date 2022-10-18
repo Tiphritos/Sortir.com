@@ -48,7 +48,7 @@ class Sortie
     private ?string $url_photo = null;
 
     #[Vich\UploadableField(mapping:"profile_pics", fileNameProperty:'url_photo')]
-    private ?File $imageFile;
+    private ?File $imageFile = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -65,6 +65,10 @@ class Sortie
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Site $site_organisateur = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
+
 
     public function getId(): ?int
     {
@@ -199,6 +203,32 @@ class Sortie
     public function setSiteOrganisateur(?site $site_organisateur): self
     {
         $this->site_organisateur = $site_organisateur;
+
+        return $this;
+    }
+
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
