@@ -14,7 +14,7 @@ const social_panel_container = document.querySelector('.social-panel-container')
 
 floating_btn.addEventListener('click', () => {
     social_panel_container.classList.toggle('visible')
-},true);
+},false);
 
 close_btn.addEventListener('click', () => {
     social_panel_container.classList.remove('visible')
