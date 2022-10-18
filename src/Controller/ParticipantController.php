@@ -16,10 +16,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/participant')]
+
 class ParticipantController extends AbstractController
 {
-    #[Route('/', name: 'app_participant_index', methods: ['GET', 'POST'])]
+    #[Route('/participant', name: 'app_participant_index', methods: ['GET', 'POST'])]
 
     public function index(ParticipantRepository $participantRepository,
                           SiteRepository $siteRepository,
@@ -71,7 +71,7 @@ class ParticipantController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_participant_new', methods: ['GET', 'POST'])]
+    #[Route('admin/participant/new', name: 'app_participant_new', methods: ['GET', 'POST'])]
 
     public function new(Request $request, ParticipantRepository $participantRepository): Response
     {
@@ -96,7 +96,7 @@ class ParticipantController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_participant_show', methods: ['GET'])]
+    #[Route('participant/{id}', name: 'app_participant_show', methods: ['GET'])]
     public function show(Participant $participant): Response
     {
         return $this->render('participant/show.html.twig', [
@@ -105,7 +105,7 @@ class ParticipantController extends AbstractController
     }
 
 
-    #[Route('/partiel/{id}', name: 'app_Partiel_show', methods: ['GET'])]
+    #[Route('participant/partiel/{id}', name: 'app_Partiel_show', methods: ['GET'])]
     public function Participant(Participant $participant): Response
     {
         return $this->render('participant/showPartiel.html.twig', [
@@ -113,7 +113,7 @@ class ParticipantController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_participant_edit', methods: ['GET', 'POST'])]
+    #[Route('participant/{id}/edit', name: 'app_participant_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Participant $participant, ParticipantRepository $participantRepository,UserPasswordHasherInterface $passwordHasher): Response
     {
         $form = $this->createForm(ParticipantType::class, $participant);
@@ -135,7 +135,7 @@ class ParticipantController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_participant_delete', methods: ['POST'])]
+    #[Route('admin/participant/{id}', name: 'app_participant_delete', methods: ['POST'])]
     public function delete(Request $request, Participant $participant, ParticipantRepository $participantRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$participant->getId(), $request->request->get('_token'))) {

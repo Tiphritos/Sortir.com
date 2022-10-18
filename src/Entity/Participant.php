@@ -76,7 +76,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'participant_id', targetEntity: Inscription::class, orphanRemoval: true)]
     private Collection $inscriptions;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true, options: ['default'=>'ProfilDefault.png'])]
     private ?string $url_photo = null;
 
     #[Vich\UploadableField(mapping:"profile_pics", fileNameProperty:'url_photo')]

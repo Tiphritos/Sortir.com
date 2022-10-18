@@ -5,8 +5,11 @@ namespace App\Entity;
 use App\Repository\SortieRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: SortieRepository::class)]
 class Sortie
 {
@@ -41,8 +44,11 @@ class Sortie
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $description_infos = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true, options:['default'=>'SortieDefault.gif'])]
     private ?string $url_photo = null;
+
+    #[Vich\UploadableField(mapping:"profile_pics", fileNameProperty:'url_photo')]
+    private ?File $imageFile;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]

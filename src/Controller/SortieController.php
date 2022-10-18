@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Inscription;
 use App\Entity\Sortie;
-use App\Form\SortieAnnulationType;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\InscriptionRepository;
@@ -131,7 +130,7 @@ class SortieController extends AbstractController
                             EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
     {
 
-        $motif = 'Raison de l\'annulation: '.($request->request->get('motifAnnulation'));
+        $motif = $request->request->get('motifAnnulation');
 
         //Checker l'état de la sortie, doit être strictement antérieur à 4 (aka ne pas avoir commencé)
         if($sortie->getEtatsNoEtat()->getId()<=3) {
