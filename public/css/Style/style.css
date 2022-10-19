@@ -42,9 +42,9 @@ body{
 .menu-items::after{
     content: "";
     transform: scale(0);
-    height: 3px;
-    width: 90%;
-    background: #edc139;
+    height: 2px;
+    width: 87%;
+    background: #0DB8DE;
     display: block;
     position: absolute;
     top: 82%;
@@ -96,10 +96,10 @@ a{
 }
 .btnAffichagePage{
     border-radius: 26.5px;
-    background-color: #001F61;
-    border: 1px solid #001F61;
+    background-color: #212529;
+    border: 1px solid #0DB8DE;
     box-shadow: 0 16px 22px -17px #03153B;
-    color: #fff;
+    color:  #edc139;
     cursor: pointer;
     font-size: 16px;
     line-height: 20px;
@@ -110,15 +110,15 @@ a{
     z-index: 999;
 }
 .btnAffichagePage:hover {
-    background-color: #ffffff;
-    color: #001F61;
+    background-color: #212529;
+    color: white;
 }
 .btnAffichageRetourAccueil{
     border-radius: 26.5px;
-    background-color: #001F61;
-    border: 1px solid #001F61;
+    background-color: #212529;
+    border: 1px solid #0DB8DE;
     box-shadow: 0 16px 22px -17px #03153b;
-    color: #fff;
+    color:  #edc139;
     cursor: pointer;
     font-size: 16px;
     line-height: 20px;
@@ -129,8 +129,8 @@ a{
     z-index: 999;
 }
 .btnAffichageRetourAccueil:hover {
-    background-color: #ffffff;
-    color: #001F61;
+    background-color: #212529;
+    color: white;
 }
 .btnCreationSortie:focus {
     outline: none;
@@ -222,4 +222,30 @@ section p{
 /*******Lieu **************/
 #exemple{
     visibility: hidden;
+}
+
+/*******Boutons************/
+
+.boutons {
+
+    /* border-color: #0DB8DE; */
+border: 1px solid #0DB8DE;
+    color: #0DB8DE;
+    border-radius: 10px;
+    padding: 6px;
+    font-weight: bold;
+}
+
+.boutons:hover{
+
+  color: white;
+}
+
+/*******boutons enlevé
+ */
+
+button{
+    text-decoration: none;
+    background-color: rgb(26 34 38);
+    margin-right: 5px;
 }
