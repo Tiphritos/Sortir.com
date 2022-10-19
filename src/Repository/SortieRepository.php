@@ -7,6 +7,7 @@ use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 use Doctrine\ORM\Query;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -46,12 +47,16 @@ class SortieRepository extends ServiceEntityRepository
     public function findFiltres($site, $motClef, $date1, $date2, $estOrganisateur, $estInscrit, $pasInscrit, $sortiesPassees, $user):array{
 
         $queryBuilder= $this->createQueryBuilder('s');
-        if(($estInscrit) || ($pasInscrit)) {
-            $queryBuilder->join('App\Entity\Inscription', 'i');
+//        if ($estInscrit){
+//            return $user->getInscriptions();
+//        }
+        if($estInscrit) {
+            $queryBuilder->Join('App\Entity\Inscription', 'i');
+
         }
         if($site != null){
             $queryBuilder->andWhere('s.site_organisateur = :site')
-            ->setParameter(':site', $site);
+                ->setParameter(':site', $site);
         }
         if(strlen($motClef)>0){
             $queryBuilder->andWhere('s.nom LIKE :motClef')
@@ -69,44 +74,32 @@ class SortieRepository extends ServiceEntityRepository
             $queryBuilder->andWhere('s.organisateur = :user')
                 ->setParameter(':user', $user );
         }
-        if(($estInscrit) && !($pasInscrit)){
-            $queryBuilder->andWhere('s.id = i.sortie_id');
-        }
-        if(!($estInscrit) && ($pasInscrit)){
-            $queryBuilder->andWhere('s.id != i.sortie_id');
+        if(($estInscrit) && !($pasInscrit)){ //Sortie auxquelles l'utilisateur est inscrit
+            $queryBuilder->andWhere('s = i.sortie_id');
+            $queryBuilder->andWhere(':user = i.participant_id')
+                ->setParameter(':user', $user);
         }
         if($sortiesPassees){
             $queryBuilder->andWhere('s.date_debut <= :date3')
                 ->setParameter(':date3', date_create_immutable('now'));
         }
-
         $query = $queryBuilder->getQuery();
-        return $query->getResult();
 
+        $response = $query->getResult();
+
+        if ($pasInscrit){
+            $inscriptions = $user->getInscriptions();
+            foreach($inscriptions as $inscription){
+                $insc = $this->findOneBy(['id' => $inscription->getSortieId()]);
+                $arr[] = $insc;
+            }
+//            if ($estInscrit){
+//
+//            }else {
+                return array_diff($response, $arr);
+           // }
+        }
+
+        return $response;
     }
-
-//    /**
-//     * @return Sortie[] Returns an array of Sortie objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Sortie
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
