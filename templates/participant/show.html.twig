@@ -87,7 +87,9 @@
             </div>
         </div>
     </section>
-
+    {% if (is_granted('ROLE_ADMIN')) %}
+    <a href="{{ path('app_participant_index') }}" class="  btnAffichagePage">Retour à la liste </a>
+    {% endif %}
     <a href="{{ path('app_accueil') }}" class="  btnAffichageRetourAccueil">Retour à l'accueil </a>
 
 

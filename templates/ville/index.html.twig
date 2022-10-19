@@ -3,9 +3,9 @@
 {% block title %}Ville index{% endblock %}
 
 {% block body %}
-    <h1>Ville index</h1>
 
-    <table class="table">
+
+{#    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -31,7 +31,57 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+    </table>#}
 
-    <a href="{{ path('app_ville_new') }}">Create new</a>
+
+
+
+    <h1>Administration des villes</h1>
+
+    <div class="container ">
+
+        <div class="row justify-content-center p-5">
+            <div class="col-5">
+                <div class="card mb-4 couleurFond">
+                    <div class="card-body text-center">
+
+
+
+                        <h5 class="my-3 ">  Ajouter une ville </h5>
+                        <a href="{{ path('app_ville_new')}}" class="btn btn-outline-primary ms-1"> Créer </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-7">
+                <div class="row">
+                    {% for ville in villes  %}
+
+                        <div class=" col-3">
+                            <div class="card mb-4 couleurFond">
+                                <div class="card-body text-center">
+                                   {# {%if part.urlPhoto %}
+                                        <img src="{{ asset('uploads/images/'~ part.urlPhoto) }}" alt="avatar"
+                                             class="rounded-circle img-fluid imgcard">
+                                    {% else %}
+                                        <img src="{{ asset('uploads/images/ProfilDefault.png')}}" alt="avatar"
+                                             class="rounded-circle img-fluid imgcard">
+                                    {% endif %}#}
+                                    <h5 class="my-3 ">{{ ville.nomVille }}  </h5>
+                                    <h5 class="my-3 ">{{ ville.codePostal }}</h5>
+                                    <a href="{{ path('app_ville_edit', {'id': ville.id}) }}" class="btn btn-outline-primary ms-1">Modifier </a>
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{{ path('app_accueil') }}" class="  btnAffichageRetourAccueil">Retour à l'accueil </a>
 {% endblock %}

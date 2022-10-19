@@ -31,7 +31,7 @@
                                         <img src="{{ asset('uploads/images/'~ part.urlPhoto) }}" alt="avatar"
                                              class="rounded-circle img-fluid imgcard">
                                     {% else %}
-                                        <img src="{{ asset('uploads/images/ProfilDefault.png')}}" alt="avatar"
+                                        <img src="{{ asset('uploads/images/poussacha.png')}}" alt="avatar"
                                              class="rounded-circle img-fluid imgcard">
                                     {% endif %}
                                     <h5 class="my-3 "><a href="{{ path('app_participant_show', {'id': part.id}) }}">{{part.pseudo}} </a> </h5>
@@ -47,4 +47,6 @@
             </div>
         </div>
     </div>
+
+    <a href="{{ path('app_accueil') }}" class="  btnAffichageRetourAccueil">Retour à l'accueil </a>
 {%  endblock %}

@@ -26,7 +26,8 @@ class SortieController extends AbstractController
                         SortieRepository $sortieRepository,
                         InscriptionRepository $inscriptionRepository,
                         EtatRepository $etatRepository,
-                        LieuRepository $lieuRepository
+                        LieuRepository $lieuRepository,
+
     ): Response
     {
         ;
