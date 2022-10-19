@@ -21,6 +21,19 @@ use Symfony\Component\Validator\Validation;
 #[Route('/sortie')]
 class SortieController extends AbstractController
 {
+    #[Route('/showall', name: 'app_sortie_show_all', methods: ['GET', 'POST'])]
+    public function showAll(Request $request,
+                        SortieRepository $sortieRepository,
+                        InscriptionRepository $inscriptionRepository,
+                        EtatRepository $etatRepository,
+                        LieuRepository $lieuRepository
+    ): Response
+    {
+
+        return $this->render('sortie/index.html.twig', [
+            'sorties' => $sortieRepository->findAll()
+        ]);
+    }
     #[Route('/new', name: 'app_sortie_new', methods: ['GET', 'POST'])]
     public function new(Request $request,
                         SortieRepository $sortieRepository,
@@ -42,20 +55,7 @@ class SortieController extends AbstractController
         $form->handleRequest($request);
         $dateDebut = $request->request->get('dateDebut');
 
-
-      /*  if($formL->isSubmitted()&& $formL->isValid()){
-
-
-
-            $lieuRepository->save($lieu, true);
-
-
-        }*/
-
-
         if ($form->isSubmitted() && $form->isValid()) {
-
-
             $sortie->setOrganisateur($this->getUser());
             $sortie->setSiteOrganisateur($this->getUser()->getSitesNoSite());
 

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Administration des sorties</h1>
+
+    <div class="container ">
+
+        <div class="row ">
+            <div class="col-4">
+                <div class="card mb-4 couleurFond">
+                    <div class="card-body text-center">
+                        <h5 class="my-3 ">  Créer une sortie </h5>
+                        <a href="{{ path('app_sortie_new')}}" class="btn btn-outline-primary ms-1"> Créer </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    {% for sortie in sorties  %}
+                        <div class=" col-12">
+                            <div class="card mb-4 couleurFond">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="{{ asset('uploads/images/'~ sortie.urlPhoto) }}" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ sortie.nom }}</h5>
+                                            <p class="card-text">{{ sortie.descriptionInfos }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
