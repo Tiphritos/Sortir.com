@@ -118,14 +118,14 @@ class ParticipantController extends AbstractController
     {
         $form = $this->createForm(ParticipantType::class, $participant);
         $form->handleRequest($request);
-        $motdepasse = $participant ->getMotDePasse();
+        $motdepasse = $participant->getMotDePasse();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $motdepasseHache = $passwordHasher->hashPassword($participant,$motdepasse);
             $participant ->setMotDePasse($motdepasseHache);
             $participantRepository->save($participant, true);
             $id = $this->getUser()->getId();
-           $this->addFlash('message',"Modification pris en compte");
+           $this->addFlash('message',"Modifications prises en compte");
             return $this->redirectToRoute('app_participant_show', ['id'=>$id], Response::HTTP_SEE_OTHER);
         }
 
