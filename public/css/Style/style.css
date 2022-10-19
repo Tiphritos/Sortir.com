@@ -218,3 +218,8 @@ section p{
     background-color: #0DB8DE;
     right: 0px;
 }
+
+/*******Lieu **************/
+#exemple{
+    visibility: hidden;
+}

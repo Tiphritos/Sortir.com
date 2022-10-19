@@ -25,7 +25,8 @@ class SortieController extends AbstractController
     public function new(Request $request,
                         SortieRepository $sortieRepository,
                         InscriptionRepository $inscriptionRepository,
-                        EtatRepository $etatRepository
+                        EtatRepository $etatRepository,
+                        LieuRepository $lieuRepository
     ): Response
     {
         ;
@@ -33,12 +34,23 @@ class SortieController extends AbstractController
         $sortie = new Sortie();
         $lieu = new Lieu();
         $formL = $this->createForm(LieuType::class,$lieu);
+        $formL->handleRequest($request);
+
         $sortie->setDateDebut($date);
         $form = $this->createForm(SortieType::class, $sortie);
-        $formL->handleRequest($request);
+
         $form->handleRequest($request);
         $dateDebut = $request->request->get('dateDebut');
 
+
+      /*  if($formL->isSubmitted()&& $formL->isValid()){
+
+
+
+            $lieuRepository->save($lieu, true);
+
+
+        }*/
 
 
         if ($form->isSubmitted() && $form->isValid()) {
