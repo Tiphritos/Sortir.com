@@ -21,9 +21,14 @@ html,body{
 
 }
 .titrePrincipal{
+    display: flex;
     font-family: 'font-Franchise';
     color: #0DB8DE;
-    font-size: 3rem;
+    font-size: 4rem;
+
+
+
+
 }
 .liens-items{
     color: #edc139;

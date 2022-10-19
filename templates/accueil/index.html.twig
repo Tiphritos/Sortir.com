@@ -8,7 +8,7 @@
                 {{ message }}
             </div>
         {% endfor %}
-        <button class="text-right filter-btn btn btn-outline-primary">Filtres</button>
+        <button class="text-right filter-btn ">Filtres</button>
         <br>
         <div id="zone-filtres row " class=" mb-5 d-none d-md-block filters-panel-container">
             <div class="row justify-content-center filters-panel">
@@ -82,7 +82,7 @@
                                 </div>
                             </div>
                             <div class="col-2 d-flex align-items-end">
-                                <button type="submit" class="btn  btnSeconnecter ms-1">Filtrer</button>
+                                <button type="submit" class="btn  btnSeconnecter ms-1 boutons">Filtrer</button>
                             </div>
                         </div>
                     </form>
@@ -117,11 +117,11 @@
                                     <div class="row mb-2">
                                         <div class="col-md-6 col-sm-12 text-center">
                                             {% if (is_granted('ROLE_ADMIN') or app.user.id == tableau.sortie.organisateur.id ) %}
-                                                <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}" class="btn btn-outline-primary ms-1">Modifier</a>
+                                                <a href="{{ path('app_sortie_edit', {'id':  tableau.sortie.id}) }}" class="boutons">Modifier</a>
                                             {% endif %}
                                         </div>
                                         <div class="col-md-6 col-sm-12 text-center">
-                                            <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }} " class="btn btn-outline-primary ms-1">Afficher</a>
+                                            <a href="{{ path('app_sortie_show', {'id':  tableau.sortie.id}) }} " class="boutons">Afficher</a>
                                         </div>
                                     </div>
 

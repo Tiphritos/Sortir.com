@@ -100,10 +100,10 @@
 
 .filter-btn {
     border-radius: 26.5px;
-    background-color: #001F61;
-    border: 1px solid #001F61;
+    background-color: #212529;
+    border: 1px solid #0DB8DE;
     box-shadow: 0 16px 22px -17px #03153B;
-    color: #fff;
+    color:  #edc139;
     cursor: pointer;
     font-size: 16px;
     line-height: 20px;
@@ -115,8 +115,8 @@
 }
 
 .filter-btn:hover {
-    background-color: #ffffff;
-    color: #001F61;
+    color: #fff;
+    border: 1px solid #0DB8DE;
 }
 
 .filter-btn:focus {

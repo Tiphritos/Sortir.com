@@ -42,7 +42,7 @@ class LieuController extends AbstractController
     }
 
 
-    #[Route('/nouveau', name: 'app_lieu_new', methods: ['GET', 'POST'])]
+    #[Route('/nouveau', name: 'app_lieu_nouveau', methods: ['GET', 'POST'])]
     public function nouveau(Request $request, LieuRepository $lieuRepository, VilleRepository $villeRepository): Response
     {
         $lieu = new Lieu();

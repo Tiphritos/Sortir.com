@@ -63,7 +63,7 @@
                         <hr class="soulignage">
 
                         <div class="d-flex justify-content-center mb-5">
-                            <button class="btn btn-outline-primary ms-1">{{ button_label|default('Save') }}</button>
+                            <button class="boutons">{{ button_label|default('Enregistrer') }}</button>
 
                         </div>
 
@@ -115,5 +115,5 @@
         </div>
         {{ form_end(form) }}
     </div>
-
+    <a href="{{ path('app_accueil') }}" class="  boutons">Retour à l'accueil </a>
 </section>

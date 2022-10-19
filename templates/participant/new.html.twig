@@ -7,5 +7,8 @@
 
     {{ include('participant/_form.html.twig') }}
 
-    <a href="{{ path('app_participant_index') }}">back to list</a>
+
+        <a href="{{ path('app_participant_index') }}" class="  btnAffichagePage">Retour à la liste </a>
+
+    <a href="{{ path('app_accueil') }}" class="  btnAffichageRetourAccueil">Retour à l'accueil </a>
 {% endblock %}
