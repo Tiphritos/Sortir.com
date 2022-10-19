@@ -74,7 +74,7 @@ class SortieRepository extends ServiceEntityRepository
             $queryBuilder->andWhere('s.organisateur = :user')
                 ->setParameter(':user', $user );
         }
-        if(($estInscrit) && !($pasInscrit)){ //Sortie auxquelles l'utilisateur est inscrit
+        if(($estInscrit)){ //Sortie auxquelles l'utilisateur est inscrit
             $queryBuilder->andWhere('s = i.sortie_id');
             $queryBuilder->andWhere(':user = i.participant_id')
                 ->setParameter(':user', $user);
@@ -93,11 +93,12 @@ class SortieRepository extends ServiceEntityRepository
                 $insc = $this->findOneBy(['id' => $inscription->getSortieId()]);
                 $arr[] = $insc;
             }
-//            if ($estInscrit){
-//
-//            }else {
+
+            if ($estInscrit){
+                return array_merge($response, $arr);
+            }else {
                 return array_diff($response, $arr);
-           // }
+            }
         }
 
         return $response;
