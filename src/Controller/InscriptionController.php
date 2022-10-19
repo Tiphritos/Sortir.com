@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Inscription;
 use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Repository\EtatRepository;
 use App\Repository\InscriptionRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
@@ -26,11 +27,12 @@ class InscriptionController extends AbstractController
         SortieRepository $sortieRepository,
         ParticipantRepository $participantRepository,
         InscriptionRepository $inscriptionRepository,
+        EtatRepository $etatRepository,
 
         EntityManagerInterface $entityManager): Response
     {
 
-        $idParticipant=$participant ->getId();
+        $idParticipant= $participant ->getId();
         $tableauDeSortie = $participant ->getInscriptions();
 
         $nouvelleInscription = new Inscription();
@@ -55,7 +57,7 @@ class InscriptionController extends AbstractController
         if (!$estinscrit){
             //Vérifier si état = ouvert
             if ($etatSortie!= 2  ) {
-                $this->addFlash('message', "Impossible de s'inscrire à la sortie");
+                $this->addFlash('message', "Impossible de s'inscrire à la sortie, les inscriptions sont clôturées");
             }
             //Vérifier si sortie complète
             else if (count($inscriptions) >=$sortie ->getNbInscriptionsMax()){
@@ -65,18 +67,17 @@ class InscriptionController extends AbstractController
             //Sinon inscrire
             else {
                 $changementDeSortie = $participant->addInscription( $nouvelleInscription );
-
-                $entityManager->persist($changementDeSortie);
+                if ((count($inscriptions)+1) >= $sortie->getNbInscriptionsMax()){
+                    $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id'=>3]));
+                    $entityManager->persist($sortie);
+                }
+                //$entityManager->persist($changementDeSortie);
                 $entityManager->persist($nouvelleInscription);
                 $entityManager->flush();
+
                 $this->addFlash('message', "Inscription réussie");
             }
         }
-
-
-
-
-        // dd($idParticipant,$idSortie);
 
         return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
 
@@ -86,9 +87,8 @@ class InscriptionController extends AbstractController
         Request $request,
         Participant $participant,
         Sortie $sortie ,
-
         InscriptionRepository $inscriptionRepository,
-        /*Inscription $inscription,*/
+        EtatRepository $etatRepository,
         EntityManagerInterface $entityManager): Response
     {
         $inscription = $inscriptionRepository->findOneBy(['sortie_id'=>$sortie->getId(), 'participant_id'=>$participant->getId()]);
@@ -105,8 +105,13 @@ class InscriptionController extends AbstractController
 
             $AnnulerDeSortie = $participant->removeInscription($inscription, true);
             $entityManager->persist($AnnulerDeSortie);
-            $entityManager->flush();
+
             $this->addFlash('message', "Désistement pris en compte");
+            if(($sortie->getEtatsNoEtat()->getId() == 3) && ($sortie->getDateCloture() > (new \DateTime('now')))){
+                $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id'=>2]));
+                $entityManager->persist($sortie);
+            }
+            $entityManager->flush();
         }else{
             $this->addFlash('message', "Blaireau!!! Tu n'es pas inscrit à cet événement");
         }
