@@ -20,9 +20,6 @@ body{
 /*******************************/
 /*Titre*/
 
-.titrePrincipal{
-    display: flex;
-}
 
 /*******************************/
 /*Menu*/
@@ -41,13 +38,13 @@ body{
 }
 .menu-items::after{
     content: "";
-    transform: scale(0);
+   transform: scale(0);
     height: 2px;
     width: 87%;
-    background: #0DB8DE;
+    background: #edc139;
     display: block;
     position: absolute;
-    top: 82%;
+    top: 80%;
     transition: transform 0.4s ease-in-out;
 
 }
@@ -211,7 +208,7 @@ section p{
 
     height: 70vh;/*478px;*/
     overflow-y: scroll;
-
+    scrollbar-color: rebeccapurple green;
 }
 
 .btn:hover{
@@ -234,6 +231,7 @@ border: 1px solid #0DB8DE;
     border-radius: 10px;
     padding: 6px;
     font-weight: bold;
+    margin-left: 1rem !important;
 }
 
 .boutons:hover{
