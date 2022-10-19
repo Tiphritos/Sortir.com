@@ -14,57 +14,57 @@ const social_panel_container = document.querySelector('.social-panel-container')
 
 floating_btn.addEventListener('click', () => {
     social_panel_container.classList.toggle('visible')
-},false);
+}, false);
 
 close_btn.addEventListener('click', () => {
     social_panel_container.classList.remove('visible')
-},true);
+}, true);
 
-document.getElementById("exemple").style.visibility="hidden";
+document.getElementById("exemple").style.visibility = "hidden";
 
 //Afficahge lieu
 
 
-function affichage(e){
+function affichage() {
     let affichage = document.getElementById("exemple");
     affichage.classList.toggle("visible");
-  document.getElementById('eventPrevent').addEventListener('click',function (){
-      let nomLieu = document.getElementById('lieu_nom_lieu').value;
-      let rue = document.getElementById('lieu_rue').value;
-     //Ville selectionnees
-      let Selectville = document.getElementById('lieu_villes_no_ville');
-      let VilleSelect = Selectville.options[Selectville.selectedIndex].text
-     //Lieux selectionnes
-      let lieuxSelectionnes = document.getElementById('sortie_lieux_no_lieu')
+    document.getElementById('eventPrevent').addEventListener('click', function () {
 
-      fetch('/lieu/nouveau',{
+        let nomLieu = document.getElementById('lieu_nom_lieu').value;
+        let rue = document.getElementById('lieu_rue').value;
+        //Ville selectionnees
+        let Selectville = document.getElementById('lieu_villes_no_ville');
+        let VilleSelect = Selectville.options[Selectville.selectedIndex].text
+        //Lieux selectionnes
+        let lieuxSelectionnes = document.getElementById('sortie_lieux_no_lieu')
 
-          method: 'POST',
-          body : JSON.stringify({nomLieu: nomLieu,rue: rue,ville: VilleSelect })
-      }).then((response) => {
-          return response.json()
+        fetch('/lieu/nouveau', {
 
-      })
-     /* document.getElementById("eventPrevent").addEventListener("click",function(event){
+            method: 'POST',
+            body: JSON.stringify({nomLieu: nomLieu, rue: rue, ville: VilleSelect})
+        })
+            .then((response) => response.json())
+            .then(data => {
+                let newLieu = new Option(data[1], data[0]);
+                //console.log(newLieu);
+                lieuxSelectionnes.add(newLieu);
+            });
 
-          event.preventDefault();
-      })*/
 
 
-      let newLieu = new Option(nomLieu, nomLieu)
-      lieuxSelectionnes.add(newLieu);
+}
 
-  })
+)
 
- /*/!*  *!/
-    fetch('/sortie/new',{
+/*/!*  *!/
+   fetch('/sortie/new',{
 
-        method: 'POST',
-        body : JSON.stringify({nomLieu:'nom_lieu',rue:'rue',ville:'villes_no_ville' })
-    }).then((response) => {
-        return response.json()
-    })
-    ;*/
+       method: 'POST',
+       body : JSON.stringify({nomLieu:'nom_lieu',rue:'rue',ville:'villes_no_ville' })
+   }).then((response) => {
+       return response.json()
+   })
+   ;*/
 }
 
 /*document.getElementById("eventPrevent").addEventListener("click",function(event){

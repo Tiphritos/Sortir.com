@@ -56,7 +56,8 @@ class LieuController extends AbstractController
         $lieu ->setVillesNoVille($villeRepository->findOneBy(['nom_ville' =>$jsonData['ville']]));
         $lieu->setRue($jsonData['rue']);
         $lieuRepository->save($lieu, true);
-        return $this->json($jsonData);
+//        dd($jsonReturn);
+        return $this->json([$lieu->getId(), $lieu->getNomLieu()], 200);
     }
 
 
