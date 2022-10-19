@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Lieu;
 use App\Form\LieuType;
 use App\Repository\LieuRepository;
+use App\Repository\VilleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,6 +40,27 @@ class LieuController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+    #[Route('/nouveau', name: 'app_lieu_new', methods: ['GET', 'POST'])]
+    public function nouveau(Request $request, LieuRepository $lieuRepository, VilleRepository $villeRepository): Response
+    {
+        $lieu = new Lieu();
+   // $lieu->setNomLieu($request->request->get('nom_lieu'));
+      /*  $lieu->setRue($request->request->get('rue'));
+        $lieu->setVillesNoVille($request->request->get('villes_no_ville'));*/
+       //     $lieuRepository->save($lieu, true);
+
+        $jsonData = json_decode($request->getContent(),true);
+        $lieu ->setNomLieu($jsonData['nomLieu']);
+        $lieu ->setVillesNoVille($villeRepository->findOneBy(['nom_ville' =>$jsonData['ville']]));
+        $lieu->setRue($jsonData['rue']);
+        $lieuRepository->save($lieu, true);
+        return $this->json($jsonData);
+    }
+
+
+
 
     #[Route('/{id}', name: 'app_lieu_show', methods: ['GET'])]
     public function show(Lieu $lieu): Response
