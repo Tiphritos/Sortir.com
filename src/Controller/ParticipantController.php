@@ -85,6 +85,8 @@ class ParticipantController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $participant->setAdministrateur(false);
+            $participant->setActif(true);
             $participantRepository->save($participant, true);
 
             return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
@@ -145,21 +147,4 @@ class ParticipantController extends AbstractController
         return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
     }
 
-//    //https://zetcode.com/php/csv/
-//    #[Route('/new/csv', name: 'app_participant_new_csv', methods: ['GET', 'POST'])]
-//    public function newCsv(Request $request, ParticipantRepository $participantRepository): Response
-//    {
-//        $csv_name = $request->request->get('csvParticipant');
-////        $csv = fgetcsv($csv_name, '1000');
-////        if (is_uploaded_file($csv)){
-//            $file = fopen($csv_name, 'r');
-//            dd($file);
-////            while (($getData = fgetcsv($file, 10000, ",")) !== FALSE) {
-////                $participant = new Participant();
-////                $participant->set
-////            }
-//        //}
-//
-//        return $this->redirectToRoute('app_accueil');
-//    }
 }
