@@ -13,20 +13,82 @@
                         <a href="{{ path('app_sortie_new')}}" class="btn btn-outline-primary ms-1"> Créer </a>
                     </div>
                 </div>
+                <div class="card mb-4 couleurFond">
+                    <img class="card-img-top" src="{{ asset('uploads/images/easteregg.jpg') }}" alt="Franchement vaut mieux pas voir ça les gars">
+                </div>
             </div>
             <div class="col-8">
-                <div class="row">
+                <div class="row scroller">
                     {% for sortie in sorties  %}
                         <div class=" col-12">
                             <div class="card mb-4 couleurFond">
                                 <div class="row">
-                                    <div class="col-4">
-                                        <img src="{{ asset('uploads/images/'~ sortie.urlPhoto) }}" class="img-fluid rounded-start" alt="...">
+                                    <div class="col-2">
+                                        <img src="{{ asset('uploads/images/'~ sortie.urlPhoto) }}" class="img-fluid rounded-start w-100" alt="image de la sortie">
+                                        <p class="text-center">{{ sortie.nbInscriptionsMax }} place(s)</p>
+                                        <p class="text-center">{{ sortie.etatsNoEtat.libelle }}</p>
+
                                     </div>
-                                    <div class="col-8">
+                                    <div class="col-10">
                                         <div class="card-body">
-                                            <h5 class="card-title">{{ sortie.nom }}</h5>
-                                            <p class="card-text">{{ sortie.descriptionInfos }}</p>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h5 class="card-title liens-items">{{ sortie.nom }}</h5>
+                                                </div>
+                                                <div class="col-3">
+
+                                                </div>
+                                                <div class="col-3">
+                                                    <span class=" dropdown ">
+                                                        <h5 class="dropdown-toggle liens-items" id="boutons" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            Gérer
+                                                        </h5>
+                                                        <span class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarScrollingDropdown">
+                                                            <span><a href="{{ path('app_sortie_edit', {'id':  sortie.id}) }}" class="dropdown-item">Modifier</a></span>
+                                                            <span><a class="dropdown-item" href=" {{ path('app_lieu_index') }}">Supprimer</a></span>
+                                                            <span><a class="dropdown-item" href="{{ path('app_participant_index')}}">Archiver</a></span>
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <hr class="soulignage">
+                                            <div class="row">
+                                                <div class="col-3 text-end">
+                                                    {% if sortie.etatsNoEtat.id == 6 %}
+                                                        <span>Cause annulation:</span>
+                                                    {% endif %}
+                                                    {% if sortie.etatsNoEtat.id != 6 %}
+                                                        <span>Description: </span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-9">
+                                                    <span class="card-text">{{ sortie.descriptionInfos }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-3 text-end">
+                                                    <span>Date: </span>
+                                                </div>
+                                                <div class="col-9">
+                                                    <span class="card-text">{{ sortie.dateDebut|date('d-M-Y') }} à {{ sortie.dateDebut|date('H:i') }} </span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-3 text-end">
+                                                    <span>Durée: </span>
+                                                </div>
+                                                <div class="col-9">
+                                                    <span class="card-text">{{ sortie.duree}} minutes</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-3 text-end">
+                                                    <span>Clôture le: </span>
+                                                </div>
+                                                <div class="col-9">
+                                                    <span class="card-text">{{ sortie.dateCloture|date('d-M-Y') }}</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
