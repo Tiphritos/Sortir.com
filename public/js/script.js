@@ -25,3 +25,5 @@ function example() {
    let  lieu = document.getElementById("example");
     lieu.style.visibility = lieu.style.visibility === "visible" ? "hidden" : "visible";
 }
+
+//Pour le commit//
