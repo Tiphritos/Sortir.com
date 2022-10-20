@@ -133,3 +133,10 @@ label {
 .btnSeconnecter:hover{
    color: black;
 }
+
+.seSouvenir{
+    color: #0DB8DE;
+}
+.seSouvenir:hover{
+    color: white;
+}

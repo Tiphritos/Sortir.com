@@ -11,64 +11,38 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <title>Document</title>
 </head>
-<body>
+<body class="container-fluid">
+<div class="row " id="header">
 
-</body>
-</html>
+    <div class=" col-1 ">
 
+        <h1 class="titrePrincipal">Sortie <span id="com" class="">.com</span></h1>
 
-{#
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">Le mot de passe ou l'identifiant sont invalides</div>
-    {% endif %}
-
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
-    <div class="container-fluid text-center justify-content-center"></div>
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputPseudo">Pseudo</label>
-    <input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password"  required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-
-
-    <label>
-        <input type="checkbox" name="_remember_me" checked/>
-        Se souvenir de moi
-    </label>
-</form>#}
-
+    </div>
+    <div class="col-10">
+    </div>
 </div>
+
+
+
+
 <form method="post">
-<div class="container">
-    <div class="row">
-        <div class="col-lg-3 col-md-2"></div>
-        <div class="col-lg-6 col-md-8 login-box">
-            <div class="col-lg-12 login-key">
-                <i class="fa fa-key" aria-hidden="true"></i>
-            </div>
-            <div class="col-lg-12 login-title">
-              Se connecter
-            </div>
-            {% if error %}
-                <div class=" col-lg-12 alert alert-danger">Le mot de passe ou l'identifiant sont invalides</div>
-            {% endif %}
-            <div class="col-lg-12 login-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-2"></div>
+            <div class="col-lg-6 col-md-8 login-box">
+                <div class="col-lg-12 login-key">
+                    <i class="fa fa-key" aria-hidden="true"></i>
+                </div>
+                <div class="col-lg-12 login-title">
+                    Se connecter
+                </div>
+                {% if error %}
+                    <div class=" col-lg-12 alert alert-danger">Le mot de passe ou l'identifiant sont invalides</div>
+                {% endif %}
                 <div class="col-lg-12 login-form">
-                    <form>
+                    <div class="col-lg-12 login-form">
+
                         <div class="form-group">
 
                             <label for="inputPseudo form-control-label">Pseudo</label>
@@ -80,7 +54,7 @@
                             <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password"  required>
 
                         </div>
-
+                        <a href="{{ path('app_forgot_password_request') }}"class="seSouvenir" > Mot de passe oublié?</a>
                         <div class="col-lg-12 loginbttm">
                             <div class="col-lg-6 login-btm login-text">
 
@@ -102,12 +76,13 @@
                                 </button>
 
                             </div>
-                            </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-2"></div>
         </div>
     </div>
 </form>
+
+</body>
+</html>

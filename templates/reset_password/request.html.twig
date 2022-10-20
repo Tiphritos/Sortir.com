@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <title>Reset your password</title>
+</head>
+
+
+
+
+
+
+
+
+<body class="container-fluid">
+<div class="row " id="header">
+
+    <div class=" col-1 ">
+
+        <h1 class="titrePrincipal">Sortie <span id="com" class="">.com</span></h1>
+
+    </div>
+    <div class="col-10">
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-2"></div>
+        <div class="col-lg-6 col-md-8 login-box">
+            <div class="col-lg-12 login-key">
+                <i class="fa fa-key" aria-hidden="true"></i>
+            </div>
+            <div class="col-lg-12 login-title">
+                <h1>Réinitialiser mot de passe</h1>
+
+            </div>
+            {% for flash_error in app.flashes('reset_password_error') %}
+                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+            {% endfor %}
+            <div class="col-lg-12 login-form">
+                <div class="col-lg-12 login-form">
+                    <form>
+                        <div class="form-group">
+                            {{ form_start(requestForm) }}
+                            {{ form_row(requestForm.mail) }}
+                            Entrez votre mail et nous allons vous envoyer un lien
+                            pour réinitialiser votre mot de passe
+
+
+                        </div>
+                        <div class="row">
+                            <div class="offset-5 col-3 mb-2">
+                            <button class="btn btnSeconnecter float-right justify-content-end">Envoyer</button>
+                            </div>
+                        </div>
+
+
+                </div>
+                {{ form_end(requestForm) }}
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-2"></div>
+    </div>
+</div>
+</body>
