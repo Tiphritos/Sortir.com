@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -36,7 +37,8 @@ class SortieType extends AbstractType
             ->add('duree', null, [
                 'label'=>'Durée en minutes: ',
                 'attr' =>[
-                    'id' =>'idDuree'
+                    'id' =>'idDuree',
+                    'step'=> 15,
                 ]
 
             ]) //En heures

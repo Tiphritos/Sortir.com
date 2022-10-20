@@ -50,21 +50,21 @@
                         <div class="form-group">
                             {{ form_start(requestForm) }}
                             {{ form_row(requestForm.mail) }}
-                            Entrez votre mail et nous allons vous envoyer un lien
+                            <div class="text-center"> Entrez votre mail et nous vous enverrons un lien
                             pour réinitialiser votre mot de passe
-
+                            (Non on a pas fait la fonctionnalité d'envoi de mails, LOL)
+                            </div>
 
                         </div>
                         <div class="row">
                             <div class="offset-5 col-3 mb-2">
-                            <button class="btn btnSeconnecter float-right justify-content-end">Envoyer</button>
+                            <a href="{{ path('app_login') }}" class="btn btnSeconnecter float-right justify-content-end">Envoyer</a>
                             </div>
                         </div>
-
+                        {{ form_end(requestForm) }}
+                    </form>
 
                 </div>
-                {{ form_end(requestForm) }}
-
             </div>
         </div>
         <div class="col-lg-3 col-md-2"></div>

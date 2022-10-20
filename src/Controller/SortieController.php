@@ -133,11 +133,8 @@ class SortieController extends AbstractController
         ]);
     }
     #[Route('/{id}/annulation', name: 'app_sortie_delete', methods: ['POST', 'GET'])]
-    public function redirectToAnnulation(Request $request,
-                                         Sortie $sortie,
-                                         InscriptionRepository $inscriptionRepository,
-                                         LieuRepository $lieuRepository,
-                                         EntityManagerInterface $entityManager): Response
+    public function redirectToAnnulation(Sortie $sortie,
+                                         LieuRepository $lieuRepository): Response
     {
         $lieu =  $lieuRepository ->findOneBy(['id' => $sortie->getLieuxNoLieu()]);
         return $this->render('sortie/confirmannulation.html.twig',[
