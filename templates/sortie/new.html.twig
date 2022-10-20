@@ -5,63 +5,230 @@
 {% block body %}
     <h1 class="text-center">A vous de créer votre sortie</h1>
 
-    {{ include('sortie/_form.html.twig') }}
-    </div>
+    <section>
+        <div class="container py-5 ">
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col">
 
-    <input type="button"  value="+ " onclick=affichage() class ="boutons " id="bouton" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card couleurFond h-100">
+                        <div class="card-body text-center">
+                            <div class="row ">
+
+                                <div class="col-sm-12">
+                                    <p class=" mb-0 ">{{ form_row(form.imageFile) }}</p>
+                                </div>
+                            </div>
+                            <hr class="soulignage">
+                            <div class="row ">
+
+                                <div class="col-sm-12">
+                                    <p class=" mb-0 ">{{ form_row(form.nom) }}</p>
+                                </div>
+                            </div>
+                            <hr class="soulignage">
+
+
+                            <div class="row">
+
+                                <div class="col-sm-12">
+                                    <p class=" mb-0">   {{ form_row(form.nb_inscriptions_max) }}</p>
+                                </div>
+                            </div>
+                            <hr class="soulignage">
+                            <div class="row">
+
+                                <div class="col-sm-12">
+                                    <p class=" mb-0">{{ form_row(form.duree) }}</p>
+                                </div>
+                            </div>
+                            <hr class="soulignage">
+
+                            <div class="d-flex justify-content-center mb-5">
+                                <button class="boutons">{{ button_label|default('Enregistrer') }}</button>
+                                <button class=" boutons" name="publier" value="publier">{{ button_label|default('Publier') }}</button>
+                                {% if sortie.etatsNoEtat and sortie.etatsNoEtat.Id <=3 %}
+                                    <a href="/sortie/{{ sortie.id }}/annulation" class=" boutons">Annuler la sortie</a>
+                                {% endif %}
+                            </div>
+                            {#<a href="{{ path('app_inscription', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Inscription</a>
+                            <a href="{{ path('app_desistement', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Desistement</a>
+                            #}{#  #}{#
+                            <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="btn btn-outline-primary ms-1">Modifier mon profil</a>
+                            #}{#
+
+                            </div>#}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-6">
+                    <div class="card mb-4 couleurFond h-100">
+                        <div class="card-body">
+
+
+                            {# <div class="row">
+
+                            <div class="col-sm-12">
+                                <p class=" mb-0">   {{ form_row(form.nb_inscriptions_max) }}</p>
+                            </div>
+                        </div>
+                        <hr class="soulignage">#}
+                            <div class="row ">
+
+                                <div class="col-sm-12">
+                                    <p class=" mb-0 ">  {{ form_row(form.date_debut) }}</p>
+                                </div>
+                            </div>
+                            <hr class="soulignage">
+                            <div class="row">
+
+                                <div class="col-sm-12">
+                                    <p class=" mb-0">   {{ form_row(form.date_cloture) }}</p>
+                                </div>
+                            </div>
+
+
+
+                            <hr class="soulignage">
+                            <div class="row">
+
+                                <div class="col-sm-12">
+
+                                    <p class=" mb-0"> {{ form_row(form.description_infos) }}</p>
+
+                                </div>
+                            </div>
+                            <hr class="soulignage">
+                            <div class="row">
+
+                                <div class="col-sm-9">
+                                    <p class="mb-0">    {{ form_row(form.lieux_no_lieu) }}</p>
+                                    {{ form_end(form) }}
+                                </div>
+                                <div class="col-1">
+                                    <input type="button"  value="+ " onclick="document.getElementById('exemple').classList.toggle('visible');" class ="" id="bouton" />
+                                </div>
+                                {#  <button class="text-right filter-btn d-none d-md-block ">Lieu</button>#}
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+
+        {#
+        <input type="button"  value="+ " onclick="document.getElementById('exemple').classList.toggle('visible');" class ="boutons " id="bouton" />
+        #}
+
+        {#    <a href="/sortie/{{ sortie.id }}/annulation" class=" btn btn-outline-primary ms-1">Annuler la sortie</a>#}
+    </section>
+
+
+    {#
+    <input type="button"  value="+ " onclick="document.getElementById('exemple').classList.toggle('visible');" class ="boutons " id="bouton" />
+    #}
 
     <div id="exemple"class="">
 
-            <div class="container py-5 ">
-                {{ form_start(form) }}
-                <div class="row">
-                    <div class="col">
+        <div class="container py-5 ">
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col">
 
-                    </div>
                 </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card couleurFond h-100">
-                            <div class="card-body text-center">
-                                {{ form_start(formL) }}
-                                <div class="row ">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card couleurFond h-100">
+                        <div class="card-body text-center">
 
-                                    <div class="col-sm-12">
-                                        <p class=" mb-0 ">  {{ form_row(formL.nom_lieu) }}</p>
-                                    </div>
+                            <div class="row ">
+
+                                <div class="col-sm-12">
+                                    {{ form_start(formL) }}
+                                    <p class=" mb-0 ">  {{ form_row(formL.nom_lieu) }}</p>
                                 </div>
-                                <hr class="soulignage">
+                            </div>
+                            <hr class="soulignage">
+                            <div class="row ">
 
-
-                                <div class="row">
-
-                                    <div class="col-sm-12">
-                                        <p class=" mb-0">   {{ form_row(formL.rue) }}</p>
-                                    </div>
+                                <div class="col-sm-12">
+                                    <p class=" mb-0 ">  {{form_row(formL.rue) }}</p>
                                 </div>
-                                <hr class="soulignage">
-                                <div class="row">
+                            </div>
+                            <div class="row">
 
-                                    <div class="col-sm-12">
-                                        <p class=" mb-0">    {{ form_row(formL.villes_no_ville) }}</p>
-                                    </div>
+                                <div class="col-sm-12">
+                                    <p class=" mb-0">    {{ form_row(formL.villes_no_ville) }}</p>
+                                    {{ form_end(formL) }}
                                 </div>
-                                <hr class="soulignage">
+                            </div>
+                            <hr class="soulignage">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="submit" value="Envoyer" class="btn btn-outline-primary ms-1" id="eventPrevent" onclick="ajoutLieu()">
+                                </div>
 
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{ form_end(formL) }}
-        <div class="row">
-            <div class="col-sm-12">
-                <input type="submit" class="btn btn-outline-primary ms-1 "id="eventPrevent" onclick="affichage()">{{ button_label|default('Save') }}</input>
-            </div>
-
         </div>
-    </div>
 
+
+
+      {#  <button class="text-right filter-btn d-none d-md-block ">Lieu</button>#}
+       {# <br>
+        <div id="zone-filtres row " class=" mb-5 d-none d-md-block filters-panel-container">
+            <div class="row justify-content-center filters-panel">
+                <div class="col-sm-0 col-md-2"></div>
+                <div class="col-12 mt-3 mb-3">cs
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-4 text-end">
+                                    {{ form_row(formL.nom_lieu) }}
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-end">
+                                    {{ form_row(formL.rue) }}
+                                </div>
+                                <div class="col-6">
+                                    {{ form_row(formL.villes_no_ville) }}
+                                    {{ form_end(formL) }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-2 d-flex align-items-end">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="submit" value="Envoyer" class="btn btn-outline-primary ms-1" id="eventPrevent" onclick="ajoutLieu()">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>#}
+    </div>
     <a href="{{ path('app_accueil') }}"class="btnAffichageRetourAccueil">Retour à l'accueil</a>
+
 {% endblock %}
