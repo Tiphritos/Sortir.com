@@ -8,7 +8,7 @@
                 {{ message }}
             </div>
         {% endfor %}
-        <button class="text-right filter-btn ">Filtres</button>
+        <button class="text-right filter-btn d-none d-md-block ">Filtres</button>
         <br>
         <div id="zone-filtres row " class=" mb-5 d-none d-md-block filters-panel-container">
             <div class="row justify-content-center filters-panel">
@@ -134,11 +134,11 @@
             </div>
         </div>
         <div class="">
-            <a href="{{ path('app_sortie_new') }}" class="btnAffichagePage ">Créer une sortie</a></div>
+            <a href="{{ path('app_sortie_new') }}" class="btnAffichagePage d-none d-md-block">Créer une sortie</a></div>
         <div class="social-panel-container ">
             <div class="social-panel">
                 <p> <i class="fa fa-heart"></i>
-                    <a href="{{ path('app_participant_show', {'id': app.user.id})}}"  class="liens-items">{{ app.user.pseudo }}</a> </p>
+                    <a href="{{ path('app_participant_show', {'id': app.user.id})}}"  class="liens-items ">{{ app.user.pseudo }}</a> </p>
                 <button class="close-btn"><i class="fas fa-times"></i></button>
                 <ul>
                     <li>
@@ -154,7 +154,7 @@
             </div>
         </div>
     </div>
-    <button class="floating-btn">
+    <button class="floating-btn d-none d-md-block">
         Mon profil
     </button>
 {% endblock %}
