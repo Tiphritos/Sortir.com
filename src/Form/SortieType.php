@@ -27,7 +27,7 @@ class SortieType extends AbstractType
                 'date_widget' => 'single_text',
                 'time_widget'=>'single_text',
                 'input_format'=>'d-m-Y H:i',
-                'label'=>'Date et heure de la sortie: ',
+                'label'=>'Date de la sortie: ',
                 'attr' =>[
                     'id' =>'idDebut',
 
@@ -45,7 +45,8 @@ class SortieType extends AbstractType
                 'date_widget' => 'single_text',
                 'time_widget'=>'single_text',
                 'input_format'=>'d-m-Y H:i',
-                'label'=>'Date limite d\'inscription: '
+                'label'=>'Date limite d\'inscription: ',
+                'attr' => ['steps' => '15']
             ])
 
             ->add('nb_inscriptions_max', null, [

@@ -50,11 +50,11 @@
                                 <a href="/sortie/{{ sortie.id }}/annulation" class=" boutons">Annuler la sortie</a>
                             {% endif %}
                         </div>
-                            {#<a href="{{ path('app_inscription', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Inscription</a>
+                        {#<a href="{{ path('app_inscription', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Inscription</a>
                             <a href="{{ path('app_desistement', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Desistement</a>
-                          #}{#  #}{#
-                            <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="btn btn-outline-primary ms-1">Modifier mon profil</a>
-                            #}{#
+                        #}{#  #}{#
+                        <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="btn btn-outline-primary ms-1">Modifier mon profil</a>
+                        #}{#
 
                         </div>#}
                     </div>
@@ -66,7 +66,7 @@
                     <div class="card-body">
 
 
-                       {# <div class="row">
+                        {# <div class="row">
 
                             <div class="col-sm-12">
                                 <p class=" mb-0">   {{ form_row(form.nb_inscriptions_max) }}</p>
@@ -74,8 +74,17 @@
                         </div>
                         <hr class="soulignage">#}
                         <div class="row ">
+                            <div class="col-12">
+{#                                <div class="row">#}
+{#                                    <div class="col-6 text-end">#}
+{#                                        {{ form_label(form.date_debut) }}#}
+{#                                    </div>#}
+{#                                    <div class="col-6">#}
+{#                                        {{ form_widget(form.date_debut) }}#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                {{ form_errors(form.date_debut) }}#}
 
-                            <div class="col-sm-12">
                                 <p class=" mb-0 ">  {{ form_row(form.date_debut) }}</p>
                             </div>
                         </div>
@@ -94,7 +103,7 @@
 
                             <div class="col-sm-12">
 
-                                    <p class=" mb-0"> {{ form_row(form.description_infos) }}</p>
+                                <p class=" mb-0"> {{ form_row(form.description_infos) }}</p>
 
                             </div>
                         </div>
@@ -112,6 +121,6 @@
             </div>
         </div>
         {{ form_end(form) }}
-
-{#    <a href="/sortie/{{ sortie.id }}/annulation" class=" btn btn-outline-primary ms-1">Annuler la sortie</a>#}
+    </div>
+        {#    <a href="/sortie/{{ sortie.id }}/annulation" class=" btn btn-outline-primary ms-1">Annuler la sortie</a>#}
 </section>
