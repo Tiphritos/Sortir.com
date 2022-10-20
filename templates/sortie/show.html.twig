@@ -28,8 +28,11 @@
                                 {% if sortie.etatsNoEtat.id is same as (6) %}
 
                                 {% else %}
-                                    <a href="{{ path('app_inscription', {'id': app.user.id,'sortie':sortie.id}) }}" class=" boutons">Inscription</a>
-                                    <a href="{{ path('app_desistement', {'id': app.user.id,'sortie':sortie.id}) }}" class=" boutons">Desistement</a>
+                                    {%  if estInscrit %}
+                                    <a href="{{ path('app_desistement', {'id': app.user.id,'sortie':sortie.id}) }}" class="btn btn-outline-primary ms-1">Desistement</a>
+                                    {%  else %}
+                                    <a href="{{ path('app_inscription', {'id': app.user.id,'sortie':sortie.id}) }}" class="btn btn-outline-primary ms-1">Inscription</a>
+                                    {%endif %}
                                 {%endif %}
                                 {#
                                 <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="btn btn-outline-primary ms-1">Modifier mon profil</a>

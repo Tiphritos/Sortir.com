@@ -49,6 +49,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 100)]
     private ?string $prenom = null;
 
+    #[Assert\Regex('^([+]?\d{1,2}[-\s]?|)\d{3}[-\s]?\d{3}[-\s]?\d{4}$^')]
     #[ORM\Column(length: 15, nullable: true)]
     private ?string $telephone = null;
 
@@ -67,7 +68,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private array $roles = [];
-
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
