@@ -22,25 +22,18 @@ use Symfony\Component\Validator\Validation;
 class SortieController extends AbstractController
 {
     #[Route('/showall', name: 'app_sortie_show_all', methods: ['GET', 'POST'])]
-    public function showAll(Request $request,
-                            SortieRepository $sortieRepository,
-                            InscriptionRepository $inscriptionRepository,
-                            EtatRepository $etatRepository,
-                            LieuRepository $lieuRepository
-    ): Response
+    public function showAll(SortieRepository $sortieRepository): Response
     {
-
         return $this->render('sortie/index.html.twig', [
             'sorties' => $sortieRepository->findAll()
         ]);
     }
+
     #[Route('/new', name: 'app_sortie_new', methods: ['GET', 'POST'])]
     public function new(Request $request,
                         SortieRepository $sortieRepository,
                         InscriptionRepository $inscriptionRepository,
-                        EtatRepository $etatRepository,
-                        LieuRepository $lieuRepository,
-
+                        EtatRepository $etatRepository
     ): Response
     {
         ;
@@ -54,7 +47,6 @@ class SortieController extends AbstractController
         $form = $this->createForm(SortieType::class, $sortie);
 
         $form->handleRequest($request);
-        $dateDebut = $request->request->get('dateDebut');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($this->getUser());
@@ -135,7 +127,6 @@ class SortieController extends AbstractController
                 return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
             }
         }
-        //dd($sortie);
         return $this->renderForm('sortie/edit.html.twig', [
             'sortie' => $sortie,
             'form' => $form,

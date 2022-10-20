@@ -38,6 +38,7 @@ class Sortie
     private ?\DateTimeInterface $date_cloture = null;
 
     #[Assert\NotBlank]
+    #[Assert\GreaterThan('1')]
     #[ORM\Column]
     private ?int $nb_inscriptions_max = null;
 

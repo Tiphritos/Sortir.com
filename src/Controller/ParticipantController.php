@@ -73,7 +73,7 @@ class ParticipantController extends AbstractController
 
     #[Route('admin/participant/new', name: 'app_participant_new', methods: ['GET', 'POST'])]
 
-    public function new(Request $request, ParticipantRepository $participantRepository,UserPasswordHasherInterface $passwordHasher): Response
+    public function new(Request $request, ParticipantRepository $participantRepository): Response
     {
         if (!$this->isGranted("ROLE_ADMIN")) {
             $this->addFlash('message',"Accès limité à l'administrateur");
