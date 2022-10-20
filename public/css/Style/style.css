@@ -3,7 +3,13 @@ body{
     padding: 0;
     color: white;
 }
+@font-face {
+    font-family: 'font-Franchise';
+    src: url("/../../fonts/Market_Deco.ttf") format("truetype");
 
+    font-weight: normal;
+    font-style: normal;
+}
 /*******************************/
 /*Au-dessus*/
 .header{
@@ -19,7 +25,10 @@ body{
 
 /*******************************/
 /*Titre*/
-
+.titreh1{
+    font-family: 'font-Franchise',serif;
+    margin-left: 60px;
+}
 
 /*******************************/
 /*Menu*/
@@ -207,9 +216,10 @@ section p{
 .scroller {
 
     height: 70vh;/*478px;*/
-    overflow-y: scroll;
-    scrollbar-color: rebeccapurple green;
+    overflow-y:  auto;
 }
+
+
 
 .btn:hover{
     background-color: #0DB8DE;
@@ -248,7 +258,7 @@ border: 1px solid #0DB8DE;
     border-radius: 10px;
     padding: 6px;
     font-weight: bold;
-    margin-left: 1rem !important;
+
 }
 
 .boutons:hover{
@@ -263,4 +273,14 @@ button{
     text-decoration: none;
     background-color: rgb(26 34 38);
     margin-right: 5px;
+}
+
+
+/**************Flash ************/
+
+.flash{
+    border: 1px solid #0DB8DE;
+    background-color: #1A2226;
+    border-radius: 10px;
+    font-size: 1.4rem;
 }

@@ -36,7 +36,7 @@
 
 
 
-    <h1>Administration des villes</h1>
+    <h1 class="titreh1">Administration des villes</h1>
 
     <div class="container ">
 
@@ -57,7 +57,7 @@
                     {% for ville in villes  %}
 
                         <div class=" col-3">
-                            <div class="card mb-4 couleurFond">
+                            <div class="card mb-2 couleurFond h-100">
                                 <div class="card-body text-center">
                                    {# {%if part.urlPhoto %}
                                         <img src="{{ asset('uploads/images/'~ part.urlPhoto) }}" alt="avatar"
@@ -68,7 +68,7 @@
                                     {% endif %}#}
                                     <h5 class="my-3 ">{{ ville.nomVille }}  </h5>
                                     <h5 class="my-3 ">{{ ville.codePostal }}</h5>
-                                    <a href="{{ path('app_ville_edit', {'id': ville.id}) }}" class="boutons">Modifier </a>
+                                    <a href="{{ path('app_ville_edit', {'id': ville.id}) }}" class="boutons">Modifier</a>
 
 
 

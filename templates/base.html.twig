@@ -71,7 +71,16 @@
             </label>
         </div>
     </div>
+<div class="row ">
+    {% for message in app.flashes('message') %}
+        <div class="flash-info offset-2 col-8 text-center ">
+            <div class="flash">  {{ message }}
+            </div>
 
+        </div>
+
+    {% endfor %}
+</div>
     {% block body %}{% endblock %}
 
 

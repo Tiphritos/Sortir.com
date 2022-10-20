@@ -29,13 +29,14 @@ class ParticipantType extends AbstractType
                 'type' => PasswordType::class,
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Password'],
+                'first_options'  => ['label' => 'Mdp '],
 
-                'second_options' => ['label' => 'Repeat Password'],],
+                'second_options' => ['label' => 'Le répéter'],],
             )
 
             ->add('sites_no_site', EntityType::class,[
                 'choice_label'=>'nom_site',
+                'label'=>'Site :',
                 'class'=>Site::class,
             ])
             ->add('imageFile', FileType::class, ['required'=>false])

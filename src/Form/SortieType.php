@@ -45,7 +45,7 @@ class SortieType extends AbstractType
                 'date_widget' => 'single_text',
                 'time_widget'=>'single_text',
                 'input_format'=>'d-m-Y H:i',
-                'label'=>'Date limite d\'inscription: ',
+                'label'=>'Date de clotûre: ',
                 'attr' => ['steps' => '15']
             ])
 
@@ -56,7 +56,7 @@ class SortieType extends AbstractType
                 ]
             ])
             ->add('description_infos',null,[
-                'label' =>'Description et infos: ',
+                'label' =>'Détails: ',
                 'attr' =>[
                     'id' =>'idDescription'
                 ]])

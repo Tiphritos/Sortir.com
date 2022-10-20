@@ -3,7 +3,7 @@
 {% block title %}Lieu index{% endblock %}
 
 {% block body %}
-    <h1>Lieu index</h1>
+    <h1  class="titreh1">Tableau de bord des lieux </h1>
 
 
 
@@ -16,22 +16,24 @@
                     <div class="card-body text-center">
                         <h5 class="my-3 ">  Ajouter un lieu</h5>
 
-                        <a href="{{ path('app_lieu_new') }}" class="btn btn-outline-primary ms-1">Ajouter</a>
+                        <a href="{{ path('app_lieu_new') }}" class="boutons">Ajouter</a>
                     </div>
                 </div>
             </div>
             <div class="col-7">
-                <div class="row">
+                <div class="row ">
                     {% for lieu in lieus %}
 
-                        <div class=" col-3">
-                            <div class="card mb-4 couleurFond">
+                        <div class=" col-3 mb-4">
+                            <div class="card mt- couleurFond  h-100 ">
                                 <div class="card-body text-center">
 
                                     <h5 class="my-3 ">{{ lieu.nomLieu }} </h5>
-                                        <a href="{{ path('app_lieu_show', {'id': lieu.id}) }}">Voir</a>
 
 
+                                </div>
+                                <div class="text-center mb-2">
+                                    <a href="{{ path('app_lieu_show', {'id': lieu.id}) }}"class="boutons align-content-end">Voir</a>
                                 </div>
                             </div>
 
@@ -43,4 +45,5 @@
             </div>
         </div>
     </div>
+    <a href="{{ path('app_accueil') }}" class="btnAffichageRetourAccueil">Retour à l'accueil</a>
 {% endblock %}

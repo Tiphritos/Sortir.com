@@ -50,6 +50,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $prenom = null;
 
     #[Assert\Regex('^([+]?\d{1,2}[-\s]?|)\d{3}[-\s]?\d{3}[-\s]?\d{4}$^')]
+
     #[ORM\Column(length: 15, nullable: true)]
     private ?string $telephone = null;
 

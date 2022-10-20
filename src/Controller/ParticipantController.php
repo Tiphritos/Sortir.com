@@ -73,7 +73,7 @@ class ParticipantController extends AbstractController
 
     #[Route('admin/participant/new', name: 'app_participant_new', methods: ['GET', 'POST'])]
 
-    public function new(Request $request, ParticipantRepository $participantRepository): Response
+    public function new(Request $request, ParticipantRepository $participantRepository,UserPasswordHasherInterface $passwordHasher): Response
     {
         if (!$this->isGranted("ROLE_ADMIN")) {
             $this->addFlash('message',"Accès limité à l'administrateur");
@@ -83,8 +83,11 @@ class ParticipantController extends AbstractController
         $participant = new Participant();
         $form = $this->createForm(ParticipantType::class, $participant);
         $form->handleRequest($request);
+        $motdepasse = $participant->getMotDePasse();
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $motdepasseHache = $passwordHasher->hashPassword($participant,$motdepasse);
+            $participant ->setMotDePasse($motdepasseHache);
             $participant->setAdministrateur(false);
             $participant->setActif(true);
             $participantRepository->save($participant, true);
@@ -128,6 +131,10 @@ class ParticipantController extends AbstractController
             $participantRepository->save($participant, true);
             $id = $this->getUser()->getId();
            $this->addFlash('message',"Modifications prises en compte");
+            if ($this->isGranted("ROLE_ADMIN")) {
+
+                return $this->redirectToRoute('app_participant_index');
+            }
             return $this->redirectToRoute('app_participant_show', ['id'=>$id], Response::HTTP_SEE_OTHER);
         }
 

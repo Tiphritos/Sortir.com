@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'font-Franchise';
+    font-family: 'font-retro';
     src: url("/../../fonts/retrolight/Retrolight.ttf") format("truetype");
 
     font-weight: normal;
@@ -22,7 +22,7 @@ html,body{
 }
 .titrePrincipal{
     display: flex;
-    font-family: 'font-Franchise';
+    font-family: 'font-retro', serif;
     color: #0DB8DE;
     font-size: 4rem;
 

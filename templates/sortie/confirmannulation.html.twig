@@ -1,56 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <h1>Sortie: {{ sortie.nom }}</h1>
+ <h1  class="titreh1">Motif de l'annulation</h1>
 
-  {#  <form action="{{ path('app_sortie_annulation', {'id':sortie.id}) }}" method="post">
-        <label for="motifAnnulation">Motif de l'annulation: </label><input type="text" name="motifAnnulation" id="motifAnnulation">
-        <button type="submit ">Annuler la sortie</button>
-    </form>#}
 
     <div class="container" >
-{#
-        <table class="table couleurEcriture">
-            <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ sortie.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ sortie.nom }}</td>
-            </tr>
-            <tr>
-                <th>Date_debut</th>
-                <td>{{ sortie.dateDebut ? sortie.dateDebut|date('Y-m-d H:i') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Duree</th>
-                <td>{{ sortie.duree }}</td>
-            </tr>
-            <tr>
-                <th>Date_cloture</th>
-                <td>{{ sortie.dateCloture ? sortie.dateCloture|date('Y-m-d H:i') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Nb_inscriptions_max</th>
-                <td>{{ sortie.nbInscriptionsMax }}</td>
-            </tr>
-            <tr>
-                <th>Description_infos</th>
-                <td>{{ sortie.descriptionInfos }}</td>
-            </tr>
-            <tr>
-                <th>Lieu</th>
-                <td>{{lieu.nomLieu }}</td>
-            </tr>
 
-            <tr>
-                <th>Url_photo</th>
-                <td>{{ sortie.urlPhoto }}</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>#}
     <a href="{{ path('app_accueil') }}" class="btnAffichageRetourAccueil">Retour à l'accueil</a>
     <section >
         <div class="container py-5 mt-5">
@@ -65,14 +19,12 @@
                         <div class="card-body text-center">
                             <img src="{{ asset('uploads/images/'~ sortie.urlPhoto) }}" alt="avatar"
                                  class="rounded-circle img-fluid" style="width: 150px;">
-                             <h1>Sortie: {{ sortie.nom }}</h1>
+                             <h1> {{ sortie.nom }}</h1>
 
-                            {{lieu.nomLieu }}
-
+                           <h5>{{lieu.nomLieu }}</h5>
                             <div class="d-flex justify-content-center mb-2">
-
                                     <form action="{{ path('app_sortie_annulation', {'id':sortie.id}) }}" method="post">
-                                        <button type="submit ">Annuler la sortie</button>
+                                        <button type="submit" class="boutons">Annuler la sortie</button>
                             </div>
                         </div>
                     </div>
@@ -83,17 +35,19 @@
                         <div class="card-body">
                             <div class="row ">
                                 <div class="col-sm-3">
-                                    <p class="  mb-0">>Motif de l'annulation: </p>
+                                    <p class="  mb-0">Motif de l'annulation: </p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class=" mb-0 "><input type="text" name="motifAnnulation" id="motifAnnulation"></p>
+                                    <div class="col-10">
+                                   <input type="text" name="motifAnnulation" id="motifAnnulation" class="col-10">
+                                    </div>
                                     </form>
                                 </div>
                             </div>
                             <hr class="soulignage">
                             <div class="row ">
                                 <div class="col-sm-3">
-                                    <p class="  mb-0">Date_debut </p>
+                                    <p class="  mb-0">Date debut </p>
                                 </div>
                                 <div class="col-sm-9">
                                     <p class=" mb-0 ">{{ sortie.dateDebut ? sortie.dateDebut|date('Y-m-d H:i') : '' }}</p>
@@ -102,7 +56,7 @@
                             <hr class="soulignage">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="mb-0  ">dateCloture</p>
+                                    <p class="mb-0  ">Date de cloture</p>
                                 </div>
                                 <div class="col-sm-9">
                                     <p class=" mb-0">{{ sortie.dateCloture ? sortie.dateCloture|date('Y-m-d H:i') : '' }}</p>
@@ -110,31 +64,23 @@
                             </div>
                             <hr class="soulignage">
                             <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0 ">nbInscriptionsMax</p>
+                                <div class="col-4">
+                                    <p class="mb-0 ">Nombre max d'inscriptions</p>
                                 </div>
-                                <div class="  col-sm-9">
+                                <div class="  col-8">
                                     <p class=" mb-0">{{  sortie.nbInscriptionsMax }}</p>
                                 </div>
                             </div>
                             <hr class="soulignage">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="mb-0 ">descriptionInfos</p>
+                                    <p class="mb-0 ">Description</p>
                                 </div>
                                 <div class="col-sm-9">
                                     <p class=" mb-0">{{ sortie.descriptionInfos }}</p>
                                 </div>
                             </div>
-                            <hr class="soulignage">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0 ">descriptionInfos</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class=" mb-0">{{ sortie.descriptionInfos }}</p>
-                                </div>
-                            </div>
+
 
                         </div>
                     </div>
