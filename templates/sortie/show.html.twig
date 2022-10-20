@@ -28,8 +28,8 @@
                                 {% if sortie.etatsNoEtat.id is same as (6) %}
 
                                 {% else %}
-                                    <a href="{{ path('app_inscription', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Inscription</a>
-                                    <a href="{{ path('app_desistement', {'id': app.user.id,'sortie':sortie.id}) }}"class="btn btn-outline-primary ms-1">Desistement</a>
+                                    <a href="{{ path('app_inscription', {'id': app.user.id,'sortie':sortie.id}) }}" class="btn btn-outline-primary ms-1">Inscription</a>
+                                    <a href="{{ path('app_desistement', {'id': app.user.id,'sortie':sortie.id}) }}" class="btn btn-outline-primary ms-1">Desistement</a>
                                 {%endif %}
                                 {#
                                 <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="btn btn-outline-primary ms-1">Modifier mon profil</a>
@@ -128,17 +128,8 @@
             </div>
         </div>
     </section>
-    {# <a href="{{ path('app_sortie_index') }}">back to list</a> #}
-
-    {#<a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">edit</a>#}
-
 
     <a href="{{ path('app_accueil') }}" class="btnAffichageRetourAccueil">Retour à l'accueil</a>
-
-
-    {#    {{ include('sortie/_delete_form.html.twig') }}#}
-
-
 
     <div class="container ">
 
@@ -149,7 +140,7 @@
                                {% if nbreDeParticipant is same as (0)  %}
                             <h5 class="my-3 ">  Aucun participant pour le moment</h5>
                                 {% else %}
-                            < <h5 class="my-3 ">  Liste des participants</h5>
+                                    <h5 class="my-3 ">  Liste des participants</h5>
                                 {% endif %}
 
                         </div>
@@ -162,13 +153,13 @@
                     <div class=" col-3">
                         <div class="card mb-4 couleurFond">
                             <div class="card-body text-center">
-{#                                {%if inscrip.participantId.urlPhoto %}#}
+                                {%if inscrip.participantId.urlPhoto %}
                                     <img src="{{ asset('uploads/images/'~ inscrip.participantId.urlPhoto) }}" alt="avatar"
                                          class="rounded-circle img-fluid imgcard">
-{#                                {% else %}#}
-{#                                    <img src="{{ asset('uploads/images/ProfilDefault.png')}}" alt="avatar"#}
-{#                                         class="rounded-circle img-fluid imgcard">#}
-{#                                {% endif %}#}
+                                {% else %}
+                                    <img src="{{ asset('uploads/images/easteregg.jpg')}}" alt="avatar"
+                                         class="rounded-circle img-fluid imgcard">
+                                {% endif %}
                                 <h5 class="my-3 ">{{inscrip.participantId.pseudo}} </h5>
 
                             </div>

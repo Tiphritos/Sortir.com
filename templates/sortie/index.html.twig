@@ -45,8 +45,10 @@
                                                         </h5>
                                                         <span class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarScrollingDropdown">
                                                             <span><a href="{{ path('app_sortie_edit', {'id':  sortie.id}) }}" class="dropdown-item">Modifier</a></span>
-                                                            <span><a class="dropdown-item" href=" {{ path('app_lieu_index') }}">Supprimer</a></span>
-                                                            <span><a class="dropdown-item" href="{{ path('app_participant_index')}}">Archiver</a></span>
+                                                            <span><a class="dropdown-item" href=" {{ path('app_sortie_admin_delete', {'id':  sortie.id})}}">Supprimer</a></span>
+                                                            {%  if sortie.etatsNoEtat.id !=4 and sortie.etatsNoEtat.id !=7  %}
+                                                                <span> <a class="dropdown-item" href="{{ path('app_sortie_admin_archive', {'id':  sortie.id})}}">Archiver</a> </span>
+                                                            {% endif %}
                                                         </span>
                                                     </span>
                                                 </div>
