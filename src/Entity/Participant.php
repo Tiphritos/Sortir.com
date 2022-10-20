@@ -55,7 +55,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $telephone = null;
 
     #[Assert\Email]
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255)] //Unique
     private ?string $mail = null;
 
     #[ORM\Column]

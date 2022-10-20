@@ -35,7 +35,7 @@ class ParticipantController extends AbstractController
         $form = $this->createForm(CsvType::class, $csv);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()){
+        if ($form->isSubmitted() && $form->isValid()){
             if (($handle = fopen($csv->getName(), "r")) !== FALSE)
             {
                 $i = 0;

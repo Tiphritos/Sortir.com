@@ -33,8 +33,6 @@ class InscriptionController extends AbstractController
         $nouvelleInscription ->setParticipantId($participant);
         $nouvelleInscription ->setSortieId($sortie);
 
-        $etatSortie = $sortie ->getEtatsNoEtat()->getId();
-
         $inscriptions = $inscriptionRepository->findBy(['sortie_id'=>$sortie->getId()] );
         $estinscrit = false;
 
@@ -47,7 +45,7 @@ class InscriptionController extends AbstractController
         }
         if (!$estinscrit){
             //Vérifier si état = ouvert
-            if ($etatSortie!= 2  ) {
+            if ($sortie ->getEtatsNoEtat()->getId() != 2  ) {
                 $this->addFlash('message', "Impossible de s'inscrire à la sortie, les inscriptions sont clôturées");
             }
             //Vérifier si sortie complète
@@ -83,23 +81,25 @@ class InscriptionController extends AbstractController
         $inscriptions = $inscriptionRepository->findBy(['sortie_id'=>$sortie->getId()] );
         $estinscrit = false;
         //Vérifier si inscrit
-
         foreach ($inscriptions as $inscrip  ){
             if ($inscrip->getParticipantId()->getId() == $participant->getId()){
                 $estinscrit = true;
             }
         }
         if ($estinscrit){
+            if ($sortie->getEtatsNoEtat()->getId() <= 3) {
+                $AnnulerDeSortie = $participant->removeInscription($inscription, true);
+                $entityManager->persist($AnnulerDeSortie);
 
-            $AnnulerDeSortie = $participant->removeInscription($inscription, true);
-            $entityManager->persist($AnnulerDeSortie);
-
-            $this->addFlash('message', "Désistement pris en compte");
-            if(($sortie->getEtatsNoEtat()->getId() == 3) && ($sortie->getDateCloture() > (new \DateTime('now')))){
-                $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id'=>2]));
-                $entityManager->persist($sortie);
+                $this->addFlash('message', "Désistement pris en compte");
+                if (($sortie->getEtatsNoEtat()->getId() == 3) && ($sortie->getDateCloture() > (new \DateTime('now')))) {
+                    $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id' => 2]));
+                    $entityManager->persist($sortie);
+                }
+                $entityManager->flush();
+            }else{
+                $this->addFlash('message', "Désistement impossible, pose pas de questions.");
             }
-            $entityManager->flush();
         }else{
             $this->addFlash('message', "Blaireau!!! Tu n'es pas inscrit à cet événement");
         }
