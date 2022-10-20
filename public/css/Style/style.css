@@ -220,20 +220,20 @@ section p{
 #exemple{
     visibility: hidden;
 
-  position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    z-index: 1000;
+  /*position: absolute;*/
+  /*  left: 0;*/
+  /*  top: 0;*/
+  /*  width: 100%;*/
+  /*  height: 100%;*/
+  /*  text-align: center;*/
+  /*  z-index: 1000;*/
 }
-#exemple div{
-   width: 534px;
-    top: 192px;
-    opacity: 0.99;
-    z-index: unset;
-}
+/*#exemple div{*/
+/*   width: 534px;*/
+/*    top: 192px;*/
+/*    opacity: 0.99;*/
+/*    z-index: unset;*/
+/*}*/
 .borderExemple{
     border: 1px solid #0DB8DE;
     border-radius: 1%;
