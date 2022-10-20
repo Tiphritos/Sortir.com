@@ -23,10 +23,10 @@ class SortieController extends AbstractController
 {
     #[Route('/showall', name: 'app_sortie_show_all', methods: ['GET', 'POST'])]
     public function showAll(Request $request,
-                        SortieRepository $sortieRepository,
-                        InscriptionRepository $inscriptionRepository,
-                        EtatRepository $etatRepository,
-                        LieuRepository $lieuRepository
+                            SortieRepository $sortieRepository,
+                            InscriptionRepository $inscriptionRepository,
+                            EtatRepository $etatRepository,
+                            LieuRepository $lieuRepository
     ): Response
     {
 
@@ -92,8 +92,15 @@ class SortieController extends AbstractController
         $lieu =  $lieuRepository ->findOneBy(['id' => $sortie->getLieuxNoLieu()]);
         $inscriptions = $inscriptionRepository ->findBy(['sortie_id'=>$sortie->getId()]);
         $nbredeParticipant = count($inscriptions);
+        $estInscrit = false;
+        foreach ($inscriptions as $inscription){
+            if ($inscription->getParticipantId() === $this->getUser()){
+                $estInscrit = true;
+            }
+        }
 
         return $this->render('sortie/show.html.twig', [
+            'estInscrit' => $estInscrit,
             'sortie' => $sortie,
             'lieu'=> $lieu,
             'inscriptions'=>$inscriptions,
@@ -175,7 +182,7 @@ class SortieController extends AbstractController
     //Supprimer sortie en tant qu'admin
     #[Route('/admin/delete/{id}', name: 'app_sortie_admin_delete', methods: ['GET'])]
     public function supprimer(Request $request, Sortie $sortie, InscriptionRepository $inscriptionRepository,
-                            SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
+                              SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
     {
         //Checker l'état de la sortie, doit être differente de 4 (aka ne pas avoir commencé)
         if($sortie->getEtatsNoEtat()->getId()!=4) {
@@ -198,7 +205,7 @@ class SortieController extends AbstractController
     //Archiver sortie en tant qu'admin
     #[Route('/admin/archive/{id}', name: 'app_sortie_admin_archive', methods: ['GET'])]
     public function archiver(Request $request, Sortie $sortie, InscriptionRepository $inscriptionRepository,
-                              EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
+                             EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
     {
         //Checker l'état de la sortie, doit être differente de 6 (aka ne pas deja être archivée)
         if($sortie->getEtatsNoEtat()->getId()!=7) {
