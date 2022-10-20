@@ -27,7 +27,7 @@
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ lieu.id) }}">
                                     <button class="boutons ">Supprimer</button>
                                 </form>
-
+                                <a href="{{ path('app_lieu_index')}}" class="boutons me-2">Annuler </a>
                             </div>
                         </div>
                     </div>
@@ -70,6 +70,6 @@
             </div>
         </div>
     </section>
-    <a href="{{ path('app_lieu_index') }}" class="  btnAffichagePage">Retour à la liste </a>
-    <a href="{{ path('app_accueil') }}" class="  btnAffichageRetourAccueil">Retour à l'accueil </a>
+    <a href="{{ path('app_lieu_index') }}" class="  btnAffichagePage d-none d-md-block">Retour à la liste </a>
+    <a href="{{ path('app_accueil') }}" class="  btnAffichageRetourAccueil d-none d-md-block">Retour à l'accueil </a>
 {% endblock %}

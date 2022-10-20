@@ -93,7 +93,7 @@
                                     {{ form_end(form) }}
                                 </div>
                                 <div class="col-1">
-                                    <input type="button"  value="+" onclick="document.getElementById('exemple').classList.toggle('visible');" class ="lieux-btn" id="bouton" />
+                                    <input type="button"  value="+" onclick="document.getElementById('exemple').classList.toggle('visible');" class ="lieux-btn d-none d-md-block" id="bouton" />
                                 </div>
                                 {#  <button class="text-right filter-btn d-none d-md-block ">Lieu</button>#}
                             </div>
@@ -209,6 +209,6 @@
             </div>
         </div>#}
     </div>
-    <a href="{{ path('app_accueil') }}"class="btnAffichageRetourAccueil">Retour à l'accueil</a>
+    <a href="{{ path('app_accueil') }}"class="btnAffichageRetourAccueil d-none d-md-block">Retour à l'accueil</a>
 
 {% endblock %}

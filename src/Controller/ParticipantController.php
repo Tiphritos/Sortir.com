@@ -91,7 +91,7 @@ class ParticipantController extends AbstractController
             $participant->setAdministrateur(false);
             $participant->setActif(true);
             $participantRepository->save($participant, true);
-
+            $this->addFlash('message',"Création d'un participant réussie");
             return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -149,6 +149,8 @@ class ParticipantController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$participant->getId(), $request->request->get('_token'))) {
             $participantRepository->remove($participant, true);
+            $this->addFlash('message',"Suppresion du participant réussie");
+
         }
 
         return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);

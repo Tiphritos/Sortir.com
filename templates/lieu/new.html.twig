@@ -5,6 +5,48 @@
 {% block body %}
     <h1  class="titreh1">Ajouter un lieu</h1>
 
-    {{ include('lieu/_form.html.twig') }}
+<div class="container p-5 ">
+
+    <div class="row">
+        <div class="col">
+
+        </div>
+    </div>
+
+    <div class="row justify-content-center ">
+        <div class="col-lg-6">
+            <div class="card couleurFond h-100">
+                <div class="card-body text-center">
+                    {{ form_start(form) }}
+                    <div class="row ">
+
+                        <div class="col-sm-12">
+                            <p class=" mb-0 ">  {{ form_row(form.nom_lieu) }}</p>
+                        </div>
+                    </div>
+                    <hr class="soulignage">
+
+
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            <p class=" mb-0">   {{ form_row(form.rue) }}</p>
+                        </div>
+                    </div>
+                    <hr class="soulignage">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            <p class=" mb-0">   {{ form_row(form.villes_no_ville) }}</p>
+                        </div>
+                    </div>
+                    <hr class="soulignage">
+                    <button class="boutons">{{ button_label|default('Enregistrer') }}</button>
+                    <a href="{{ path('app_lieu_index') }}" class="boutons pb-2 pt-2">Annuler</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
     <a href="{{ path('app_accueil') }}"class="btnAffichageRetourAccueil">Retour à l'accueil</a>
 {% endblock %}

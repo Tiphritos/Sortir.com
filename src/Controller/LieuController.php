@@ -76,6 +76,7 @@ class LieuController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $lieuRepository->save($lieu, true);
+            $this->addFlash('message',"Modification prise en compte");
 
             return $this->redirectToRoute('app_lieu_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -95,6 +96,7 @@ class LieuController extends AbstractController
         try {
             if ($this->isCsrfTokenValid('delete' . $lieu->getId(), $request->request->get('_token'))) {
                 $lieuRepository->remove($lieu, true);
+                $this->addFlash('message',"Suppresion du lieu réussie");
             }
         }catch(\Exception $e){
             $this->addFlash('message',"Suppression impossible. Merci de contacter l'administrateur de base de données. (Et nous envoyer son contact)");

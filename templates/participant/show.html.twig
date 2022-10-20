@@ -4,14 +4,11 @@
 
 {% block body %}
 
-    {% for message in app.flashes('message') %}
-        <div class="flash-info">
-            {{ message }}
-        </div>
 
-    {% endfor %}
+
+<h1 class="titreh1">Profil</h1>
     <section >
-        <div class="container py-5 mt-5">
+        <div class="container py-5">
             <div class="row">
                 <div class="col">
 
@@ -25,9 +22,9 @@
                                  class="rounded-circle img-fluid" style="width: 150px;">
                             <h5 class="my-3 ">{{ participant.pseudo }}</h5>
                             <div class="d-flex justify-content-center mb-2">
-                                <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="boutons">Modifier </a>
+                                <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="boutons me-1">Modifier </a>
                                 {% if (is_granted('ROLE_ADMIN')) %}
-                                    <a href="{{ path('app_participant_index') }}" class="boutons pb-2 pt-2">Annuler</a>
+                                    <a href="{{ path('app_participant_index') }}" class="boutons pb-1 pt-2">Annuler</a>
                                     <form method="post" action="{{ path('app_participant_delete', {'id': participant.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer ce compte?');">
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ participant.id) }}">
                                         <button class="boutons ms-1">Supprimer</button>
@@ -85,9 +82,9 @@
         </div>
     </section>
     {% if (is_granted('ROLE_ADMIN')) %}
-    <a href="{{ path('app_participant_index') }}" class="  btnAffichagePage">Retour à la liste </a>
+    <a href="{{ path('app_participant_index') }}" class="  btnAffichagePage d-none d-md-block">Retour à la liste </a>
     {% endif %}
-    <a href="{{ path('app_accueil') }}" class="  btnAffichageRetourAccueil">Retour à l'accueil </a>
+    <a href="{{ path('app_accueil') }}" class="  btnAffichageRetourAccueil d-none d-md-block">Retour à l'accueil </a>
 
 
 
