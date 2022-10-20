@@ -4,6 +4,11 @@ body {
     color: white;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
 @font-face {
     font-family: 'font-Franchise';
     src: url("/../../fonts/Market_Deco.ttf") format("truetype");
@@ -105,10 +110,10 @@ body {
     padding-left: 379px;
 }
 
-a {
-    text-decoration: none;
-    color: white;
-}
+/*a {*/
+/*    text-decoration: none;*/
+/*    color: white;*/
+/*}*/
 
 .liens-items:hover {
     color: #edc139;

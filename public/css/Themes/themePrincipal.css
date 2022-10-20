@@ -13,7 +13,6 @@
 
 
 html,body{
-
     background: var(--main-color) ;
     background: var(--backgroundlinear);
     background-attachment: fixed;
@@ -25,10 +24,6 @@ html,body{
     font-family: 'font-retro', serif;
     color: #0DB8DE;
     font-size: 4rem;
-
-
-
-
 }
 .liens-items{
     color: #edc139;

@@ -70,7 +70,6 @@ class InscriptionController extends AbstractController
 
     #[Route('/{id}/{sortie}/desistement', name: 'app_desistement')]
     public function desistement(
-        Request $request,
         Participant $participant,
         Sortie $sortie ,
         InscriptionRepository $inscriptionRepository,
