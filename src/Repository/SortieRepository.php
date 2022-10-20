@@ -80,7 +80,10 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter(':user', $user);
         }
         if($sortiesPassees){
-            $queryBuilder->andWhere('s.date_debut <= :date3')
+            $queryBuilder->andWhere('s.date_debut < :date3')
+                ->setParameter(':date3', date_create_immutable('now'));
+        }else{
+            $queryBuilder->andWhere('s.date_debut >= :date3')
                 ->setParameter(':date3', date_create_immutable('now'));
         }
         $query = $queryBuilder->getQuery();

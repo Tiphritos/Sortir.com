@@ -119,7 +119,10 @@ class ParticipantController extends AbstractController
     }
 
     #[Route('participant/{id}/edit', name: 'app_participant_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Participant $participant, ParticipantRepository $participantRepository,UserPasswordHasherInterface $passwordHasher): Response
+    public function edit(Request $request,
+                         Participant $participant,
+                         ParticipantRepository $participantRepository,
+                         UserPasswordHasherInterface $passwordHasher): Response
     {
         $form = $this->createForm(ParticipantType::class, $participant);
         $form->handleRequest($request);
