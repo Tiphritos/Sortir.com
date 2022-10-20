@@ -5,10 +5,110 @@
 {% block body %}
     <h1  class="titreh1">Create new Participant</h1>
 
-    {{ include('participant/_form.html.twig') }}
+    <section>
+        <div class="container py-5 ">
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card couleurFond h-100">
+                        <div class="card-body text-center">
+                            <div class="row ">
+
+                                <div class="col-sm-12">
+                                    <p class=" mb-0 ">      {{ form_row(form.imageFile) }}</p>
+                                </div>
+                            </div>
+                            <hr class="soulignage">
+
+                            <div class="row ">
+
+                                <div class="col-sm-12">
+                                    <p class=" mb-0 ">  {{ form_row(form.pseudo) }}</p>
+                                </div>
+                            </div>
+                            <hr class="soulignage">
 
 
-        <a href="{{ path('app_participant_index') }}" class="  btnAffichagePage">Retour à la liste </a>
+                            <div class="row">
+
+                                <div class="col-sm-12">
+                                    <p class=" mb-0">   {{ form_row(form.nom) }}</p>
+                                </div>
+                            </div>
+                            <hr class="soulignage">
+                            <div class="row">
+
+                                <div class="col-sm-12">
+                                    <p class=" mb-0">  {{ form_row(form.prenom) }}</p>
+                                </div>
+                            </div>
+                            <hr class="soulignage">
+
+                            <div class="d-flex justify-content-center mb-5">
+                                <button class="boutons">{{ button_label|default('Enregistrer') }}</button>
+                                <a href="{{ path('app_participant_index') }}" class="boutons pb-2 pt-2">Annuler</a>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-6">
+                    <div class="card mb-4 couleurFond h-100">
+                        <div class="card-body">
+
+
+
+                            <div class="row ">
+
+                                <div class="col-sm-12">
+                                    <p class=" mb-0 ">   {{ form_row(form.telephone) }}</p>
+                                </div>
+                            </div>
+                            <hr class="soulignage">
+                            <div class="row">
+
+                                <div class="col-sm-12">
+                                    <p class=" mb-0">   {{ form_row(form.mail) }}</p>
+                                </div>
+                            </div>
+
+
+
+                            <hr class="soulignage">
+                            <div class="row">
+
+                                <div class="col-sm-12">
+                                    <p class=" mb-0">    {{ form_row(form.motDePasse) }}</p>
+                                </div>
+                            </div>
+                            <hr class="soulignage">
+                            <div class="row">
+
+                                <div class="col-sm-9">
+                                    <p class=" mb-0">     {{ form_row(form.sites_no_site) }}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </section>
+
+
+
+    <a href="{{ path('app_participant_index') }}" class="  btnAffichagePage">Retour à la liste </a>
 
     <a href="{{ path('app_accueil') }}" class="  btnAffichageRetourAccueil">Retour à l'accueil </a>
 {% endblock %}

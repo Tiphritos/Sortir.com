@@ -27,6 +27,7 @@
                             <div class="d-flex justify-content-center mb-2">
                                 <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="boutons">Modifier </a>
                                 {% if (is_granted('ROLE_ADMIN')) %}
+                                    <a href="{{ path('app_participant_index') }}" class="boutons pb-2 pt-2">Annuler</a>
                                     <form method="post" action="{{ path('app_participant_delete', {'id': participant.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer ce compte?');">
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ participant.id) }}">
                                         <button class="boutons ms-1">Supprimer</button>

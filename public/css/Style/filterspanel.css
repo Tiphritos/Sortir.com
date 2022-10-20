@@ -108,10 +108,7 @@
     font-size: 16px;
     line-height: 20px;
     padding: 12px 20px;
-    /*position: fixed;*/
-    /*bottom: 20px;*/
-    /*right: 20px;*/
-    z-index: 999;
+      z-index: 999;
 }
 
 .filter-btn:hover {
@@ -123,24 +120,6 @@
     outline: none;
 }
 
-/*.floating-text {
-    background-color: #001F61;
-    border-radius: 10px 10px 0 0;
-    color: #fff;
-    font-family: 'Muli';
-    padding: 7px 15px;
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    z-index: 998;
-}
-
-.floating-text a {
-    color: #FF7500;
-    text-decoration: none;
-}*/
 
 @media screen and (max-width: 480px) {
 

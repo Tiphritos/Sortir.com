@@ -1,8 +1,9 @@
-body{
+body {
     margin: 0;
     padding: 0;
     color: white;
 }
+
 @font-face {
     font-family: 'font-Franchise';
     src: url("/../../fonts/Market_Deco.ttf") format("truetype");
@@ -10,23 +11,25 @@ body{
     font-weight: normal;
     font-style: normal;
 }
+
 /*******************************/
 /*Au-dessus*/
-.header{
+.header {
     border: 2px solid black;
 }
-.fix{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    margin:0;
+
+.fix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
 }
 
 /*******************************/
 /*Titre*/
-.titreh1{
-    font-family: 'font-Franchise',serif;
+.titreh1 {
+    font-family: 'font-Franchise', serif;
     margin-left: 60px;
 }
 
@@ -34,20 +37,21 @@ body{
 /*Menu*/
 
 
-.nav .menu-items{
-     position: relative;
-     display: inline-flex;
-     padding: 3px;
+.nav .menu-items {
+    position: relative;
+    display: inline-flex;
+    padding: 3px;
 
 
-    margin: -12px 0px;
+    margin: -12px 0;
     /* z-index: 1; */
     /* font-size: 1rem;*/
 
 }
-.menu-items::after{
+
+.menu-items::after {
     content: "";
-   transform: scale(0);
+    transform: scale(0);
     height: 2px;
     width: 87%;
     background: #edc139;
@@ -57,11 +61,12 @@ body{
     transition: transform 0.4s ease-in-out;
 
 }
-.menu-items:hover::after{
+
+.menu-items:hover::after {
     transform: scale(1);
 }
 
-.nav .menu-items a{
+.nav .menu-items a {
     text-decoration: none;
     font-size: 1.2rem;
     opacity: 0.9;
@@ -70,42 +75,51 @@ body{
     */
 
 }
+
 /************ Style bouton*********************/
-.creation{
+.creation {
     width: 150px;
     /*background: linear-gradient(0deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(255,173,57,1) 95%);*/
 
 }
-.parent .creation{
+
+.parent .creation {
     width: 150px;
     height: 78px;
     margin: 40px 0 0 -190px;
 }
-.creationCard{
+
+.creationCard {
     width: 128px;
 }
-.creation:active{
-    -webkit-box-shadow: 0px 2px 0px ;
-    -moz-box-shadow: 0px 2px 0px ;
-    box-shadow: 0px 2px 0px ;
-    position:relative;
-    top:7px;}
-.nav{
+
+.creation:active {
+    -webkit-box-shadow: 0 2px 0;
+    -moz-box-shadow: 0 2px 0;
+    box-shadow: 0 2px 0;
+    position: relative;
+    top: 7px;
+}
+
+.nav {
     padding-left: 379px;
 }
-a{
+
+a {
     text-decoration: none;
     color: white;
 }
-.liens-items:hover{
+
+.liens-items:hover {
     color: #edc139;
 }
-.btnAffichagePage{
+
+.btnAffichagePage {
     border-radius: 26px;
     background-color: #212529;
     border: 1px solid #0DB8DE;
     box-shadow: 0 16px 22px -17px #03153B;
-    color:  #edc139;
+    color: #edc139;
     cursor: pointer;
     font-size: 16px;
     line-height: 20px;
@@ -115,43 +129,48 @@ a{
     right: 145px;
     z-index: 999;
 }
+
 .btnAffichagePage:hover {
     background-color: #212529;
     color: white;
 }
-.btnAffichageRetourAccueil{
+
+.btnAffichageRetourAccueil {
     border-radius: 26px;
     background-color: #212529;
     border: 1px solid #0DB8DE;
     box-shadow: 0 16px 22px -17px #03153b;
-    color:  #edc139;
+    color: #edc139;
     cursor: pointer;
     font-size: 16px;
     line-height: 20px;
     padding: 12px 9px;
     position: fixed;
     bottom: 20px;
-    right: 0px;
+    right: 0;
     z-index: 999;
 }
+
 .btnAffichageRetourAccueil:hover {
     background-color: #212529;
     color: white;
 }
+
 .btnCreationSortie:focus {
     outline: none;
 }
 
 
 /* SOus menu administrateur*/
-.signe_droite::after{
+.signe_droite::after {
     content: "\2BC8";
     padding-left: 3px;
     position: absolute;
     top: 23%;
     font-size: 17px
 }
-.sous_menu_admin{
+
+.sous_menu_admin {
     position: absolute;
     display: none;
     border-radius: 10%;
@@ -161,50 +180,50 @@ a{
     background-color: rgb(200 175 175 / 89%);
 
 }
-.sous_menu_admin:hover{
-    display :block;
+
+.sous_menu_admin:hover {
+    display: block;
 }
+
 /***********Couleur**************/
 
-.couleurEcriture{
+.couleurEcriture {
     color: white;
 }
 
-/********Tableau d'affichage******/
-/*
-.table{
-    text-align: center;
-}
-*/
 /********Cards page accueil******/
-.card{
+.card {
     margin-bottom: 10px;
     margin-left: 10px;
 }
 
 /********Profil utilisateur******/
-.couleurFond{
+.couleurFond {
     background-color: #1A2226;
 }
-section p{
+
+section p {
     color: white;
 }
-.soulignage{
+
+.soulignage {
     margin: 1rem 0;
     color: inherit;
     border: 0;
     border-bottom: 2px solid #0DB8DE;
-     opacity: 1;
+    opacity: 1;
 }
+
 /************Editer Sortie*************/
-#sortie_duree{
+#sortie_duree {
     margin-top: 12px;
 }
 
 /*******Cards page Sortie Affichage Participant********/
-.imgcard{
+.imgcard {
     height: 100px;
 }
+
 /*******Cards images page d'accueil********/
 .card-img-top {
     width: 100%;
@@ -214,62 +233,42 @@ section p{
 
 /******Scroll ***********/
 .scroller {
-
-    height: 70vh;/*478px;*/
-    overflow-y:  auto;
+    height: 70vh; /*478px;*/
+    overflow-y: auto;
 }
 
-
-
-.btn:hover{
+.btn:hover {
     background-color: #0DB8DE;
     right: 0;
 }
-
 /*******Lieu **************/
-#exemple{
+#exemple {
     visibility: hidden;
-
-  /*position: absolute;*/
-  /*  left: 0;*/
-  /*  top: 0;*/
-  /*  width: 100%;*/
-  /*  height: 100%;*/
-  /*  text-align: center;*/
-  /*  z-index: 1000;*/
 }
-/*#exemple div{*/
-/*   width: 534px;*/
-/*    top: 192px;*/
-/*    opacity: 0.99;*/
-/*    z-index: unset;*/
-/*}*/
-.borderExemple{
+
+.borderExemple {
     border: 1px solid #0DB8DE;
     border-radius: 1%;
 }
+
 /*******Boutons************/
 
 .boutons {
-
-    /* border-color: #0DB8DE; */
-border: 1px solid #0DB8DE;
+    border: 1px solid #0DB8DE;
     color: #0DB8DE;
     border-radius: 10px;
     padding: 6px;
     font-weight: bold;
-
 }
 
-.boutons:hover{
-
-  color: white;
+.boutons:hover {
+    color: white;
 }
 
 /*******boutons enlevé
  */
 
-button{
+button {
     text-decoration: none;
     background-color: rgb(26 34 38);
     margin-right: 5px;
@@ -278,7 +277,7 @@ button{
 
 /**************Flash ************/
 
-.flash{
+.flash {
     border: 1px solid #0DB8DE;
     background-color: #1A2226;
     border-radius: 10px;

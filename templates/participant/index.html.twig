@@ -1,37 +1,37 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1  class="titreh1">Administration des participants</h1>
+    <h1  class="titreh1">Tableau de bord des participants</h1>
 
     <div class="container ">
 
         <div class="row ">
             <div class="col-5">
-                <div class="card mb-4 couleurFond">
+                <div class="card mb-4 couleurFond ">
                     <div class="card-body text-center">
                         <h5 class="my-3 ">  Ajouter une liste de participants (fichier csv)</h5>
                         {{ form_start(form) }}
                         {{ form_row(form.name) }}
-                        <button class="btn btn-outline-primary ms-1">{{ button_label|default('Enregistrer') }}</button>
+                        <button class="boutons">{{ button_label|default('Enregistrer') }}</button>
                         {{ form_end(form) }}
                         <hr class="soulignage">
                         <h5 class="my-3 ">  Créer manuellement des participants </h5>
-                        <a href="{{ path('app_participant_new')}}" class="btn btn-outline-primary ms-1"> Créer </a>
+                        <a href="{{ path('app_participant_new')}}" class="boutons"> Créer </a>
                     </div>
                 </div>
             </div>
             <div class="col-7">
-                <div class="row">
+                <div class="row ">
                     {% for part in participants  %}
 
-                        <div class=" col-3">
-                            <div class="card mb-4 couleurFond">
+                        <div class=" col-3 mb-2">
+                            <div class="card  couleurFond h-100 ">
                                 <div class="card-body text-center">
                                     {%if part.urlPhoto %}
                                         <img src="{{ asset('uploads/images/'~ part.urlPhoto) }}" alt="avatar"
                                              class="rounded-circle img-fluid imgcard">
                                     {% else %}
-                                        <img src="{{ asset('uploads/images/poussacha.png')}}" alt="avatar"
+                                        <img src="{{ asset('uploads/images/ProfilDefault.jpg')}}" alt="avatar"
                                              class="rounded-circle img-fluid imgcard">
                                     {% endif %}
                                     <h5 class="my-3 "><a href="{{ path('app_participant_show', {'id': part.id}) }}">{{part.pseudo}} </a> </h5>
