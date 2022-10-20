@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Lieu;
 use App\Form\LieuType;
 use App\Repository\LieuRepository;
+use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,17 +47,13 @@ class LieuController extends AbstractController
     public function nouveau(Request $request, LieuRepository $lieuRepository, VilleRepository $villeRepository): Response
     {
         $lieu = new Lieu();
-   // $lieu->setNomLieu($request->request->get('nom_lieu'));
-      /*  $lieu->setRue($request->request->get('rue'));
-        $lieu->setVillesNoVille($request->request->get('villes_no_ville'));*/
-       //     $lieuRepository->save($lieu, true);
 
         $jsonData = json_decode($request->getContent(),true);
         $lieu ->setNomLieu($jsonData['nomLieu']);
         $lieu ->setVillesNoVille($villeRepository->findOneBy(['nom_ville' =>$jsonData['ville']]));
         $lieu->setRue($jsonData['rue']);
         $lieuRepository->save($lieu, true);
-//        dd($jsonReturn);
+
         return $this->json([$lieu->getId(), $lieu->getNomLieu()], 200);
     }
 
@@ -90,10 +87,17 @@ class LieuController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_lieu_delete', methods: ['POST'])]
-    public function delete(Request $request, Lieu $lieu, LieuRepository $lieuRepository): Response
+    public function delete(Request $request,
+                           Lieu $lieu,
+                           LieuRepository $lieuRepository
+    ): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$lieu->getId(), $request->request->get('_token'))) {
-            $lieuRepository->remove($lieu, true);
+        try {
+            if ($this->isCsrfTokenValid('delete' . $lieu->getId(), $request->request->get('_token'))) {
+                $lieuRepository->remove($lieu, true);
+            }
+        }catch(\Exception $e){
+            $this->addFlash('message',"Suppression impossible. Merci de contacter l'administrateur de base de données. (Et nous envoyer son contact)");
         }
 
         return $this->redirectToRoute('app_lieu_index', [], Response::HTTP_SEE_OTHER);

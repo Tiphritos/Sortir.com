@@ -10,7 +10,6 @@
         </div>
 
     {% endfor %}
-
     <section >
         <div class="container py-5 mt-5">
             <div class="row">
@@ -25,12 +24,10 @@
                             <img src="{{ asset('uploads/images/'~ participant.urlPhoto) }}" alt="avatar"
                                  class="rounded-circle img-fluid" style="width: 150px;">
                             <h5 class="my-3 ">{{ participant.pseudo }}</h5>
-
-
                             <div class="d-flex justify-content-center mb-2">
                                 <a href="{{ path('app_participant_edit', {'id': participant.id}) }}" class="boutons">Modifier </a>
                                 {% if (is_granted('ROLE_ADMIN')) %}
-                                    <form method="post" action="{{ path('app_participant_delete', {'id': participant.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                    <form method="post" action="{{ path('app_participant_delete', {'id': participant.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer ce compte?');">
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ participant.id) }}">
                                         <button class="boutons ms-1">Supprimer</button>
                                     </form>
@@ -38,7 +35,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-lg-8">
                     <div class="card mb-4 couleurFond">

@@ -21,20 +21,12 @@ class InscriptionController extends AbstractController
 {
     #[Route('/{id}/{sortie}/inscription', name: 'app_inscription')]
     public function inscription(
-        Request $request,
         Participant $participant,
         Sortie $sortie ,
-        SortieRepository $sortieRepository,
-        ParticipantRepository $participantRepository,
         InscriptionRepository $inscriptionRepository,
         EtatRepository $etatRepository,
-
         EntityManagerInterface $entityManager): Response
     {
-
-        $idParticipant= $participant ->getId();
-        $tableauDeSortie = $participant ->getInscriptions();
-
         $nouvelleInscription = new Inscription();
         $date = new \DateTimeImmutable();
         $nouvelleInscription ->setDateInscription($date);
@@ -45,7 +37,6 @@ class InscriptionController extends AbstractController
 
         $inscriptions = $inscriptionRepository->findBy(['sortie_id'=>$sortie->getId()] );
         $estinscrit = false;
-
 
         //Vérifier si déjà inscrit
         foreach ($inscriptions as $inscrip  ){
@@ -66,22 +57,19 @@ class InscriptionController extends AbstractController
             }
             //Sinon inscrire
             else {
-                $changementDeSortie = $participant->addInscription( $nouvelleInscription );
                 if ((count($inscriptions)+1) >= $sortie->getNbInscriptionsMax()){
                     $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id'=>3]));
                     $entityManager->persist($sortie);
                 }
-                //$entityManager->persist($changementDeSortie);
                 $entityManager->persist($nouvelleInscription);
                 $entityManager->flush();
 
                 $this->addFlash('message', "Inscription réussie");
             }
         }
-
         return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
-
     }
+
     #[Route('/{id}/{sortie}/desistement', name: 'app_desistement')]
     public function desistement(
         Request $request,
@@ -115,8 +103,6 @@ class InscriptionController extends AbstractController
         }else{
             $this->addFlash('message', "Blaireau!!! Tu n'es pas inscrit à cet événement");
         }
-        // dd($idParticipant,$idSortie);
-
         return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
 
     }

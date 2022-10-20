@@ -127,7 +127,7 @@ class ParticipantController extends AbstractController
             $participant ->setMotDePasse($motdepasseHache);
             $participantRepository->save($participant, true);
             $id = $this->getUser()->getId();
-           $this->addFlash('message',"Modifications prises en compte");
+            $this->addFlash('message',"Modifications prises en compte");
             return $this->redirectToRoute('app_participant_show', ['id'=>$id], Response::HTTP_SEE_OTHER);
         }
 
@@ -140,8 +140,12 @@ class ParticipantController extends AbstractController
     #[Route('admin/participant/{id}', name: 'app_participant_delete', methods: ['POST'])]
     public function delete(Request $request, Participant $participant, ParticipantRepository $participantRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$participant->getId(), $request->request->get('_token'))) {
-            $participantRepository->remove($participant, true);
+        try{
+            if ($this->isCsrfTokenValid('delete'.$participant->getId(), $request->request->get('_token'))) {
+                $participantRepository->remove($participant, true);
+            }
+        }catch(\Exception $e){
+            $this->addFlash('message',"Suppression impossible de cet utilisateur. Il guérira peut-être le cancer, on va pas l'achever maintenant, merde.");
         }
 
         return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
