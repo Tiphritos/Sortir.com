@@ -171,4 +171,48 @@ class SortieController extends AbstractController
         }
         return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
     }
+
+    //Supprimer sortie en tant qu'admin
+    #[Route('/admin/delete/{id}', name: 'app_sortie_admin_delete', methods: ['GET'])]
+    public function supprimer(Request $request, Sortie $sortie, InscriptionRepository $inscriptionRepository,
+                            SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
+    {
+        //Checker l'état de la sortie, doit être differente de 4 (aka ne pas avoir commencé)
+        if($sortie->getEtatsNoEtat()->getId()!=4) {
+            //Recupérer les inscriptions à la sortie puis les supprimer
+            $inscriptions = $inscriptionRepository->findBy(['sortie_id' => $sortie->getId()]);
+            foreach ($inscriptions as $inscription) {
+                $inscriptionRepository->remove($inscription, true);
+            }
+            //Supprimer la sortie
+            try{
+                $sortieRepository->remove($sortie, true);
+            }catch(\Exception $e){
+                $this->addFlash('message', 'Erreur lors de la suppression! Veuillez contacter le père Noël et faisez moi pas chier');
+            }
+
+            $this->addFlash('message', 'Sortie supprimée avec succès!');
+        }
+        return $this->redirectToRoute('app_sortie_show_all', [], Response::HTTP_SEE_OTHER);
+    }
+    //Archiver sortie en tant qu'admin
+    #[Route('/admin/archive/{id}', name: 'app_sortie_admin_archive', methods: ['GET'])]
+    public function archiver(Request $request, Sortie $sortie, InscriptionRepository $inscriptionRepository,
+                              EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
+    {
+        //Checker l'état de la sortie, doit être differente de 6 (aka ne pas deja être archivée)
+        if($sortie->getEtatsNoEtat()->getId()!=7) {
+
+            //Archiver la sortie
+            $sortie->setEtatsNoEtat($etatRepository->findOneBy(['id'=>7]));
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+            $this->addFlash('message', 'Sortie archivée avec succès!');
+        }
+        else{
+            $this->addFlash('message', 'Cette sortie est déjà archivée!');
+        }
+        return $this->redirectToRoute('app_sortie_show_all', [], Response::HTTP_SEE_OTHER);
+    }
+
 }
