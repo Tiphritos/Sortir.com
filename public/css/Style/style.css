@@ -180,7 +180,9 @@ a {
 .couleurEcriture {
     color: white;
 }
-
+a:hover{
+    color: #0DB8DE;
+}
 /********Cards page accueil******/
 .card {
     margin-bottom: 10px;
