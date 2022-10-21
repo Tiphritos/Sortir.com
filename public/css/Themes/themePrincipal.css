@@ -19,7 +19,7 @@ html,body{
     height: 100vh;
 
 }
-.titrePrincipal{
+#titrePrincipal{
     display: flex;
     font-family: 'font-retro', serif;
     color: #0DB8DE;

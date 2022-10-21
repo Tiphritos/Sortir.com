@@ -5,6 +5,7 @@ const chk = document.getElementById('chk');
 chk.addEventListener('change', () => {
     document.body.classList.toggle('hub');
     document.getElementById("com").classList.toggle('titre')
+    document.getElementById("titrePrincipal").classList.toggle('titrePrincipalHub')
 });
 
 // SOCIAL PANEL JS
