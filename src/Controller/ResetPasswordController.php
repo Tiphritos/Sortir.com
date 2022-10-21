@@ -35,7 +35,9 @@ class ResetPasswordController extends AbstractController
      * Display & process form to request a password reset.
      */
     #[Route('/reset', name: 'app_forgot_password_request')]
-    public function request(Request $request, MailerInterface $mailer, TranslatorInterface $translator): Response
+    public function request(Request $request
+                            //,MailerInterface $mailer, TranslatorInterface $translator
+        ): Response
     {
         $form = $this->createForm(ResetPasswordRequestFormType::class);
         $form->handleRequest($request);
@@ -119,37 +121,37 @@ class ResetPasswordController extends AbstractController
         ]);
     }
 
-    private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer): RedirectResponse
-    {
-        $user = $this->entityManager->getRepository(Participant::class)->findOneBy([
-            'mail' => $emailFormData,
-        ]);
-
-        // Do not reveal whether a user account was found or not.
-        if (!$user) {
-            return $this->redirectToRoute('app_check_email');
-        }
-        try {
-            $resetToken = $this->resetPasswordHelper->generateResetToken($user);
-        } catch (ResetPasswordExceptionInterface $e) {
-            return $this->redirectToRoute('app_check_email');
-        }
-
-        $email = (new TemplatedEmail())
-            ->from(new Address('chris@gmail.com', 'Acme Mail Bot'))
-            ->to($user->getMail())
-            ->subject('Your password reset request')
-            ->htmlTemplate('reset_password/email.html.twig')
-            ->context([
-                'resetToken' => $resetToken,
-            ])
-        ;
-
-        $mailer->send($email);
-
-        // Store the token object in session for retrieval in check-email route.
-        $this->setTokenObjectInSession($resetToken);
-
-        return $this->redirectToRoute('app_check_email');
-    }
+//    private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer): RedirectResponse
+//    {
+//        $user = $this->entityManager->getRepository(Participant::class)->findOneBy([
+//            'mail' => $emailFormData,
+//        ]);
+//
+//        // Do not reveal whether a user account was found or not.
+//        if (!$user) {
+//            return $this->redirectToRoute('app_check_email');
+//        }
+//        try {
+//            $resetToken = $this->resetPasswordHelper->generateResetToken($user);
+//        } catch (ResetPasswordExceptionInterface $e) {
+//            return $this->redirectToRoute('app_check_email');
+//        }
+//
+//        $email = (new TemplatedEmail())
+//            ->from(new Address('chris@gmail.com', 'Acme Mail Bot'))
+//            ->to($user->getMail())
+//            ->subject('Your password reset request')
+//            ->htmlTemplate('reset_password/email.html.twig')
+//            ->context([
+//                'resetToken' => $resetToken,
+//            ])
+//        ;
+//
+//        $mailer->send($email);
+//
+//        // Store the token object in session for retrieval in check-email route.
+//        $this->setTokenObjectInSession($resetToken);
+//
+//        return $this->redirectToRoute('app_check_email');
+//    }
 }

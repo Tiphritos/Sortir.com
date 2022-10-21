@@ -169,8 +169,8 @@ class SortieController extends AbstractController
 
     //Supprimer sortie en tant qu'admin
     #[Route('/admin/delete/{id}', name: 'app_sortie_admin_delete', methods: ['GET'])]
-    public function supprimer(Request $request, Sortie $sortie, InscriptionRepository $inscriptionRepository,
-                              SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
+    public function supprimer(Sortie $sortie, InscriptionRepository $inscriptionRepository,
+                              SortieRepository $sortieRepository): Response
     {
         //Checker l'état de la sortie, doit être differente de 4 (aka ne pas avoir commencé)
         if($sortie->getEtatsNoEtat()->getId()!=4) {
@@ -192,7 +192,7 @@ class SortieController extends AbstractController
     }
     //Archiver sortie en tant qu'admin
     #[Route('/admin/archive/{id}', name: 'app_sortie_admin_archive', methods: ['GET'])]
-    public function archiver(Request $request, Sortie $sortie, InscriptionRepository $inscriptionRepository,
+    public function archiver(Sortie $sortie, InscriptionRepository $inscriptionRepository,
                              EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
     {
         //Checker l'état de la sortie, doit être differente de 6 (aka ne pas deja être archivée)

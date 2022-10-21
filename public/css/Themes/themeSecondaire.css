@@ -4,9 +4,15 @@ body.hub {
     background: black fixed no-repeat;
 
 }
+.titrePrincipalHub{
+color: white!important;
+    font-family: 'Arial', serif!important;
+}
 .titre{
     background: orange;
     border-radius: 2px;
+    color: black
+;
 }
 .checkbox {
     opacity: 0;

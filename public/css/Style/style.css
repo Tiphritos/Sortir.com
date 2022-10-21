@@ -4,6 +4,11 @@ body {
     color: white;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
 @font-face {
     font-family: 'font-Franchise';
     src: url("/../../fonts/Market_Deco.ttf") format("truetype");
@@ -105,10 +110,10 @@ body {
     padding-left: 379px;
 }
 
-a {
-    text-decoration: none;
-    color: white;
-}
+/*a {*/
+/*    text-decoration: none;*/
+/*    color: white;*/
+/*}*/
 
 .liens-items:hover {
     color: #edc139;
@@ -162,35 +167,22 @@ a {
 
 
 /* SOus menu administrateur*/
-.signe_droite::after {
-    content: "\2BC8";
-    padding-left: 3px;
-    position: absolute;
-    top: 23%;
-    font-size: 17px
+
+
+.admin{
+    text-decoration: none;
 }
-
-.sous_menu_admin {
-    position: absolute;
-    display: none;
-    border-radius: 10%;
-    left: 100%;
-    width: 60%;
-    top: 0;
-    background-color: rgb(200 175 175 / 89%);
-
+.admin:active{
+    text-decoration: none;
 }
-
-.sous_menu_admin:hover {
-    display: block;
-}
-
 /***********Couleur**************/
 
 .couleurEcriture {
     color: white;
 }
-
+a:hover{
+    color: #0DB8DE;
+}
 /********Cards page accueil******/
 .card {
     margin-bottom: 10px;
