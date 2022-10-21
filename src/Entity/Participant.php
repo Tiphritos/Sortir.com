@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Form\Type\VichImageType;
+
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ParticipantRepository::class)]
@@ -50,7 +50,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $prenom = null;
 
     #[Assert\Regex('^([+]?\d{1,2}[-\s]?|)\d{3}[-\s]?\d{3}[-\s]?\d{4}$^')]
-
     #[ORM\Column(length: 15, nullable: true)]
     private ?string $telephone = null;
 
@@ -77,8 +76,8 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'participant_id', targetEntity: Inscription::class, orphanRemoval: true)]
     private Collection $inscriptions;
 
-    #[ORM\Column(length: 255, nullable: true, options: ['default'=>'ProfilDefault.png'])]
-    private ?string $url_photo = 'ProfilDefault.png';
+    #[ORM\Column(length: 255, nullable: true, options: ['default'=>'ProfilDefault.jpg'])]
+    private ?string $url_photo = 'ProfilDefault.jpg';
 
     #[Vich\UploadableField(mapping:"profile_pics", fileNameProperty:'url_photo')]
     private ?File $imageFile = null;
